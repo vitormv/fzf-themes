@@ -1,8 +1,9 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import App from './App.svelte';
 
-import 'vanilla-picker/dist/vanilla-picker.csp.css'
+import './styles/main.css';
 
-import './styles/main.css'
+const app = new App({
+  target: document.getElementById('app') as HTMLElement,
+});
 
-createApp(App).mount('#app')
+export default app;

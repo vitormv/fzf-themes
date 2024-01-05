@@ -1,13 +1,12 @@
-import { defineConfig } from 'vite'
-import Components from 'unplugin-vue-components/vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), Components({})],
+  plugins: [svelte()],
   resolve: {
     alias: {
       '~': '/src',
     },
   },
-})
+});

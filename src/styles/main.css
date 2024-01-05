@@ -37,7 +37,7 @@ body {
   height: 100vh;
   background-color: var(--bg-color);
   color: var(--text-color);
-    font-family: 'Inconsolata', monospace;
+  font-family: 'Inconsolata', monospace;
 }
 
 #app {

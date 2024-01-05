@@ -14,3 +14,4 @@ export type FzfColor =
   | 'gutter'
   | 'border'
   | 'separator'
+  | 'scrollbar';
