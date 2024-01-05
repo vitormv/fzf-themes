@@ -1,17 +1,3 @@
-/**
- * These options apply to all color pickers on the page
- * @see https://jscolor.com/docs/
- */
-jscolor.presets.default = {
-	format: 'hex',
-  previewSize: 40,
-  width: 300,
-  height: 200,
-  shadow: false,
-  required: false,
-  mode: 'hvs',
-};
-
 const defaultColors = {
   'fg': '#d0d0d0',
   'fg-plus': '#d0d0d0',
@@ -77,7 +63,7 @@ class ColorBlock extends HTMLElement {
   constructor() {
     // Always call super first in constructor
     super();
-    
+
     this.addEventListener('click', (e) => {
       this.querySelector(':scope input[data-jscolor]').jscolor.show();
     });
@@ -99,14 +85,14 @@ class ColorBlock extends HTMLElement {
   }
 
   /**
-   * @param {string} name 
+   * @param {string} name
    */
   toFzfName(name) {
     return name.replace('-plus', '+')
   }
 
   /**
-   * @param {string} color 
+   * @param {string} color
    */
   getColorValue(color) {
     if (color.startsWith('#')) {
@@ -121,9 +107,9 @@ class ColorBlock extends HTMLElement {
     return '';
   }
 
-  /** 
+  /**
    * decide whether to use black/white text depending on color
-   * 
+   *
    * @source https://24ways.org/2010/calculating-color-contrast
    */
   getLabelColor (hexcolor) {
@@ -138,7 +124,7 @@ class ColorBlock extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     if (name === 'color') {
       this.querySelector('label').style.backgroundColor = newValue;
-      this.querySelector('label').style.color = this.getLabelColor(newValue);
+      this.querySelector('label').style.color = newValue ? this.getLabelColor(newValue) : '';
       this.querySelector('.hex').innerHTML = this.getColorValue(newValue);
       this.querySelector('input').value = newValue;
     }

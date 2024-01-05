@@ -1,0 +1,47 @@
+@keyframes cursor-blink {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes terminal-spinner {
+  10% {
+    content: '⠙';
+  }
+
+  20% {
+    content: '⠹';
+  }
+
+  30% {
+    content: '⠸';
+  }
+
+  40% {
+    content: '⠼';
+  }
+
+  50% {
+    content: '⠴';
+  }
+
+  60% {
+    content: '⠦';
+  }
+
+  70% {
+    content: '⠧';
+  }
+
+  80% {
+    content: '⠇';
+  }
+
+  90% {
+    content: '⠏';
+  }
+}
