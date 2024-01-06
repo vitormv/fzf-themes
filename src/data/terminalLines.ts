@@ -50,6 +50,7 @@ const lines = [
       token(' '),
       token('35/63 (3) ', 'info'),
       fillSpace('─', 'separator'),
+      token(' '),
     ],
   }),
   new Line({

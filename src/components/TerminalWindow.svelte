@@ -10,28 +10,81 @@
     .join(';');
 
   let terminalWindowEl: HTMLDivElement;
+  let charWidthEl: HTMLSpanElement;
 
-  onMount(() => {
+  function renderTerminalWindow() {
     terminalWindowEl.innerHTML = '';
+    terminalWindowEl.style.width = '';
+
+    const charWidth = charWidthEl.getBoundingClientRect().width;
+    const terminalWindowWidth = terminalWindowEl.getBoundingClientRect().width;
+
+    // cols follow the screen size, but has a minimum of 50
+    const maxCols = Math.max(50, Math.floor(terminalWindowWidth / charWidth));
 
     lines.forEach((line) => {
-      terminalWindowEl.appendChild(line.render(50));
+      terminalWindowEl.style.width = `${Math.ceil(maxCols * charWidth) + 3}px`;
+      terminalWindowEl.appendChild(line.render(maxCols));
     });
+  }
+
+  onMount(() => {
+    function onLoadHandler() {
+      renderTerminalWindow();
+    }
+
+    if (document.readyState === 'complete') {
+      renderTerminalWindow();
+    } else {
+      window.addEventListener('load', onResizeHandler);
+    }
+
+    function onResizeHandler() {
+      renderTerminalWindow();
+    }
+
+    window.addEventListener('resize', onResizeHandler);
+
+    return () => {
+      window.removeEventListener('load', onLoadHandler);
+      window.removeEventListener('resize', onResizeHandler);
+    };
   });
 </script>
 
-<div style={allTokenVariables}>
+<div class="wrapper" style={allTokenVariables}>
   <div bind:this={terminalWindowEl} class="terminal-window"></div>
+
+  <!-- This element is used to calculate the current width of chars according
+  to users browser window, resolution, zoom amount, etc. -->
+  <span bind:this={charWidthEl} class="sample-char-width">m</span>
 </div>
 
 <style lang="scss">
+  :root {
+    --terminal-font: 'Roboto Mono', monospace;
+  }
+
+  .wrapper {
+    position: relative;
+  }
+
+  .sample-char-width {
+    // its like it was never there :)
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    font-family: var(--terminal-font);
+  }
   .terminal-window {
     list-style-type: none;
-    font-family: 'Roboto Mono', monospace;
-    padding: 10px;
+    font-family: var(--terminal-font);
     font-size: 16px;
-    padding: 20px;
-    line-height: 1.4;
+    line-height: 1.3;
     overflow: hidden;
     word-wrap: break-word;
     position: relative;

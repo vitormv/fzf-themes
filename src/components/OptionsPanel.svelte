@@ -1,9 +1,14 @@
 <script lang="ts">
   import FormControl from '~/components/common/FormControl.svelte';
+  // @ts-ignore
+  import AutoComplete from 'simple-svelte-autocomplete';
+  import { borderTypes, type BorderType } from '~/data/fzfBorders';
+
+  let selectedBorder: BorderType;
 </script>
 
 <FormControl label="Border">
-  <input type="text" />
+  <AutoComplete items={borderTypes} bind:selectedItem={selectedBorder} showClear />
 </FormControl>
 <FormControl label="Border Label">
   <input type="text" />

@@ -1690,6 +1690,7 @@ __metadata:
     prettier: "npm:^3.1.1"
     prettier-plugin-svelte: "npm:^3.1.2"
     sass: "npm:^1.69.7"
+    simple-svelte-autocomplete: "npm:^2.5.2"
     svelte: "npm:^4.2.8"
     svelte-awesome-color-picker: "npm:^3.0.0-beta.11"
     svelte-check: "npm:^3.6.2"
@@ -3018,6 +3019,13 @@ __metadata:
   version: 4.1.0
   resolution: "signal-exit@npm:4.1.0"
   checksum: 41602dce540e46d599edba9d9860193398d135f7ff72cab629db5171516cfae628d21e7bfccde1bbfdf11c48726bc2a6d1a8fb8701125852fbfda7cf19c6aa83
+  languageName: node
+  linkType: hard
+
+"simple-svelte-autocomplete@npm:^2.5.2":
+  version: 2.5.2
+  resolution: "simple-svelte-autocomplete@npm:2.5.2"
+  checksum: dd5acc594802fc13057a338e545c73db7875bd010c27490f09df673325d60286c49ec5c0a79ade298746e3b5e241ea2478bfa0ef5dea8c207f56cccecb72eb57
   languageName: node
   linkType: hard
 
