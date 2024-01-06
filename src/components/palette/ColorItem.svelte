@@ -3,7 +3,6 @@
   import type { FzfColor } from '~/types/fzf';
   import { getContrastColor } from '~/utils/getContrastColor';
   import { getColorOrFallback, settingsStore } from '~/data/settingsStore';
-  import { isNil } from '~/utils/isNil';
   import { colorDefinitions } from '~/data/fzfDefinitions';
 
   export let token: FzfColor;

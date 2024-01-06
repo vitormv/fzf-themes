@@ -30,7 +30,7 @@
     "vite": "^5.0.8"
   },
   "dependencies": {
-    "vanilla-picker": "^2.12.2"
+    "svelte-awesome-color-picker": "^3.0.0-beta.11"
   },
   "engines": {
     "node": "^20.0.0"

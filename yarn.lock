@@ -481,13 +481,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sphinxxxx/color-conversion@npm:^2.2.2":
-  version: 2.2.2
-  resolution: "@sphinxxxx/color-conversion@npm:2.2.2"
-  checksum: 847d6952aed358d54991b2f9a3c2f76d04d4c70cd014e9c1f86d8b37490768f3a56d077ba8f7ab3355b7616c4b1dcdacdba2e4705ade9b7c6220e4e950ab100f
-  languageName: node
-  linkType: hard
-
 "@sveltejs/vite-plugin-svelte-inspector@npm:^2.0.0-next.0 || ^2.0.0":
   version: 2.0.0
   resolution: "@sveltejs/vite-plugin-svelte-inspector@npm:2.0.0"
@@ -1044,6 +1037,13 @@ __metadata:
   version: 1.1.4
   resolution: "color-name@npm:1.1.4"
   checksum: a1a3f914156960902f46f7f56bc62effc6c94e84b2cae157a526b1c1f74b677a47ec602bf68a61abfa2b42d15b7c5651c6dbe72a43af720bc588dff885b10f95
+  languageName: node
+  linkType: hard
+
+"colord@npm:^2.9.3":
+  version: 2.9.3
+  resolution: "colord@npm:2.9.3"
+  checksum: 9699e956894d8996b28c686afe8988720785f476f59335c80ce852ded76ab3ebe252703aec53d9bef54f6219aea6b960fb3d9a8300058a1d0c0d4026460cd110
   languageName: node
   linkType: hard
 
@@ -1691,10 +1691,10 @@ __metadata:
     prettier-plugin-svelte: "npm:^3.1.2"
     sass: "npm:^1.69.7"
     svelte: "npm:^4.2.8"
+    svelte-awesome-color-picker: "npm:^3.0.0-beta.11"
     svelte-check: "npm:^3.6.2"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.3.3"
-    vanilla-picker: "npm:^2.12.2"
     vite: "npm:^5.0.8"
   languageName: unknown
   linkType: soft
@@ -3201,6 +3201,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"svelte-awesome-color-picker@npm:^3.0.0-beta.11":
+  version: 3.0.0-beta.11
+  resolution: "svelte-awesome-color-picker@npm:3.0.0-beta.11"
+  dependencies:
+    colord: "npm:^2.9.3"
+    svelte-awesome-slider: "npm:^0.0.10"
+  peerDependencies:
+    svelte: ^3.55.1 || ^4.0.0
+  checksum: fd50a85321efb14a6401325f5dec125e8bfa4f708f644f52dfdfaeb9c9191b0afe1276047709b9789d173e966a2d8d6c6f605102d69340456c1bc021f4f4c54f
+  languageName: node
+  linkType: hard
+
+"svelte-awesome-slider@npm:^0.0.10":
+  version: 0.0.10
+  resolution: "svelte-awesome-slider@npm:0.0.10"
+  peerDependencies:
+    svelte: ^3.54.0 || ^4.0.0
+  checksum: 6982f1a1cfb4ecc76fa70b4b61c1b7aa7a9eafc4cf19c4f9d94ec4b2e1f9a02e79a3a52d3df0e11ad3d67d059b9ea9b39b001466e25ed083ed8ebe7c1f843786
+  languageName: node
+  linkType: hard
+
 "svelte-check@npm:^3.6.2":
   version: 3.6.2
   resolution: "svelte-check@npm:3.6.2"
@@ -3466,15 +3487,6 @@ __metadata:
     spdx-correct: "npm:^3.0.0"
     spdx-expression-parse: "npm:^3.0.0"
   checksum: 7b91e455a8de9a0beaa9fe961e536b677da7f48c9a493edf4d4d4a87fd80a7a10267d438723364e432c2fcd00b5650b5378275cded362383ef570276e6312f4f
-  languageName: node
-  linkType: hard
-
-"vanilla-picker@npm:^2.12.2":
-  version: 2.12.2
-  resolution: "vanilla-picker@npm:2.12.2"
-  dependencies:
-    "@sphinxxxx/color-conversion": "npm:^2.2.2"
-  checksum: 9e59b17607296e0fcb11a44c11ec66874e6f944916b152932d03fd3477c0f6cfdece6fab0a4859cdf57ceebf8ae18adb8d1774bdfbf6ab33933679f243c0a5ac
   languageName: node
   linkType: hard
 

@@ -1,61 +1,28 @@
 <script lang="ts">
   import { orderedColorTokens } from '~/data/fzfDefinitions';
-  import { settingsStore } from '~/data/settingsStore';
+  import { getColorOrFallback, settingsStore } from '~/data/settingsStore';
+  import { onMount } from 'svelte';
+  import { lines } from '~/data/terminalLines';
 
   // take all known color tokens and set them as css variables
   $: allTokenVariables = orderedColorTokens
-    .map((token) => `--fzf-${token}: ${$settingsStore.colors[token]}`)
+    .map((token) => `--fzf-${token}: ${getColorOrFallback(token, $settingsStore.colors)}`)
     .join(';');
+
+  let terminalWindowEl: HTMLDivElement;
+
+  onMount(() => {
+    terminalWindowEl.innerHTML = '';
+
+    lines.forEach((line) => {
+      terminalWindowEl.appendChild(line.render(50));
+    });
+  });
 </script>
 
-<ul class="terminal-window" style={allTokenVariables}>
-  <li>
-    <span class="fzf-gutter">&nbsp;</span><span class="fzf-gutter fzf-marker">&gt;</span><span
-      class="fzf-fg">src/fzf/main</span
-    ><span class="fzf-hl">.go</span><span class="fzf-scrollbar">│</span>
-  </li>
-  <li>
-    <span class="fzf-gutter">&nbsp;</span>&nbsp;<span class="fzf-fg">src/pattern</span><span
-      class="fzf-hl">.go</span
-    ><span class="fzf-scrollbar">│</span>
-  </li>
-  <li>
-    <span class="fzf-gutter">&nbsp;</span><span class="fzf-gutter fzf-marker">&gt;</span><span
-      class="fzf-fg">src/options</span
-    ><span class="fzf-hl">.go</span><span class="fzf-scrollbar">│</span>
-  </li>
-  <li>
-    <span class="fzf-gutter">&nbsp;</span>&nbsp;<span class="fzf-fg">src/matcher</span><span
-      class="fzf-hl">.go</span
-    >
-  </li>
-  <li>
-    <span class="fzf-bg-plus"
-      ><span class="fzf-gutter fzf-pointer">&gt;</span><span class="fzf-marker">&nbsp;</span><span
-        class="fzf-fg-plus">src/history</span
-      ><span class="fzf-hl-plus">.go</span></span
-    >
-  </li>
-  <li>
-    <span class="fzf-gutter">&nbsp;</span>&nbsp;<span class="fzf-fg">src/reader</span><span
-      class="fzf-hl">.go</span
-    >
-  </li>
-  <li>
-    <span class="fzf-gutter">&nbsp;</span>&nbsp;<span class="fzf-fg">src/merger</span><span
-      class="fzf-hl">.go</span
-    >
-  </li>
-  <li>&nbsp;&nbsp;<span class="fzf-header">This is Header</span></li>
-  <li>
-    <span class="fzf-spinner terminal-spinner"><span class="placeholder">&nbsp;</span></span><span
-      class="fzf-info">&nbsp;35/63 (3)</span
-    >&nbsp;<span class="fzf-separator">───────────────────────────────────────</span>
-  </li>
-  <li>
-    <span class="fzf-prompt">&gt;&nbsp;</span><span class="fzf-query">.go$</span><span class="cursor">█</span>
-  </li>
-</ul>
+<div style={allTokenVariables}>
+  <div bind:this={terminalWindowEl} class="terminal-window"></div>
+</div>
 
 <style lang="scss">
   /* --- TERMINAL WINDOW ------------------------------------------------------ */
@@ -79,13 +46,14 @@
       content: '⠋';
     }
   }
+
   .terminal-window {
     list-style-type: none;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Roboto Mono', monospace;
     padding: 10px;
-    font-size: 20px;
+    font-size: 16px;
     padding: 20px;
-    line-height: 121%;
+    line-height: 1.4;
     overflow: hidden;
     word-wrap: break-word;
     position: relative;
@@ -97,10 +65,11 @@
       line-height: 1.2;
     }
 
-    [class*='fzf-'] {
-      transition:
-        color 200ms ease-out,
-        background-color 200ms ease-out;
+    & span {
+      display: inline-block;
+    }
+
+    :global(span[class]:not(span[class=''])) {
       cursor: pointer;
       outline: 2px solid transparent;
 
@@ -108,72 +77,5 @@
         outline: 2px dotted salmon;
       }
     }
-
-    .fzf-scrollbar {
-      position: absolute;
-      right: 5px;
-    }
-
-    .fzf-bg-plus {
-      font-weight: bold;
-    }
-  }
-
-  :global(.fzf-hl) {
-    color: var(--fzf-hl);
-  }
-
-  :global(.fzf-pointer) {
-    color: var(--fzf-pointer);
-  }
-
-  :global(.fzf-marker) {
-    color: var(--fzf-marker);
-  }
-
-  :global(.fzf-gutter) {
-    background-color: var(--fzf-gutter);
-    display: inline-block;
-  }
-
-  :global(.fzf-header) {
-    color: var(--fzf-header);
-  }
-
-  :global(.fzf-info) {
-    color: var(--fzf-info);
-  }
-
-  :global(.fzf-spinner) {
-    color: var(--fzf-spinner);
-  }
-
-  :global(.fzf-prompt) {
-    color: var(--fzf-prompt);
-  }
-
-  :global(.fzf-border) {
-    color: var(--fzf-border);
-  }
-
-  :global(.fzf-separator) {
-    color: var(--fzf-separator);
-  }
-
-  :global(.fzf-scrollbar) {
-    color: var(--fzf-scrollbar);
-  }
-
-  :global(.fzf-bg-plus) {
-    background-color: var(--fzf-bg-plus);
-    font-weight: bold;
-  }
-
-  :global(.fzf-fg-plus) {
-    color: var(--fzf-fg-plus);
-  }
-
-  :global(.fzf-hl-plus) {
-    color: var(--fzf-hl-plus);
   }
 </style>

@@ -5,11 +5,13 @@ import { isNil } from '~/utils/isNil';
 
 export type SettingsStore = {
   selectedColor: FzfColor;
+  colorPickerColor: string | undefined;
   colors: Record<FzfColor, string>;
 };
 
 const initialSettings: SettingsStore = {
   selectedColor: 'fg',
+  colorPickerColor: colorDefinitions.fg.initial,
   colors: Object.fromEntries(
     Object.entries(colorDefinitions).map(([token, options]) => [token, options.initial ?? '']),
   ) as SettingsStore['colors'],
@@ -40,6 +42,15 @@ export const settingsStore = {
     _settingsStore.update((settings) => ({
       ...settings,
       selectedColor: token,
+      colorPickerColor: settings.colors[token],
+    }));
+  },
+  resetAllColors: () => {
+    _settingsStore.update((settings) => ({
+      ...initialSettings,
+      selectedColor: settings.selectedColor,
+      colorPickerColor:
+        settings.colorPickerColor[colorDefinitions[settings.selectedColor!].initial]!,
     }));
   },
   updateColor: (token: string, color: string | undefined) => {

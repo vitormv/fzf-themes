@@ -1,5 +1,6 @@
 <script lang="ts">
   import LayoutBox from '~/components/common/LayoutBox.svelte';
+  import heartSvg from '~/assets/heart-outline.svg';
 </script>
 
 <div class="wrapper">
@@ -14,9 +15,14 @@
     </div>
   </LayoutBox>
 
-  <LayoutBox title="About">
-    Heavily inspired by terminal.sexy, and uses the awesome hsluv and lolight libraries to generate
-    pretty terminal color schemes.
+  <LayoutBox title="About" style="flex: 1">
+    <div>
+      Heavily inspired by <a href="https://terminal.sexy" target="_blank">terminal.sexy</a>, and
+      uses the awesome hsluv and lolight libraries to generate pretty terminal color schemes. Made
+      with
+      <img src={heartSvg} height="20px" alt="heart icon" style="color: red;" />
+      by <a href="https://github.com/vitormv" target="_blank">@vitormv</a>.
+    </div>
   </LayoutBox>
 </div>
 
@@ -24,6 +30,7 @@
   .wrapper {
     display: flex;
     flex-direction: column;
+    height: 100%;
     gap: var(--box-gap);
   }
 

@@ -1,10 +1,17 @@
 <script lang="ts">
   import ColorItem from '~/components/palette/ColorItem.svelte';
   import { orderedColorTokens } from '~/data/fzfDefinitions';
+  import { settingsStore } from '~/data/settingsStore';
 </script>
 
 <div class="wrapper">
-  <button type="button" class="js-reset-all btn btn-sm btn-outline-secondary">Reset all</button>
+  <button
+    type="button"
+    class="btn btn-sm btn-outline-secondary"
+    on:click={settingsStore.resetAllColors}
+  >
+    Reset all
+  </button>
 
   <div class="color-grid">
     {#each orderedColorTokens as token}
@@ -15,8 +22,7 @@
 
 <style>
   .wrapper {
-    height: 100%;
-    overflow-y: scroll;
+    flex: 1;
   }
 
   button {

@@ -1,13 +1,16 @@
 <script lang="ts">
+  // @todo: optional flex-direction and stuff
   export let title: string = '';
+  export let style: string = '';
+  export let contentStyle: string = '';
 </script>
 
-<div class="box">
+<div class="box" {style}>
   {#if title}
     <h2 class="title">{title}</h2>
   {/if}
 
-  <div class="content"><slot /></div>
+  <div class="content" style={contentStyle}><slot /></div>
 </div>
 
 <style>
@@ -15,10 +18,18 @@
     background-color: var(--box-bg-color);
     padding: 15px;
     position: relative;
+    display: flex;
+    flex-direction: column;
   }
 
   .title {
     margin-bottom: 1rem;
+  }
+
+  .content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
   }
 
   h2 {

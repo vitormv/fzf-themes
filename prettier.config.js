@@ -9,8 +9,8 @@ const config = {
   useTabs: false,
   quoteProps: 'consistent',
   bracketSameLine: false,
-  htmlWhitespaceSensitivity: 'ignore',
-  // allowShorthand: false, // explicit definitions are easier for Svelte beginners
+  // htmlWhitespaceSensitivity: 'ignore',
+  allowShorthand: false, // explicit definitions are easier for Svelte beginners
   plugins: ['prettier-plugin-svelte'],
   overrides: [
     {

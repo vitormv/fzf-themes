@@ -1,4 +1,6 @@
 @import url('./animations.css');
+@import url('./forms');
+@import url('./terminal');
 
 :root {
   --brand-text: #e9e9e9;
@@ -11,6 +13,9 @@
   --text-color: #e9e9e9;
   --box-gap: 15px;
   --box-bg-color: #323232;
+
+  --border-color: #3f3f3f;
+  --border-dark-color: #474747;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -46,10 +51,11 @@ body {
 
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: #4ca0f4;
+  text-decoration: underline;
 }
 
 a:hover {
   color: #535bf2;
+  text-decoration: none;
 }

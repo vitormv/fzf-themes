@@ -1,0 +1,82 @@
+.terminal-window {
+  span {
+    display: inline-block;
+  }
+
+  .hl {
+    color: var(--fzf-hl);
+  }
+
+  .pointer {
+    color: var(--fzf-pointer);
+  }
+
+  .marker {
+    color: var(--fzf-marker);
+  }
+
+  .gutter {
+    background-color: var(--fzf-gutter);
+  }
+
+  .header {
+    color: var(--fzf-header);
+  }
+
+  .info {
+    color: var(--fzf-info);
+  }
+
+  .spinner {
+    color: var(--fzf-spinner);
+    position: relative;
+
+    &::after {
+      position: absolute;
+      left: 0;
+      animation: terminal-spinner 0.8s linear infinite;
+      display: inline;
+      content: '⠋';
+    }
+  }
+
+  .prompt {
+    color: var(--fzf-prompt);
+  }
+
+  .border {
+    color: var(--fzf-border);
+  }
+
+  .separator {
+    color: var(--fzf-separator);
+  }
+
+  .scrollbar {
+    color: var(--fzf-scrollbar);
+  }
+
+  .bg-plus {
+    background-color: var(--fzf-bg-plus);
+    font-weight: bold;
+  }
+
+  .fg-plus {
+    color: var(--fzf-fg-plus);
+  }
+
+  .hl-plus {
+    color: var(--fzf-hl-plus);
+  }
+
+  .query {
+    color: var(--fzf-query);
+
+    &::after {
+      content: '█';
+      color: var(--fzf-fg);
+      animation: cursor-blink 1.5s steps(1) infinite
+    }
+  }
+
+}
