@@ -1,25 +1,14 @@
 <script lang="ts">
-  import { settingsStore } from '~/state/settingsContext';
+  import { orderedColorTokens } from '~/data/fzfDefinitions';
+  import { settingsStore } from '~/data/settingsStore';
+
+  // take all known color tokens and set them as css variables
+  $: allTokenVariables = orderedColorTokens
+    .map((token) => `--fzf-${token}: ${$settingsStore.colors[token]}`)
+    .join(';');
 </script>
 
-<ul
-  class="terminal-window"
-  style:--fzf-fg={$settingsStore.colors.fg}
-  style:--fzf-fg-plus={$settingsStore.colors['fg-plus']}
-  style:--fzf-bg={$settingsStore.colors['bg']}
-  style:--fzf-bg-plus={$settingsStore.colors['bg-plus']}
-  style:--fzf-hl={$settingsStore.colors['hl']}
-  style:--fzf-hl-plus={$settingsStore.colors['hl-plus']}
-  style:--fzf-info={$settingsStore.colors['info']}
-  style:--fzf-marker={$settingsStore.colors['marker']}
-  style:--fzf-prompt={$settingsStore.colors['prompt']}
-  style:--fzf-spinner={$settingsStore.colors['spinner']}
-  style:--fzf-pointer={$settingsStore.colors['pointer']}
-  style:--fzf-header={$settingsStore.colors['header']}
-  style:--fzf-gutter={$settingsStore.colors['gutter']}
-  style:--fzf-border={$settingsStore.colors['border']}
-  style:--fzf-separator={$settingsStore.colors['separator']}
->
+<ul class="terminal-window" style={allTokenVariables}>
   <li>
     <span class="fzf-gutter">&nbsp;</span><span class="fzf-gutter fzf-marker">&gt;</span><span
       class="fzf-fg">src/fzf/main</span
@@ -64,7 +53,7 @@
     >&nbsp;<span class="fzf-separator">───────────────────────────────────────</span>
   </li>
   <li>
-    <span class="fzf-prompt">&gt;&nbsp;</span>.go$<span class="cursor">█</span>
+    <span class="fzf-prompt">&gt;&nbsp;</span><span class="fzf-query">.go$</span><span class="cursor">█</span>
   </li>
 </ul>
 
@@ -172,7 +161,7 @@
   }
 
   :global(.fzf-scrollbar) {
-    color: var(--fzf-separator);
+    color: var(--fzf-scrollbar);
   }
 
   :global(.fzf-bg-plus) {

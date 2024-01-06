@@ -3,7 +3,7 @@
   import OptionsPanel from '~/components/OptionsPanel.svelte';
   import LayoutBox from '~/components/common/LayoutBox.svelte';
   import ColorGrid from '~/components/palette/ColorGrid.svelte';
-  import TerminalWindow from '~/components/tui/TerminalWindow.svelte';
+  import TerminalWindow from '~/components/TerminalWindow.svelte';
 </script>
 
 <main class="layout">
@@ -30,7 +30,7 @@
   .layout {
     display: grid;
     gap: var(--box-gap);
-    grid-template-columns: 350px 300px 1fr;
+    grid-template-columns: 350px 350px 1fr;
     grid-template-rows: auto;
     align-items: stretch;
     height: 100%;

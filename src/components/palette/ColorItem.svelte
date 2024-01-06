@@ -1,8 +1,10 @@
 <script lang="ts">
   import { hexColorToRgb } from '~/utils/hexColorToRgb';
   import type { FzfColor } from '~/types/fzf';
-  import { getContrastColor } from '~/utils/getConstrastColor';
-  import { settingsStore } from '~/state/settingsContext';
+  import { getContrastColor } from '~/utils/getContrastColor';
+  import { getColorOrFallback, settingsStore } from '~/data/settingsStore';
+  import { isNil } from '~/utils/isNil';
+  import { colorDefinitions } from '~/data/fzfDefinitions';
 
   export let token: FzfColor;
 
@@ -10,21 +12,20 @@
     return name.replace('-plus', '+');
   };
 
-  const getColorValue = (color: string) => {
+  const getColorLabel = (color: string) => {
     if (color.startsWith('#')) {
       return color;
     }
 
-    const matches = color.match(/var\(--fzf-([a-z-]+)\)/);
-    if (matches && matches[1]) {
-      // return `same as ${toFzfName(matches[1])}`;
-      return `---`;
+    if (!color && colorDefinitions[token].inherits) {
+      return 'inherit';
     }
 
-    return '';
+    return '---';
   };
 
-  $: contrastColor = getContrastColor($settingsStore.colors[token]);
+  $: color = getColorOrFallback(token, $settingsStore.colors);
+  $: contrastColor = getContrastColor(color);
   $: borderColor = hexColorToRgb(contrastColor === 'dark' ? '#dddddd' : '#ffffff');
 </script>
 
@@ -34,12 +35,12 @@
     class="color"
     class:selected={$settingsStore.selectedColor === token}
     style:color={contrastColor === 'dark' ? '#000' : '#fff'}
-    style:background-color={$settingsStore.colors[token]}
+    style:background-color={color}
     style:--border-color-hover={`rgba(${borderColor?.r}, ${borderColor?.g}, ${borderColor?.b}, .8)`}
     on:click={void settingsStore.setSelected(token)}
   >
     <div class="name">{toFzfName(token)}</div>
-    <div class="hex">{getColorValue($settingsStore.colors[token])}</div>
+    <div class="hex">{getColorLabel($settingsStore.colors[token])}</div>
   </button>
 </div>
 
@@ -58,7 +59,7 @@
     position: relative;
     justify-content: space-between;
     cursor: pointer;
-    padding: 10px 6px 6px;
+    padding: 8px 4px 4px;
     border-radius: 0;
     border: 0;
     transition: none;
@@ -72,7 +73,8 @@
     }
 
     .name {
-      font-size: 20px;
+      font-size: 16px;
+      text-transform: uppercase;
       font-weight: bold;
       opacity: 0.7;
     }

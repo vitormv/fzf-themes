@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Picker from 'vanilla-picker';
-  import { settingsStore } from '~/state/settingsContext';
+  import { colorDefinitions } from '~/data/fzfDefinitions';
+  import { settingsStore } from '~/data/settingsStore';
 
   let picker: Picker;
 
@@ -13,12 +14,15 @@
       popup: false,
       alpha: false,
       layout: 'default',
+      color: colorDefinitions.fg.initial, // initial color only
       onChange: (color) => {
+        // update settingsStore
         settingsStore.updateColor($settingsStore.selectedColor, color.hex.substring(0, 7));
       },
     });
   });
 
+  // when "selectedColor" changes in the store, also update the currentcolor in the ColorPicker
   $: picker?.setOptions({ color: $settingsStore.colors[$settingsStore.selectedColor] });
 </script>
 

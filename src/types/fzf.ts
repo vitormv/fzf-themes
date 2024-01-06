@@ -14,4 +14,12 @@ export type FzfColor =
   | 'gutter'
   | 'border'
   | 'separator'
-  | 'scrollbar';
+  | 'scrollbar'
+  | 'preview-fg'
+  | 'preview-bg'
+  | 'preview-border'
+  | 'preview-scrollbar'
+  | 'preview-label'
+  | 'label'
+  | 'query'
+  | 'disabled';
