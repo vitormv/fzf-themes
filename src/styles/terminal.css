@@ -57,8 +57,12 @@
   }
 
   .bg-plus {
-    background-color: var(--fzf-bg-plus);
+
     font-weight: bold;
+
+    span[class]:not(span[class='']) {
+      background-color: var(--fzf-bg-plus);
+    }
   }
 
   .fg-plus {

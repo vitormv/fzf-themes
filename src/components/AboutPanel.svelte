@@ -17,9 +17,10 @@
 
   <LayoutBox title="About" style="flex: 1">
     <div>
-      Heavily inspired by <a href="https://terminal.sexy" target="_blank">terminal.sexy</a>, and
-      uses the awesome hsluv and lolight libraries to generate pretty terminal color schemes. Made
-      with
+      Very heavily inspired by <a href="https://terminal.sexy" target="_blank">terminal.sexy</a>
+      and
+      <a href="https://terminal.love" target="_blank">terminal.love</a>, this offer a quick way to
+      preview <strong>*some*</strong> of the many styling options available. Made with much
       <img src={heartSvg} height="20px" alt="heart icon" style="color: red;" />
       by <a href="https://github.com/vitormv" target="_blank">@vitormv</a>.
     </div>
