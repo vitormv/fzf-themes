@@ -1,31 +1,35 @@
 import { Token, FillSpace, token } from '~/utils/tui/Token';
 
-// https://svelte.dev/repl/c5c99203078e4b1587d97b6947e2d2f2?version=4.2.8
+type LineToken = undefined | string | Token | FillSpace;
 
 export type LineOptions = {
   className?: string;
-  content: Array<undefined | string | Token | FillSpace>;
+  tokens: LineToken[];
 };
 
 export class Line {
-  public options: LineOptions;
+  public tokens: LineToken[];
+  public className: string | undefined;
 
   constructor(options: LineOptions) {
-    this.options = { ...options, content: this.ensureContainsFillSpace(options.content) };
+    this.tokens = options.tokens;
+    this.className = options.className;
   }
 
   public clone() {
-    return new Line({ ...this.options, content: [...this.options.content] });
+    return new Line({ className: this.className, tokens: this.tokens });
   }
 
-  private ensureContainsFillSpace(tokens: LineOptions['content']) {
-    const hasFillSpace = tokens.some((item) => item instanceof FillSpace);
+  public hasFillSpace() {
+    return this.tokens.some((item) => item instanceof FillSpace);
+  }
 
-    return hasFillSpace ? tokens : [...tokens, new FillSpace(' ')];
+  private ensureContainsFillSpace(tokens: LineOptions['tokens']) {
+    return this.hasFillSpace() ? tokens : [...tokens, new FillSpace(' ')];
   }
 
   private staticContentLength(): number {
-    return this.options.content.reduce((length, item) => {
+    return this.tokens.reduce((length, item) => {
       if (typeof item === 'string') {
         return length + item.length;
       } else if (item instanceof Token) {
@@ -39,13 +43,14 @@ export class Line {
   render(cols: number) {
     const lineElement = document.createElement('div');
 
-    if (this.options.className) {
-      lineElement.className = this.options.className;
+    if (this.className) {
+      lineElement.className = this.className;
     }
 
+    const normalizedTokens = this.ensureContainsFillSpace(this.tokens);
     const fillSpaceLength = cols - this.staticContentLength();
 
-    this.options.content.forEach((item) => {
+    normalizedTokens.forEach((item) => {
       if (!item) return;
 
       if (item instanceof FillSpace && fillSpaceLength > 0) {

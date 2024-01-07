@@ -12,20 +12,25 @@ export const addBorders = (lines: Line[], theme: ThemeOptions) => {
 
   const linesWithBorder = [
     new Line({
-      content: [
+      tokens: [
         token(borderDefinition.topLeft, 'border'),
         fillSpace(borderDefinition.top, 'border'),
         token(borderDefinition.topRight, 'border'),
       ],
     }),
     ...lines.map((line) => {
-      line.options.content.unshift(token(borderDefinition.left, 'border'));
-      line.options.content.push(token(borderDefinition.right, 'border'));
+      line.tokens.unshift(token(borderDefinition.left, 'border'));
+
+      if (!line.hasFillSpace()) {
+        line.tokens.push(fillSpace(' '));
+      }
+
+      line.tokens.push(token(borderDefinition.right, 'border'));
 
       return line;
     }),
     new Line({
-      content: [
+      tokens: [
         token(borderDefinition.bottomLeft, 'border'),
         fillSpace(borderDefinition.bottom, 'border'),
         token(borderDefinition.bottomRight, 'border'),

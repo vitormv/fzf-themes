@@ -2,7 +2,7 @@ import type { BoxCoordinates } from '~/data/themeStore';
 import { Line } from '~/utils/tui/Line';
 import { token, fillSpace } from '~/utils/tui/Token';
 
-const emptySpaceLine = new Line({ content: [fillSpace(' ')] });
+const emptySpaceLine = new Line({ tokens: [fillSpace(' ')] });
 
 const getVerticalSpace = (count: number) => {
   if (count < 1) return [];
@@ -17,11 +17,11 @@ export const addSpacing = (lines: Line[], space: BoxCoordinates) => {
     ...getVerticalSpace(space.top),
     ...lines.map((line) => {
       if (space.left > 0) {
-        line.options.content.unshift(token(' '.repeat(space.left)));
+        line.tokens.unshift(token(' '.repeat(space.left)));
       }
 
       if (space.right > 0) {
-        line.options.content.push(token(' '.repeat(space.right)));
+        line.tokens.push(token(' '.repeat(space.right)));
       }
 
       return line;
