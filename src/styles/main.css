@@ -3,11 +3,6 @@
 @import url('./forms');
 @import url('./terminal');
 
-@font-face {
-  font-family: 'Iosevka';
-  src: url("/IosevkaTermNerdFontMono-Regular.woff2") format('woff2');
-}
-
 
 :root {
   --brand-text: #e9e9e9;
