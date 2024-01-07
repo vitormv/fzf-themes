@@ -23,7 +23,7 @@
     return '---';
   };
 
-  $: color = getColorOrFallback(token, $colorsStore.colors);
+  $: color = getColorOrFallback(token, $colorsStore.colors).value;
   $: contrastColor = getContrastColor(color);
   $: borderColor = hexColorToRgb(contrastColor === 'dark' ? '#dddddd' : '#ffffff');
 </script>
@@ -38,7 +38,7 @@
     style:--border-color-hover={`rgba(${borderColor?.r}, ${borderColor?.g}, ${borderColor?.b}, .8)`}
     on:click={void colorsStore.setSelected(token)}
   >
-    <div class="name">{toFzfName(token)}</div>
+    <div class="name"><span>{toFzfName(token)}</span></div>
     <div class="hex">{getColorLabel($colorsStore.colors[token])}</div>
   </button>
 </div>
@@ -76,10 +76,14 @@
       text-transform: uppercase;
       font-weight: bold;
       opacity: 0.7;
+      flex: 1;
+      display: flex;
+      align-items: center;
     }
 
     .hex {
       font-size: 1rem;
+      flex: 0;
       opacity: 0.7;
     }
   }

@@ -7,12 +7,13 @@
 
   // take all known color tokens and set them as css variables
   $: allTokenVariables = orderedColorTokens
-    .map((token) => `--fzf-${token}: ${getColorOrFallback(token, $colorsStore.colors)}`)
+    .map((token) => `--fzf-${token}: ${getColorOrFallback(token, $colorsStore.colors).value}`)
     .join(';');
 
   let terminalWindowEl: HTMLDivElement;
   let wrapperEl: HTMLDivElement;
   let charWidthEl: HTMLSpanElement;
+  let hintEl: HTMLDivElement;
 
   $: theme = $themeStore;
 
@@ -23,11 +24,12 @@
 
   function renderTerminalWindow(currentTheme: ThemeOptions) {
     terminalWindowEl.innerHTML = '';
+    hintEl.style.width = '';
 
     const charWidth = charWidthEl.getBoundingClientRect().width;
     const terminalWindowWidth = wrapperEl.getBoundingClientRect().width;
 
-    // cols follow the screen size, but has a minimum of 50
+    // cols follow the available screen size, but has a minimum of 50 cols
     const maxCols = Math.max(50, Math.floor(terminalWindowWidth / charWidth));
 
     const lineElements = renderLines(maxCols, currentTheme);
@@ -35,21 +37,20 @@
     lineElements.forEach((lineEl) => {
       terminalWindowEl.appendChild(lineEl);
     });
+
+    hintEl.style.width = `${terminalWindowEl.getBoundingClientRect().width}px`;
   }
 
   onMount(() => {
-    function onLoadHandler() {
-      renderTerminalWindow(theme);
-    }
+    const onLoadHandler = () => void renderTerminalWindow(theme);
+    const onResizeHandler = () => void renderTerminalWindow(theme);
 
+    // if document already finished loading, just fire the
+    // event without registering listener
     if (document.readyState === 'complete') {
       renderTerminalWindow(theme);
     } else {
       window.addEventListener('load', onResizeHandler);
-    }
-
-    function onResizeHandler() {
-      renderTerminalWindow(theme);
     }
 
     window.addEventListener('resize', onResizeHandler);
@@ -68,8 +69,10 @@
 
   <!-- This element is used to calculate the current width of chars according
   to users browser window, resolution, zoom amount, etc. -->
+  <span bind:this={charWidthEl} class="sample-char-width">▀</span>
 </div>
-<span bind:this={charWidthEl} class="sample-char-width">▀</span>
+
+<div class="hint" bind:this={hintEl}>background: bg text: fg</div>
 
 <style lang="scss">
   :root {
@@ -118,5 +121,11 @@
         outline: 2px dotted salmon;
       }
     }
+  }
+
+  .hint {
+    background-color: var(--gray-900);
+    line-height: 1.5;
+    padding: 6px 12px;
   }
 </style>

@@ -13,7 +13,8 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
   },
   'fg-plus': {
     initial: '#d0d0d0',
-    nullable: false,
+    nullable: true,
+    inherits: 'fg',
   },
   'bg': {
     initial: '#121212',
@@ -21,7 +22,8 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
   },
   'bg-plus': {
     initial: '#262626',
-    nullable: false,
+    nullable: true,
+    inherits: 'bg',
   },
   'hl': {
     initial: '#5f87af',
@@ -30,6 +32,7 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
   'hl-plus': {
     initial: '#5fd7ff',
     nullable: false,
+    inherits: 'fg',
   },
   'info': {
     initial: '#afaf87',
@@ -106,14 +109,33 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
   'preview-scrollbar': {
     initial: '',
     nullable: true,
-    inherits: 'border',
+    inherits: 'preview-border',
   },
   'preview-label': {
     initial: '',
     nullable: true,
-    inherits: 'label',
+    inherits: 'preview-fg',
   },
 } as const;
+
+/**
+ * once at runtime, create an easy dictionary of which color inherits from which
+ */
+export const colorInheritances = Object.fromEntries(
+  Object.entries(colorDefinitions).map(([k, v]) => {
+    let inherits: FzfColor[] = [];
+
+    let tokenLookup = v.inherits;
+
+    while (tokenLookup) {
+      inherits.push(tokenLookup);
+
+      tokenLookup = colorDefinitions[tokenLookup].inherits;
+    }
+
+    return [k, inherits];
+  }),
+) as Record<FzfColor, FzfColor[]>;
 
 /**
  * The order of colors is constantly changing in the settings store, so prefer

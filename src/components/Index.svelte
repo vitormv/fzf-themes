@@ -29,7 +29,7 @@
   </div>
 
   <div style="display: flex; gap: var(--box-gap); width: 100%;">
-    <LayoutBox title="Color Picker" contentStyle="height: 100%;">
+    <LayoutBox title="Color Picker" style="flex: 0 1 300px" contentStyle="height: 100%;">
       <ColorPicker />
     </LayoutBox>
 

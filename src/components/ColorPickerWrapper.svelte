@@ -25,7 +25,6 @@
     margin: 0 0 10px;
     display: none;
     width: max-content;
-    height: 100%;
   }
 
   .is-open {

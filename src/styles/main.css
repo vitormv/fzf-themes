@@ -19,6 +19,8 @@
   --border-color: #3f3f3f;
   --border-dark-color: #474747;
 
+  --gray-900: #202020;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;

@@ -1,6 +1,6 @@
 import type { FzfColor } from '~/types/fzf';
 import { writable } from 'svelte/store';
-import { colorDefinitions } from '~/data/fzfDefinitions';
+import { colorDefinitions, colorInheritances } from '~/data/fzfDefinitions';
 import { isNil } from '~/utils/isNil';
 
 export type ColorsStore = {
@@ -22,18 +22,20 @@ const _colorsStore = writable<ColorsStore>(initialSettings);
 /**
  * Given a color token, get its value from the store, or recursively try
  * to find the first parent with a color.
- * @todo recursively iterate through parents
  */
-export const getColorOrFallback = (token: FzfColor, colors: ColorsStore['colors']) => {
-  if (colors[token]) {
-    return colors[token];
+export const getColorOrFallback = (color: FzfColor, currentColors: Record<FzfColor, string>) => {
+  const thisColor = { color, value: currentColors[color] };
+
+  if (currentColors[color]) {
+    return thisColor;
   }
 
-  if (!isNil(colorDefinitions[token].inherits)) {
-    return colors[colorDefinitions[token].inherits!];
-  }
+  // given the inheritance tree, find the first that has a value
+  const firstMatched = colorInheritances[color].find(
+    (inheritedColor) => currentColors[inheritedColor],
+  );
 
-  return '';
+  return firstMatched ? { color: firstMatched, value: currentColors[firstMatched] } : thisColor;
 };
 
 export const colorsStore = {
