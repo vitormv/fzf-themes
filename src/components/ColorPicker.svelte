@@ -17,6 +17,3 @@
   --slider-width="15px"
   --picker-width="300px"
 />
-
-<style>
-</style>

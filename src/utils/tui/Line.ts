@@ -48,7 +48,7 @@ export class Line {
     this.options.content.forEach((item) => {
       if (!item) return;
 
-      if (item instanceof FillSpace) {
+      if (item instanceof FillSpace && fillSpaceLength > 0) {
         lineElement.appendChild(
           token(item.fillChar.repeat(fillSpaceLength), item.classNames).render(),
         );

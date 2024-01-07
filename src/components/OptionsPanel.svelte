@@ -3,6 +3,7 @@
   import { borderTypes } from '~/data/fzfBorders';
   import { themeStore } from '~/data/themeStore';
   import InputCycle from '~/components/common/InputCycle.svelte';
+  import { boxCoordinatesToString, stringToBoxCoordinates } from '~/utils/boxCoordinates';
 </script>
 
 <div class="wrapper">
@@ -41,11 +42,31 @@
     </FormControl>
 
     <FormControl label="Margin">
-      <input type="text" />
+      <input
+        type="text"
+        value={boxCoordinatesToString($themeStore.margin)}
+        on:input={(e) => {
+          const coords = stringToBoxCoordinates(e.target?.value);
+
+          if (coords) {
+            themeStore.set('margin', coords);
+          }
+        }}
+      />
     </FormControl>
 
     <FormControl label="Padding">
-      <input type="text" value="0,1" />
+      <input
+        type="text"
+        value={boxCoordinatesToString($themeStore.padding)}
+        on:input={(e) => {
+          const coords = stringToBoxCoordinates(e.target?.value);
+
+          if (coords) {
+            themeStore.set('padding', coords);
+          }
+        }}
+      />
     </FormControl>
   </div>
 

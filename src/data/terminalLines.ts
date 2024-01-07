@@ -1,7 +1,8 @@
-import { BorderStyleDefinitions } from '~/data/fzfBorders';
 import type { ThemeOptions } from '~/data/themeStore';
 import { Line } from '~/utils/tui/Line';
 import { token, fillSpace } from '~/utils/tui/Token';
+import { addBorders } from '~/utils/tui/addBorders';
+import { addSpacing } from '~/utils/tui/addSpacing';
 
 const lines = [
   new Line({
@@ -65,37 +66,14 @@ const lines = [
 ];
 
 export const renderLines = (maxCols: number, lines: Line[], theme: ThemeOptions) => {
-  const borderDefinition = BorderStyleDefinitions[theme.borderStyle || 'none'];
+  // clone to avoid mutating original objects
+  let parsedLines = [...lines.map((line) => line.clone())];
 
-  if (!theme.borderStyle || theme.borderStyle === 'none') {
-    return lines.map((line) => line.render(maxCols));
-  }
+  parsedLines = addSpacing(parsedLines, theme.padding);
+  parsedLines = addBorders(parsedLines, theme);
+  parsedLines = addSpacing(parsedLines, theme.margin);
 
-  const linesWithBorder = [
-    new Line({
-      content: [
-        token(borderDefinition.topLeft, 'border'),
-        fillSpace(borderDefinition.top, 'border'),
-        token(borderDefinition.topRight, 'border'),
-      ],
-    }),
-    ...lines.map((line) => {
-      const lineWithBorder = line.clone();
-      lineWithBorder.options.content.unshift(token(borderDefinition.left, 'border'));
-      lineWithBorder.options.content.push(token(borderDefinition.right, 'border'));
-
-      return lineWithBorder;
-    }),
-    new Line({
-      content: [
-        token(borderDefinition.bottomLeft, 'border'),
-        fillSpace(borderDefinition.bottom, 'border'),
-        token(borderDefinition.bottomRight, 'border'),
-      ],
-    }),
-  ];
-
-  return linesWithBorder.map((line) => line.render(maxCols));
+  return parsedLines.map((line) => line.render(maxCols));
 };
 
 export { lines };
