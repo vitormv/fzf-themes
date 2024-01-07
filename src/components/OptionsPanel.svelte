@@ -1,7 +1,7 @@
 <script lang="ts">
   import FormControl from '~/components/common/FormControl.svelte';
   import { borderTypes } from '~/data/fzfBorders';
-  import { borderStore } from '~/data/borderStore';
+  import { themeStore } from '~/data/themeStore';
   import InputCycle from '~/components/common/InputCycle.svelte';
 </script>
 
@@ -12,10 +12,10 @@
     <FormControl label="Border">
       <InputCycle
         items={borderTypes}
-        value={$borderStore.style}
+        value={$themeStore.borderStyle}
         showIndex
         on:change={(e) => {
-          borderStore.setStyle(e.detail);
+          themeStore.set('borderStyle', e.detail);
         }}
       />
     </FormControl>

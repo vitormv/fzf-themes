@@ -2,7 +2,7 @@
   import { hexColorToRgb } from '~/utils/hexColorToRgb';
   import type { FzfColor } from '~/types/fzf';
   import { getContrastColor } from '~/utils/getContrastColor';
-  import { getColorOrFallback, settingsStore } from '~/data/settingsStore';
+  import { getColorOrFallback, colorsStore } from '~/data/colorsStore';
   import { colorDefinitions } from '~/data/fzfDefinitions';
 
   export let token: FzfColor;
@@ -23,7 +23,7 @@
     return '---';
   };
 
-  $: color = getColorOrFallback(token, $settingsStore.colors);
+  $: color = getColorOrFallback(token, $colorsStore.colors);
   $: contrastColor = getContrastColor(color);
   $: borderColor = hexColorToRgb(contrastColor === 'dark' ? '#dddddd' : '#ffffff');
 </script>
@@ -32,14 +32,14 @@
   <button
     type="button"
     class="color"
-    class:selected={$settingsStore.selectedColor === token}
+    class:selected={$colorsStore.selectedColor === token}
     style:color={contrastColor === 'dark' ? '#000' : '#fff'}
     style:background-color={color}
     style:--border-color-hover={`rgba(${borderColor?.r}, ${borderColor?.g}, ${borderColor?.b}, .8)`}
-    on:click={void settingsStore.setSelected(token)}
+    on:click={void colorsStore.setSelected(token)}
   >
     <div class="name">{toFzfName(token)}</div>
-    <div class="hex">{getColorLabel($settingsStore.colors[token])}</div>
+    <div class="hex">{getColorLabel($colorsStore.colors[token])}</div>
   </button>
 </div>
 

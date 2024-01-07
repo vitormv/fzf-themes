@@ -1,7 +1,7 @@
 import type { FzfColor } from '~/types/fzf';
 
 type ColorDefinition = {
-  initial: string | undefined;
+  initial: string;
   inherits?: FzfColor;
   nullable?: boolean;
 };

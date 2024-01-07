@@ -1,27 +1,27 @@
 <script lang="ts">
   import { orderedColorTokens } from '~/data/fzfDefinitions';
-  import { getColorOrFallback, settingsStore } from '~/data/settingsStore';
+  import { getColorOrFallback, colorsStore } from '~/data/colorsStore';
   import { onMount } from 'svelte';
   import { lines, renderLines } from '~/data/terminalLines';
-  import { borderStore, type BorderOptions } from '~/data/borderStore';
+  import { themeStore, type ThemeOptions } from '~/data/themeStore';
 
   // take all known color tokens and set them as css variables
   $: allTokenVariables = orderedColorTokens
-    .map((token) => `--fzf-${token}: ${getColorOrFallback(token, $settingsStore.colors)}`)
+    .map((token) => `--fzf-${token}: ${getColorOrFallback(token, $colorsStore.colors)}`)
     .join(';');
 
   let terminalWindowEl: HTMLDivElement;
   let wrapperEl: HTMLDivElement;
   let charWidthEl: HTMLSpanElement;
 
-  $: borderOptions = $borderStore;
+  $: theme = $themeStore;
 
-  borderStore.subscribe((borderSettings) => {
+  themeStore.subscribe((borderSettings) => {
     if (!terminalWindowEl) return;
     renderTerminalWindow(borderSettings);
   });
 
-  function renderTerminalWindow(borderOptions: BorderOptions) {
+  function renderTerminalWindow(currentTheme: ThemeOptions) {
     terminalWindowEl.innerHTML = '';
 
     const charWidth = charWidthEl.getBoundingClientRect().width;
@@ -30,7 +30,7 @@
     // cols follow the screen size, but has a minimum of 50
     const maxCols = Math.max(50, Math.floor(terminalWindowWidth / charWidth));
 
-    const lineElements = renderLines(maxCols, lines, borderOptions.style);
+    const lineElements = renderLines(maxCols, lines, currentTheme);
 
     lineElements.forEach((lineEl) => {
       terminalWindowEl.appendChild(lineEl);
@@ -39,17 +39,17 @@
 
   onMount(() => {
     function onLoadHandler() {
-      renderTerminalWindow(borderOptions);
+      renderTerminalWindow(theme);
     }
 
     if (document.readyState === 'complete') {
-      renderTerminalWindow(borderOptions);
+      renderTerminalWindow(theme);
     } else {
       window.addEventListener('load', onResizeHandler);
     }
 
     function onResizeHandler() {
-      renderTerminalWindow(borderOptions);
+      renderTerminalWindow(theme);
     }
 
     window.addEventListener('resize', onResizeHandler);

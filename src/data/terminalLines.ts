@@ -1,4 +1,5 @@
-import { BorderStyleDefinitions, type BorderStyle } from '~/data/fzfBorders';
+import { BorderStyleDefinitions } from '~/data/fzfBorders';
+import type { ThemeOptions } from '~/data/themeStore';
 import { Line } from '~/utils/tui/Line';
 import { token, fillSpace } from '~/utils/tui/Token';
 
@@ -63,10 +64,10 @@ const lines = [
   }),
 ];
 
-export const renderLines = (maxCols: number, lines: Line[], borderType: BorderStyle) => {
-  const borderDefinition = BorderStyleDefinitions[borderType || 'none'];
+export const renderLines = (maxCols: number, lines: Line[], theme: ThemeOptions) => {
+  const borderDefinition = BorderStyleDefinitions[theme.borderStyle || 'none'];
 
-  if (!borderType || borderType === 'none') {
+  if (!theme.borderStyle || theme.borderStyle === 'none') {
     return lines.map((line) => line.render(maxCols));
   }
 

@@ -1,14 +1,14 @@
 <script lang="ts">
   import ColorItem from '~/components/palette/ColorItem.svelte';
   import { orderedColorTokens } from '~/data/fzfDefinitions';
-  import { settingsStore } from '~/data/settingsStore';
+  import { colorsStore } from '~/data/colorsStore';
 </script>
 
 <div class="wrapper">
   <button
     type="button"
     class="btn btn-sm btn-outline-secondary"
-    on:click={settingsStore.resetAllColors}
+    on:click={colorsStore.resetAllColors}
   >
     Reset all
   </button>

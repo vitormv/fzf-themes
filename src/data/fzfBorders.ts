@@ -36,6 +36,9 @@ export const BorderStyleDefinitions: Record<BorderStyle, BorderTypeGlyphs> = {
     bottomLeft: '╰',
     bottomRight: '╯',
   },
+  // ┌─────────────────┐
+  // │      sharp      │
+  // └─────────────────┘
   sharp: {
     top: '─',
     bottom: '─',
@@ -46,6 +49,9 @@ export const BorderStyleDefinitions: Record<BorderStyle, BorderTypeGlyphs> = {
     bottomLeft: '└',
     bottomRight: '┘',
   },
+  // ┏━━━━━━━━━━━━━━━━━┓
+  // ┃      bold       ┃
+  // ┗━━━━━━━━━━━━━━━━━┛
   bold: {
     top: '━',
     bottom: '━',
@@ -56,6 +62,9 @@ export const BorderStyleDefinitions: Record<BorderStyle, BorderTypeGlyphs> = {
     bottomLeft: '┗',
     bottomRight: '┛',
   },
+  // ╔════════════════╗
+  // ║     double     ║
+  // ╚════════════════╝
   double: {
     top: '═',
     bottom: '═',
