@@ -1,6 +1,7 @@
 .terminal-window {
   span {
     display: inline-block;
+    white-space: nowrap;
   }
 
   .hl {
@@ -57,12 +58,9 @@
   }
 
   .bg-plus {
-
+    background-color: var(--fzf-bg-plus);
     font-weight: bold;
 
-    span[class]:not(span[class='']) {
-      background-color: var(--fzf-bg-plus);
-    }
   }
 
   .fg-plus {
@@ -75,11 +73,15 @@
 
   .query {
     color: var(--fzf-query);
+    position: relative;
 
     &::after {
       content: '█';
       color: var(--fzf-fg);
-      animation: cursor-blink 1.5s steps(1) infinite
+      animation: cursor-blink 1.5s steps(1) infinite;
+      position: absolute;
+      right: 0;
+      transform: translateX(100%);
     }
   }
 

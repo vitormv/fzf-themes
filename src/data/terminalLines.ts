@@ -1,3 +1,4 @@
+import { BorderStyleDefinitions, type BorderStyle } from '~/data/fzfBorders';
 import { Line } from '~/utils/tui/Line';
 import { token, fillSpace } from '~/utils/tui/Token';
 
@@ -34,8 +35,12 @@ const lines = [
     content: [token(' ', 'gutter'), token(' '), token('src/matcher', 'fg'), token('.go', 'hl')],
   }),
   new Line({
-    className: 'bg-plus',
-    content: [token('◆ ', 'pointer gutter'), token('src/history', 'fg-plus'), token('.go', 'hl')],
+    className: '',
+    content: [
+      token('◆ ', 'pointer gutter bg-plus'),
+      token('src/history', 'fg-plus bg-plus'),
+      token('.go', 'hl bg-plus'),
+    ],
   }),
   new Line({
     content: [token(' ', 'gutter'), token(' '), token('src/reader', 'fg'), token('.go', 'hl')],
@@ -57,5 +62,39 @@ const lines = [
     content: [token('> ', 'prompt'), token('.go$', 'query')],
   }),
 ];
+
+export const renderLines = (maxCols: number, lines: Line[], borderType: BorderStyle) => {
+  const borderDefinition = BorderStyleDefinitions[borderType];
+
+  if (borderType === 'none') {
+    return lines.map((line) => line.render(maxCols));
+  }
+
+  const linesWithBorder = [
+    new Line({
+      content: [
+        token(borderDefinition.topLeft, 'border'),
+        fillSpace(borderDefinition.top, 'border'),
+        token(borderDefinition.topRight, 'border'),
+      ],
+    }),
+    ...lines.map((line) => {
+      const lineWithBorder = line.clone();
+      lineWithBorder.options.content.unshift(token(borderDefinition.left, 'border'));
+      lineWithBorder.options.content.push(token(borderDefinition.right, 'border'));
+
+      return lineWithBorder;
+    }),
+    new Line({
+      content: [
+        token(borderDefinition.bottomLeft, 'border'),
+        fillSpace(borderDefinition.bottom, 'border'),
+        token(borderDefinition.bottomRight, 'border'),
+      ],
+    }),
+  ];
+
+  return linesWithBorder.map((line) => line.render(maxCols));
+};
 
 export { lines };

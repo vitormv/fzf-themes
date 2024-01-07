@@ -2,7 +2,8 @@
   import { orderedColorTokens } from '~/data/fzfDefinitions';
   import { getColorOrFallback, settingsStore } from '~/data/settingsStore';
   import { onMount } from 'svelte';
-  import { lines } from '~/data/terminalLines';
+  import { lines, renderLines } from '~/data/terminalLines';
+  import { borderStore, type BorderOptions } from '~/data/borderStore';
 
   // take all known color tokens and set them as css variables
   $: allTokenVariables = orderedColorTokens
@@ -10,37 +11,45 @@
     .join(';');
 
   let terminalWindowEl: HTMLDivElement;
+  let wrapperEl: HTMLDivElement;
   let charWidthEl: HTMLSpanElement;
 
-  function renderTerminalWindow() {
+  $: borderOptions = $borderStore;
+
+  borderStore.subscribe((borderSettings) => {
+    if (!terminalWindowEl) return;
+    renderTerminalWindow(borderSettings);
+  });
+
+  function renderTerminalWindow(borderOptions: BorderOptions) {
     terminalWindowEl.innerHTML = '';
-    terminalWindowEl.style.width = '';
 
     const charWidth = charWidthEl.getBoundingClientRect().width;
-    const terminalWindowWidth = terminalWindowEl.getBoundingClientRect().width;
+    const terminalWindowWidth = wrapperEl.getBoundingClientRect().width;
 
     // cols follow the screen size, but has a minimum of 50
     const maxCols = Math.max(50, Math.floor(terminalWindowWidth / charWidth));
 
-    lines.forEach((line) => {
-      terminalWindowEl.style.width = `${Math.ceil(maxCols * charWidth) + 3}px`;
-      terminalWindowEl.appendChild(line.render(maxCols));
+    const lineElements = renderLines(maxCols, lines, borderOptions.style);
+
+    lineElements.forEach((lineEl) => {
+      terminalWindowEl.appendChild(lineEl);
     });
   }
 
   onMount(() => {
     function onLoadHandler() {
-      renderTerminalWindow();
+      renderTerminalWindow(borderOptions);
     }
 
     if (document.readyState === 'complete') {
-      renderTerminalWindow();
+      renderTerminalWindow(borderOptions);
     } else {
       window.addEventListener('load', onResizeHandler);
     }
 
     function onResizeHandler() {
-      renderTerminalWindow();
+      renderTerminalWindow(borderOptions);
     }
 
     window.addEventListener('resize', onResizeHandler);
@@ -52,25 +61,27 @@
   });
 </script>
 
-<div class="wrapper" style={allTokenVariables}>
+<pre style="font-family: var(--terminal-font)"></pre>
+
+<div bind:this={wrapperEl} class="wrapper" style={allTokenVariables}>
   <div bind:this={terminalWindowEl} class="terminal-window"></div>
 
   <!-- This element is used to calculate the current width of chars according
   to users browser window, resolution, zoom amount, etc. -->
-  <span bind:this={charWidthEl} class="sample-char-width">m</span>
 </div>
+<span bind:this={charWidthEl} class="sample-char-width">▀</span>
 
 <style lang="scss">
   :root {
-    --terminal-font: 'Roboto Mono', monospace;
+    --terminal-font: monospace;
   }
 
   .wrapper {
     position: relative;
+    display: inline-block;
   }
 
   .sample-char-width {
-    // its like it was never there :)
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
@@ -79,9 +90,12 @@
     left: 0;
     display: inline-block;
     font-family: var(--terminal-font);
+    white-space: nowrap;
+    font-size: 16px;
   }
+
   .terminal-window {
-    list-style-type: none;
+    display: inline-block;
     font-family: var(--terminal-font);
     font-size: 16px;
     line-height: 1.3;
@@ -91,6 +105,10 @@
 
     background-color: var(--fzf-bg);
     color: var(--fzf-fg);
+
+    :global(*) {
+      white-space: nowrap;
+    }
 
     :global(span[class]:not(span[class=''])) {
       cursor: pointer;

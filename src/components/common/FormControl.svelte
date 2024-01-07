@@ -9,7 +9,7 @@
 
 <style lang="scss">
   .control {
-    display: flex;
+    display: inline-flex;
     gap: 10px;
   }
 

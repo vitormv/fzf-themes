@@ -8,14 +8,26 @@ export type LineOptions = {
 };
 
 export class Line {
-  private options: LineOptions;
+  public options: LineOptions;
 
   constructor(options: LineOptions) {
-    this.options = options;
+    this.options = { ...options, content: this.ensureContainsFillSpace(options.content) };
   }
 
-  private hasFillSpace() {
-    return this.options.content.some((item) => item instanceof FillSpace);
+  public clone() {
+    return new Line({ ...this.options, content: [...this.options.content] });
+  }
+
+  private ensureContainsFillSpace(tokens: LineOptions['content']) {
+    const hasFillSpace = tokens.some((item) => item instanceof FillSpace);
+
+    const newTokens = [...tokens];
+
+    if (!hasFillSpace) {
+      newTokens.push(new FillSpace(' '));
+    }
+
+    return newTokens;
   }
 
   private staticContentLength(): number {
@@ -37,16 +49,9 @@ export class Line {
       lineElement.className = this.options.className;
     }
 
-    const hasFillSpace = this.hasFillSpace();
     const fillSpaceLength = cols - this.staticContentLength();
 
-    const items = [...this.options.content];
-
-    if (!hasFillSpace) {
-      items.push(new FillSpace(' '));
-    }
-
-    items.forEach((item) => {
+    this.options.content.forEach((item) => {
       if (!item) return;
 
       if (item instanceof FillSpace) {

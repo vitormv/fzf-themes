@@ -1,4 +1,4 @@
-export type BorderStyle = {
+export type BorderTypeGlyphs = {
   top: string;
   bottom: string;
   left: string;
@@ -9,9 +9,19 @@ export type BorderStyle = {
   bottomRight: string;
 };
 
-export type BorderType = 'rounded' | 'sharp' | 'bold' | 'double' | 'block' | 'thinblock' | 'none';
+export type BorderStyle = 'rounded' | 'sharp' | 'bold' | 'double' | 'block' | 'thinblock' | 'none';
 
-export const BorderStyleDefinitions: Record<BorderType, BorderStyle> = {
+export const BorderStyleDefinitions: Record<BorderStyle, BorderTypeGlyphs> = {
+  none: {
+    top: '',
+    bottom: '',
+    left: '',
+    right: '',
+    topLeft: '',
+    topRight: '',
+    bottomLeft: '',
+    bottomRight: '',
+  },
   // ╭─────────────────╮
   // │     rounded     │
   // ╰─────────────────╯
@@ -24,6 +34,36 @@ export const BorderStyleDefinitions: Record<BorderType, BorderStyle> = {
     topRight: '╮',
     bottomLeft: '╰',
     bottomRight: '╯',
+  },
+  sharp: {
+    top: '─',
+    bottom: '─',
+    left: '│',
+    right: '│',
+    topLeft: '┌',
+    topRight: '┐',
+    bottomLeft: '└',
+    bottomRight: '┘',
+  },
+  bold: {
+    top: '━',
+    bottom: '━',
+    left: '┃',
+    right: '┃',
+    topLeft: '┏',
+    topRight: '┓',
+    bottomLeft: '┗',
+    bottomRight: '┛',
+  },
+  double: {
+    top: '═',
+    bottom: '═',
+    left: '║',
+    right: '║',
+    topLeft: '╔',
+    topRight: '╗',
+    bottomLeft: '╚',
+    bottomRight: '╝',
   },
   // ▛▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▜
   // ▌      block      ▐
@@ -48,46 +88,6 @@ export const BorderStyleDefinitions: Record<BorderType, BorderStyle> = {
     bottomLeft: '🭼',
     bottomRight: '🭿',
   },
-  double: {
-    top: '═',
-    bottom: '═',
-    left: '║',
-    right: '║',
-    topLeft: '╔',
-    topRight: '╗',
-    bottomLeft: '╚',
-    bottomRight: '╝',
-  },
-  bold: {
-    top: '━',
-    bottom: '━',
-    left: '┃',
-    right: '┃',
-    topLeft: '┏',
-    topRight: '┓',
-    bottomLeft: '┗',
-    bottomRight: '┛',
-  },
-  sharp: {
-    top: '─',
-    bottom: '─',
-    left: '│',
-    right: '│',
-    topLeft: '┌',
-    topRight: '┐',
-    bottomLeft: '└',
-    bottomRight: '┘',
-  },
-  none: {
-    top: '',
-    bottom: '',
-    left: '',
-    right: '',
-    topLeft: '',
-    topRight: '',
-    bottomLeft: '',
-    bottomRight: '',
-  },
 };
 
-export const borderTypes = Object.keys(BorderStyleDefinitions) as BorderType[];
+export const borderTypes = Object.keys(BorderStyleDefinitions) as BorderStyle[];
