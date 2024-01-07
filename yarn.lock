@@ -253,6 +253,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@floating-ui/core@npm:^1.5.0, @floating-ui/core@npm:^1.5.3":
+  version: 1.5.3
+  resolution: "@floating-ui/core@npm:1.5.3"
+  dependencies:
+    "@floating-ui/utils": "npm:^0.2.0"
+  checksum: 5fc8fa0d6f99ac91ae42bdfc06c4dea60ae0a979d8f7c74ebc8e9e9770d3c88a0afa6efce459fcdc0c3922176763477d13bc27b93d3838c8b81851e753193976
+  languageName: node
+  linkType: hard
+
+"@floating-ui/dom@npm:^1.5.3":
+  version: 1.5.4
+  resolution: "@floating-ui/dom@npm:1.5.4"
+  dependencies:
+    "@floating-ui/core": "npm:^1.5.3"
+    "@floating-ui/utils": "npm:^0.2.0"
+  checksum: 8a47ac5b8cf90214d73011d436d66821ccb7f4b9a29170e23117df2cc6008845834db7f59e73d998add19807f62f09e5e6a84516eed81cebbf25770dea595a84
+  languageName: node
+  linkType: hard
+
+"@floating-ui/utils@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@floating-ui/utils@npm:0.2.0"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 18a5827e65fb473ae9ec80536da0d05193728e88d921e5d2895e49985bb40df62351d32857da18bc08723a555c0ce251c8a1c5b09ad87c29808c1fb34894380a
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.13":
   version: 0.11.13
   resolution: "@humanwhocodes/config-array@npm:0.11.13"
@@ -1690,10 +1718,11 @@ __metadata:
     prettier: "npm:^3.1.1"
     prettier-plugin-svelte: "npm:^3.1.2"
     sass: "npm:^1.69.7"
-    simple-svelte-autocomplete: "npm:^2.5.2"
     svelte: "npm:^4.2.8"
     svelte-awesome-color-picker: "npm:^3.0.0-beta.11"
     svelte-check: "npm:^3.6.2"
+    svelte-ionicons: "npm:^0.7.2"
+    svelte-select: "npm:^5.8.3"
     tslib: "npm:^2.6.2"
     typescript: "npm:^5.3.3"
     vite: "npm:^5.0.8"
@@ -3022,13 +3051,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-svelte-autocomplete@npm:^2.5.2":
-  version: 2.5.2
-  resolution: "simple-svelte-autocomplete@npm:2.5.2"
-  checksum: dd5acc594802fc13057a338e545c73db7875bd010c27490f09df673325d60286c49ec5c0a79ade298746e3b5e241ea2478bfa0ef5dea8c207f56cccecb72eb57
-  languageName: node
-  linkType: hard
-
 "slash@npm:^3.0.0":
   version: 3.0.0
   resolution: "slash@npm:3.0.0"
@@ -3268,12 +3290,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"svelte-floating-ui@npm:1.5.8":
+  version: 1.5.8
+  resolution: "svelte-floating-ui@npm:1.5.8"
+  dependencies:
+    "@floating-ui/core": "npm:^1.5.0"
+    "@floating-ui/dom": "npm:^1.5.3"
+  checksum: 63f2a7aadc7b2f8bb0736e034a4e1344918139d9572d852a8b34841691b99fbb62f066f17dff22fcb04e24b18ce2767dfa858eb7bc925036af0c9b1a70d4b135
+  languageName: node
+  linkType: hard
+
 "svelte-hmr@npm:^0.15.3":
   version: 0.15.3
   resolution: "svelte-hmr@npm:0.15.3"
   peerDependencies:
     svelte: ^3.19.0 || ^4.0.0
   checksum: 80b6df78e4bc1dd8d1beb4cfc5c341a7839a444b41320cb1ff56c19741346ecc07ee7cc989d7083b02c40bad80d989d52b0defac4126cd0013eaac378f626d63
+  languageName: node
+  linkType: hard
+
+"svelte-ionicons@npm:^0.7.2":
+  version: 0.7.2
+  resolution: "svelte-ionicons@npm:0.7.2"
+  peerDependencies:
+    svelte: ^3.54.0 || ^4.0.0
+  checksum: c5869962fcf34769199a8ac5a9bb2bd7c5d45677930e86c31cb074b2a2c43631bf78819a10c4fe5a778e82bc126ffcd66251013734bf8c9f3c8b7a8e0528bbb4
   languageName: node
   linkType: hard
 
@@ -3320,6 +3361,15 @@ __metadata:
     typescript:
       optional: true
   checksum: 587246945dada39dd82ce3842f8918848d651ad9cbe5587d455802b6971741fd936e0ed63dbbb82f276a002571602c73cca6c1798f2ec09fe15c7532cdf98880
+  languageName: node
+  linkType: hard
+
+"svelte-select@npm:^5.8.3":
+  version: 5.8.3
+  resolution: "svelte-select@npm:5.8.3"
+  dependencies:
+    svelte-floating-ui: "npm:1.5.8"
+  checksum: 723072f3ac2d2f2bc4207add378c125ed60bd1296f0debdf99545bfba8c21667836e77bc0344493a7ac0508ffdec2a379b0763fdce7c7249e763dc16267506fd
   languageName: node
   linkType: hard
 

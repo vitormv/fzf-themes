@@ -1,6 +1,6 @@
 <script lang="ts">
   import LayoutBox from '~/components/common/LayoutBox.svelte';
-  import heartSvg from '~/assets/heart-outline.svg';
+  import { HeartOutline } from 'svelte-ionicons';
 </script>
 
 <div class="wrapper">
@@ -20,8 +20,8 @@
       Very heavily inspired by <a href="https://terminal.sexy" target="_blank">terminal.sexy</a>
       and
       <a href="https://terminal.love" target="_blank">terminal.love</a>, this offers a quick way to
-      preview <strong>*some*</strong> of the many styling options available. Made with much
-      <img src={heartSvg} height="20px" alt="heart icon" style="color: red;" />
+      preview <strong>*some*</strong> of the many styling options available for fzf.<br />Made with
+      <HeartOutline size="16" style="color: red; vertical-align: middle;" />
       by <a href="https://github.com/vitormv" target="_blank">@vitormv</a>.
     </div>
   </LayoutBox>

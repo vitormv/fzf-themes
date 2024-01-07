@@ -21,13 +21,7 @@ export class Line {
   private ensureContainsFillSpace(tokens: LineOptions['content']) {
     const hasFillSpace = tokens.some((item) => item instanceof FillSpace);
 
-    const newTokens = [...tokens];
-
-    if (!hasFillSpace) {
-      newTokens.push(new FillSpace(' '));
-    }
-
-    return newTokens;
+    return hasFillSpace ? tokens : [...tokens, new FillSpace(' ')];
   }
 
   private staticContentLength(): number {

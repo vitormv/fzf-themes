@@ -64,9 +64,9 @@ const lines = [
 ];
 
 export const renderLines = (maxCols: number, lines: Line[], borderType: BorderStyle) => {
-  const borderDefinition = BorderStyleDefinitions[borderType];
+  const borderDefinition = BorderStyleDefinitions[borderType || 'none'];
 
-  if (borderType === 'none') {
+  if (!borderType || borderType === 'none') {
     return lines.map((line) => line.render(maxCols));
   }
 

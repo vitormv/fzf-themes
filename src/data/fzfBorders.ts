@@ -11,6 +11,7 @@ export type BorderTypeGlyphs = {
 
 export type BorderStyle = 'rounded' | 'sharp' | 'bold' | 'double' | 'block' | 'thinblock' | 'none';
 
+// @todo: add border disclaimers for block and thinblock
 export const BorderStyleDefinitions: Record<BorderStyle, BorderTypeGlyphs> = {
   none: {
     top: '',
