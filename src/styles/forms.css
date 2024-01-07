@@ -11,6 +11,9 @@
     &:focus {
       border-color: var(--border-darker-color);
     }
-  }
 
+    &:invalid {
+      border: 2px solid #cc383f;
+    }
+  }
 }

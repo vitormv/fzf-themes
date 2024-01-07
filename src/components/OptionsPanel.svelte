@@ -44,6 +44,7 @@
     <FormControl label="Margin">
       <input
         type="text"
+        pattern={'^[0-9](,[0-9]){0,3}$'}
         value={boxCoordinatesToString($themeStore.margin)}
         on:input={(e) => {
           const coords = stringToBoxCoordinates(e.target?.value);
@@ -58,6 +59,7 @@
     <FormControl label="Padding">
       <input
         type="text"
+        pattern={'^[0-9](,[0-9]){0,3}$'}
         value={boxCoordinatesToString($themeStore.padding)}
         on:input={(e) => {
           const coords = stringToBoxCoordinates(e.target?.value);

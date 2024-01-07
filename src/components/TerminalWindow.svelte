@@ -2,8 +2,8 @@
   import { orderedColorTokens } from '~/data/fzfDefinitions';
   import { getColorOrFallback, colorsStore } from '~/data/colorsStore';
   import { onMount } from 'svelte';
-  import { lines, renderLines } from '~/data/terminalLines';
   import { themeStore, type ThemeOptions } from '~/data/themeStore';
+  import { renderLines } from '~/utils/tui/renderLines';
 
   // take all known color tokens and set them as css variables
   $: allTokenVariables = orderedColorTokens
@@ -30,7 +30,7 @@
     // cols follow the screen size, but has a minimum of 50
     const maxCols = Math.max(50, Math.floor(terminalWindowWidth / charWidth));
 
-    const lineElements = renderLines(maxCols, lines, currentTheme);
+    const lineElements = renderLines(maxCols, currentTheme);
 
     lineElements.forEach((lineEl) => {
       terminalWindowEl.appendChild(lineEl);

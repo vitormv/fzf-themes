@@ -1,8 +1,5 @@
-import type { ThemeOptions } from '~/data/themeStore';
 import { Line } from '~/utils/tui/Line';
 import { token, fillSpace } from '~/utils/tui/Token';
-import { addBorders } from '~/utils/tui/addBorders';
-import { addSpacing } from '~/utils/tui/addSpacing';
 
 const lines = [
   new Line({
@@ -64,16 +61,5 @@ const lines = [
     content: [token('> ', 'prompt'), token('.go$', 'query')],
   }),
 ];
-
-export const renderLines = (maxCols: number, lines: Line[], theme: ThemeOptions) => {
-  // clone to avoid mutating original objects
-  let parsedLines = [...lines.map((line) => line.clone())];
-
-  parsedLines = addSpacing(parsedLines, theme.padding);
-  parsedLines = addBorders(parsedLines, theme);
-  parsedLines = addSpacing(parsedLines, theme.margin);
-
-  return parsedLines.map((line) => line.render(maxCols));
-};
 
 export { lines };
