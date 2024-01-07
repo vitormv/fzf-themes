@@ -50,13 +50,13 @@
 
   .color {
     display: flex;
-    text-align: center;
     flex-direction: column;
     gap: 6px;
     width: 100%;
     /* height: 80px; */
     position: relative;
     justify-content: space-between;
+    align-items: center;
     cursor: pointer;
     padding: 8px 4px 4px;
     border-radius: 0;

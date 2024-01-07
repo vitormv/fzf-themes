@@ -99,7 +99,6 @@
     font-family: var(--terminal-font);
     font-size: 16px;
     line-height: 1.3;
-    overflow: hidden;
     word-wrap: break-word;
     position: relative;
 
@@ -115,6 +114,7 @@
       outline: 2px solid transparent;
 
       &:hover {
+        position: relative;
         outline: 2px dotted salmon;
       }
     }

@@ -22,6 +22,8 @@
     inputEl.focus();
     dispatch('change', items.at(newIndex));
   }
+
+  // @todo: add keyboard arrow navigation?
 </script>
 
 <span class="input-cycle">
@@ -61,6 +63,11 @@
       opacity: 1;
       background-color: var(--border-color);
     }
+  }
+
+  input {
+    display: block;
+    width: 100%;
   }
 
   .prev {

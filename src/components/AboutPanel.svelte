@@ -1,6 +1,6 @@
 <script lang="ts">
   import LayoutBox from '~/components/common/LayoutBox.svelte';
-  import { HeartOutline } from 'svelte-ionicons';
+  import { Heart } from 'svelte-ionicons';
 </script>
 
 <div class="wrapper">
@@ -21,7 +21,7 @@
       and
       <a href="https://terminal.love" target="_blank">terminal.love</a>, this offers a quick way to
       preview <strong>*some*</strong> of the many styling options available for fzf.<br />Made with
-      <HeartOutline size="16" style="color: red; vertical-align: middle;" />
+      <Heart size="16" style="color: red; vertical-align: middle;" />
       by <a href="https://github.com/vitormv" target="_blank">@vitormv</a>.
     </div>
   </LayoutBox>

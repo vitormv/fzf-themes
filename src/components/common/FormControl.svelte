@@ -9,16 +9,21 @@
 
 <style lang="scss">
   .control {
-    display: inline-flex;
+    display: flex;
     gap: 10px;
   }
 
   .control .label {
     display: block;
+    flex: 0 0 90px;
     text-align: right;
     margin-right: 10px;
     line-height: 21px;
     padding: 5px 0;
-    width: 120px;
+  }
+
+  :global(.control > *:not(.label)) {
+    flex: 1;
+    width: 100%;
   }
 </style>

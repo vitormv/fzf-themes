@@ -9,7 +9,7 @@ export type BorderOptions = {
 
 const initialSettings: BorderOptions = {
   style: 'rounded',
-  label: '',
+  label: '', // @todo implement
   position: '',
 };
 
