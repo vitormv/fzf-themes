@@ -1,6 +1,6 @@
 <script lang="ts">
   import FormControl from '~/components/common/FormControl.svelte';
-  import { borderTypes } from '~/data/fzfBorders';
+  import { borderTypes, layoutTypes } from '~/data/fzfBorders';
   import { themeStore } from '~/data/themeStore';
   import InputCycle from '~/components/common/InputCycle.svelte';
   import { boxCoordinatesToString, stringToBoxCoordinates } from '~/utils/boxCoordinates';
@@ -42,7 +42,14 @@
     <div class="group-title">Box</div>
 
     <FormControl label="Layout">
-      <InputCycle items={['default', 'reverse', 'reverse-list']} value={'default'} />
+      <InputCycle
+        showIndex
+        items={layoutTypes}
+        value={$themeStore.layout}
+        on:change={(e) => {
+          themeStore.set('layout', e.detail);
+        }}
+      />
     </FormControl>
 
     <FormControl label="Margin">

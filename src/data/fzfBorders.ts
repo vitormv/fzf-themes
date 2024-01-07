@@ -101,3 +101,5 @@ export const BorderStyleDefinitions: Record<BorderStyle, BorderTypeGlyphs> = {
 };
 
 export const borderTypes = Object.keys(BorderStyleDefinitions) as BorderStyle[];
+export const layoutTypes = ['default' as const, 'reverse' as const, 'reverse-list' as const];
+export type Layout = (typeof layoutTypes)[number];

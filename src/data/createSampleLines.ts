@@ -3,12 +3,12 @@ import { Line } from '~/utils/tui/Line';
 import { token, fillSpace } from '~/utils/tui/Token';
 
 export const createSampleLines = (themeOptions: ThemeOptions) => {
-  const lines = [
+  const fileResultLines = [
     new Line({
       content: [
         token(' '.repeat(themeOptions.pointer.length), 'gutter'),
         token(themeOptions.marker, 'gutter marker'),
-        token('src/fzf/main', 'fg'),
+        token('src/fzf/tui/layout/borders', 'fg'),
         token('.go', 'hl'),
         fillSpace(' '),
         token(themeOptions.scrollbar, 'scrollbar'),
@@ -18,7 +18,7 @@ export const createSampleLines = (themeOptions: ThemeOptions) => {
       content: [
         token(' '.repeat(themeOptions.pointer.length), 'gutter'),
         token(' '.repeat(themeOptions.marker.length)),
-        token('src/pattern', 'fg'),
+        token('src/fzf/tui/main', 'fg'),
         token('.go', 'hl'),
         fillSpace(' '),
         token(themeOptions.scrollbar, 'scrollbar'),
@@ -48,7 +48,7 @@ export const createSampleLines = (themeOptions: ThemeOptions) => {
         token(themeOptions.pointer, 'pointer gutter bg-plus'),
         token(' '.repeat(themeOptions.marker.length)),
         token('src/history', 'fg-plus bg-plus'),
-        token('.go', 'hl bg-plus'),
+        token('.go', 'hl-plus bg-plus'),
       ],
     }),
     new Line({
@@ -67,6 +67,16 @@ export const createSampleLines = (themeOptions: ThemeOptions) => {
         token('.go', 'hl'),
       ],
     }),
+  ];
+
+  if (themeOptions.layout === 'reverse-list') {
+    fileResultLines.reverse();
+  }
+
+  // @todo: fix scrollbars when changing layout
+
+  const allLines = [
+    ...fileResultLines,
     new Line({ content: [token('  '), token('This is Header', 'header')] }),
     new Line({
       content: [
@@ -82,5 +92,9 @@ export const createSampleLines = (themeOptions: ThemeOptions) => {
     }),
   ];
 
-  return lines;
+  if (themeOptions.layout === 'reverse') {
+    allLines.reverse();
+  }
+
+  return allLines;
 };
