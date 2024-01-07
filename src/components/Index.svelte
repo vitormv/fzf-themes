@@ -44,7 +44,7 @@
     display: grid;
     gap: var(--box-gap);
     grid-template-columns: 350px 1fr;
-    grid-template-rows: 300px auto;
+    grid-template-rows: minmax(300px, 400px) auto;
     align-items: stretch;
     height: 100%;
   }

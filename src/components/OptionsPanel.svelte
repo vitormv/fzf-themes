@@ -130,7 +130,7 @@
 <style lang="scss">
   .wrapper {
     display: flex;
-    gap: 40px;
+    gap: 20px;
 
     > div {
       flex: 1 1 0;

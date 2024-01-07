@@ -53,7 +53,7 @@
     flex-direction: column;
     gap: 6px;
     width: 100%;
-    /* height: 80px; */
+    height: 70px;
     position: relative;
     justify-content: space-between;
     align-items: center;

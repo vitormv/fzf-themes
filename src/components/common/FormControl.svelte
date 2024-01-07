@@ -15,7 +15,7 @@
 
   .control .label {
     display: block;
-    flex: 0 0 90px;
+    flex: 0 0 78px;
     text-align: right;
     margin-right: 10px;
     line-height: 21px;
