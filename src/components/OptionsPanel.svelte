@@ -30,7 +30,11 @@
     </FormControl>
 
     <FormControl label="Separator">
-      <input type="text" value="─" />
+      <input
+        type="text"
+        value={$themeStore.separator}
+        on:input={(e) => void themeStore.set('separator', e.target?.value)}
+      />
     </FormControl>
   </div>
 
@@ -70,19 +74,44 @@
         }}
       />
     </FormControl>
+
+    <FormControl label="Scrollbar">
+      <input
+        type="text"
+        maxlength="2"
+        value={$themeStore.scrollbar}
+        on:input={(e) => void themeStore.set('scrollbar', e.target?.value)}
+      />
+    </FormControl>
   </div>
 
   <div class="group">
     <div class="group-title">Indicators</div>
 
     <FormControl label="Prompt">
-      <input type="text" value="> " />
+      <input
+        type="text"
+        value={$themeStore.prompt}
+        on:input={(e) => void themeStore.set('prompt', e.target?.value)}
+      />
     </FormControl>
+
     <FormControl label="Pointer">
-      <input type="text" value="◆" maxlength="2" />
+      <input
+        type="text"
+        maxlength="2"
+        value={$themeStore.pointer}
+        on:input={(e) => void themeStore.set('pointer', e.target?.value)}
+      />
     </FormControl>
+
     <FormControl label="Marker">
-      <input type="text" value="> " maxlength="2" />
+      <input
+        type="text"
+        maxlength="2"
+        value={$themeStore.marker}
+        on:input={(e) => void themeStore.set('marker', e.target?.value)}
+      />
     </FormControl>
 
     <FormControl label="Info">

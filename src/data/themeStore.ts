@@ -14,6 +14,11 @@ export type ThemeOptions = {
   borderLabelPosition: string;
   padding: BoxCoordinates;
   margin: BoxCoordinates;
+  prompt: string;
+  pointer: string;
+  marker: string;
+  separator: string;
+  scrollbar: string;
 };
 
 const initialSettings: ThemeOptions = {
@@ -22,6 +27,11 @@ const initialSettings: ThemeOptions = {
   borderLabelPosition: '',
   padding: { top: 0, bottom: 0, left: 1, right: 1 },
   margin: { top: 0, bottom: 0, left: 0, right: 0 },
+  prompt: '> ',
+  marker: '>',
+  pointer: '◆',
+  separator: '─',
+  scrollbar: '│',
 };
 
 const _optionsStore = writable<ThemeOptions>(initialSettings);

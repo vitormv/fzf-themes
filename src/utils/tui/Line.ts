@@ -49,8 +49,9 @@ export class Line {
       if (!item) return;
 
       if (item instanceof FillSpace && fillSpaceLength > 0) {
+        const fillString = item.fillChar.repeat(fillSpaceLength);
         lineElement.appendChild(
-          token(item.fillChar.repeat(fillSpaceLength), item.classNames).render(),
+          token(fillString.substring(0, fillSpaceLength), item.classNames).render(),
         );
       } else if (typeof item === 'string') {
         lineElement.appendChild(document.createTextNode(item));
