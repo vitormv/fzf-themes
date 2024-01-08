@@ -10,7 +10,7 @@ const config = {
   quoteProps: 'consistent',
   bracketSameLine: false,
   // htmlWhitespaceSensitivity: 'ignore',
-  allowShorthand: false, // explicit definitions are easier for Svelte beginners
+  svelteAllowShorthand: false, // explicit syntax is easier for beginners
   plugins: ['prettier-plugin-svelte'],
   overrides: [
     {

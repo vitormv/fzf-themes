@@ -11,7 +11,7 @@
 
   <div class="color-grid">
     {#each orderedColorTokens as token}
-      <PaletteColor {token} />
+      <PaletteColor token={token} />
     {/each}
   </div>
 </div>

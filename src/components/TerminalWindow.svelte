@@ -92,16 +92,16 @@
 <div bind:this={wrapperEl} class="wrapper" style={allTokenVariables}>
   <div bind:this={terminalWindowEl} class="terminal-window"></div>
 
-  <!-- This element is used to calculate the current width of chars according
-  to users browser window, resolution, zoom amount, etc. -->
-  <span bind:this={charWidthEl} class="sample-char-width">▀</span>
-
   <div class="hint" bind:this={hintEl}>
     background: <strong>{toFzfColorName(currentBg || '').toUpperCase() || '---'}</strong>
     {#if currentFg}&nbsp;◆&nbsp;&nbsp;foreground:<strong
         >&nbsp;{toFzfColorName(currentFg || '').toUpperCase() || '---'}</strong
       >{/if}
   </div>
+
+  <!-- This element is used to calculate the current width of chars according
+  to users browser window, resolution, zoom amount, etc. -->
+  <span bind:this={charWidthEl} class="sample-char-width">▀</span>
 </div>
 
 <style lang="scss">

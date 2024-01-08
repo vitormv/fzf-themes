@@ -5,7 +5,7 @@
   export let contentStyle: string = '';
 </script>
 
-<div class="box" {style}>
+<div class="box" style={style}>
   {#if title}
     <h2 class="title">{title}</h2>
   {/if}

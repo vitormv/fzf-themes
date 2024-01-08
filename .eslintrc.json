@@ -28,6 +28,10 @@
       "parserOptions": {
         "project": "tsconfig.json",
         "parser": "@typescript-eslint/parser"
+      },
+      "rules": {
+        "svelte/shorthand-attribute": ["error", { "prefer": "never" }],
+        "svelte/shorthand-directive": ["error", { "prefer": "never" }]
       }
     }
   ]

@@ -1,20 +1,21 @@
-.control {
-  input:not([type]), input[type="text"] {
-    color: var(--text-color);
-    background: transparent;
-    border: 2px solid var(--border-color);
-    padding: 3px 5px;
-    line-height: 24px;
-    outline: 0;
-    box-sizing: border-box;
+input:not([type]), input {
+  color: var(--text-color);
+  background: transparent;
+  border: 2px solid var(--border-color);
+  padding: 3px 5px;
+  line-height: 24px;
+  outline: 0;
+  box-sizing: border-box;
 
-    &:focus {
-      border-color: var(--border-darker-color);
-    }
+      -moz-appearance: textfield;
+    appearance: textfield;
 
-    &:invalid {
-      border: 2px solid #cc383f;
-    }
+  &:focus {
+    border-color: var(--border-darker-color);
+  }
+
+  &:invalid {
+    border: 2px solid #cc383f;
   }
 }
 
