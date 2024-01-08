@@ -33,5 +33,6 @@
     grid-template-columns: 1fr 1fr;
     width: 100%;
     gap: 12px;
+    padding: 0 0 20px;
   }
 </style>

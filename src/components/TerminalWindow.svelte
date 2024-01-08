@@ -1,6 +1,6 @@
 <script lang="ts">
   import { orderedColorTokens } from '~/data/fzfDefinitions';
-  import { getColorOrFallback, colorsStore } from '~/data/colorsStore';
+  import { getColorOrFallback, colorsStore, isValidColor } from '~/data/colorsStore';
   import { onMount } from 'svelte';
   import { themeStore, type ThemeOptions } from '~/data/themeStore';
   import { renderLines } from '~/utils/tui/renderLines';
@@ -75,6 +75,20 @@
       "span[class]:not(span[class=''])",
     );
 
+    // when clicking a token, set is as the selected color
+    addDelegateEventListener(
+      terminalWindowEl,
+      'click',
+      (e) => {
+        if (currentFg && isValidColor(currentFg)) {
+          colorsStore.setSelected(currentFg);
+        } else if (currentBg && isValidColor(currentBg)) {
+          colorsStore.setSelected(currentBg);
+        }
+      },
+      "span[class]:not(span[class=''])",
+    );
+
     terminalWindowEl.addEventListener('mouseleave', () => {
       currentBg = undefined;
       currentFg = undefined;
@@ -94,7 +108,7 @@
 
   <div class="hint" bind:this={hintEl}>
     background: <strong>{toFzfColorName(currentBg || '').toUpperCase() || '---'}</strong>
-    {#if currentFg}&nbsp;◆&nbsp;&nbsp;foreground:<strong
+    {#if currentFg}&nbsp;─&nbsp;&nbsp;foreground:<strong
         >&nbsp;{toFzfColorName(currentFg || '').toUpperCase() || '---'}</strong
       >{/if}
   </div>
@@ -149,6 +163,7 @@
       &:hover {
         position: relative;
         outline: 2px dotted salmon;
+        outline-offset: 2px;
       }
     }
   }

@@ -5,8 +5,11 @@
   import { getColorOrFallback, colorsStore } from '~/data/colorsStore';
   import { colorDefinitions } from '~/data/fzfDefinitions';
   import { toFzfColorName } from '~/utils/toFzfColorName';
+  import { beforeUpdate } from 'svelte';
 
   export let token: FzfColor;
+
+  let wrapperEl: HTMLDivElement;
 
   const getColorLabel = (color: string) => {
     if (color.startsWith('#')) {
@@ -20,12 +23,18 @@
     return '---';
   };
 
+  beforeUpdate(() => {
+    if ($colorsStore.selectedColor === token && wrapperEl) {
+      wrapperEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
   $: color = getColorOrFallback(token, $colorsStore.colors).value;
   $: contrastColor = getContrastColor(color);
   $: borderColor = hexColorToRgb(contrastColor === 'dark' ? '#dddddd' : '#ffffff');
 </script>
 
-<div class="wrapper">
+<div class="wrapper" bind:this={wrapperEl}>
   <button
     type="button"
     class="color"
