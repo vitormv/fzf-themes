@@ -98,7 +98,7 @@
 
   <div class="hint" bind:this={hintEl}>
     background: <strong>{toFzfColorName(currentBg || '').toUpperCase() || '---'}</strong>
-    {#if currentFg}│&nbsp;foreground:<strong
+    {#if currentFg}&nbsp;◆&nbsp;&nbsp;foreground:<strong
         >&nbsp;{toFzfColorName(currentFg || '').toUpperCase() || '---'}</strong
       >{/if}
   </div>

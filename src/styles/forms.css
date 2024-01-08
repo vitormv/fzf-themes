@@ -17,3 +17,24 @@
     }
   }
 }
+
+.btn {
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out;
+
+  &.btn-outline {
+    color: var(--text-color);
+    background-color: transparent;
+    border: 2px solid var(--border-color);
+
+    &:hover {
+      border-color: var(--border-darker-color);
+    }
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}

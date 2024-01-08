@@ -5,11 +5,7 @@
 </script>
 
 <div class="wrapper">
-  <button
-    type="button"
-    class="btn btn-sm btn-outline-secondary"
-    on:click={colorsStore.resetAllColors}
-  >
+  <button type="button" class="btn btn-outline" on:click={colorsStore.resetAllColors}>
     Reset all
   </button>
 
