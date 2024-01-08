@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { colorsStore, getColorOrFallback } from '~/data/colorsStore';
+  import { colorsStore } from '~/data/colorsStore';
   import ColorPickerWrapper from '~/components/ColorPickerWrapper.svelte';
   import ColorPicker from 'svelte-awesome-color-picker';
   import { colorInheritances } from '~/data/fzfDefinitions';
+  import { fly } from 'svelte/transition';
 
   $: inheritsFrom = colorInheritances[$colorsStore.selectedColor];
 </script>
@@ -23,11 +24,12 @@
   />
 
   {#if inheritsFrom.length > 0}
-    <div class="inheritance">
-      <strong>Inheritance: {$colorsStore.selectedColor}</strong>
+    <!-- @todo: prevent overflow while animating -->
+    <div class="inheritance" transition:fly={{ y: 60, duration: 200 }}>
+      <strong>Inherits: {$colorsStore.selectedColor}</strong>
 
-      {#each inheritsFrom as parent, i}
-        {' ← '}{parent}
+      {#each inheritsFrom as parent}
+        {' || '}{parent}
       {/each}
     </div>
   {/if}
@@ -40,6 +42,7 @@
     flex-direction: column;
     justify-content: space-between;
     padding-bottom: 60px;
+    overflow: hidden;
   }
   .inheritance {
     background-color: var(--gray-900);

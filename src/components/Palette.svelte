@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ColorItem from '~/components/palette/ColorItem.svelte';
+  import PaletteColor from '~/components/PaletteColor.svelte';
   import { orderedColorTokens } from '~/data/fzfDefinitions';
   import { colorsStore } from '~/data/colorsStore';
 </script>
@@ -15,7 +15,7 @@
 
   <div class="color-grid">
     {#each orderedColorTokens as token}
-      <ColorItem {token} />
+      <PaletteColor {token} />
     {/each}
   </div>
 </div>

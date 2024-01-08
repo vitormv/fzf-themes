@@ -48,8 +48,8 @@ export const createSampleLines = (themeOptions: ThemeOptions) => {
     }),
     new Line({
       tokens: [
-        token(themeOptions.pointer, 'pointer gutter bg-plus'),
-        token(' '.repeat(themeOptions.marker.length)),
+        token(themeOptions.pointer, 'pointer bg-plus'),
+        token(' '.repeat(themeOptions.marker.length), 'bg-plus'),
         token('src/history', 'fg-plus bg-plus'),
         token('.go', 'hl-plus bg-plus'),
       ],
@@ -87,8 +87,6 @@ export const createSampleLines = (themeOptions: ThemeOptions) => {
       tokens: [token(themeOptions.prompt, 'prompt'), token('.go$', 'query')],
     }),
   ];
-
-  // @todo: fix scrollbars when changing layout
 
   switch (themeOptions.layout) {
     case 'default': // files first, ui after

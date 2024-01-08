@@ -4,6 +4,8 @@
   import { onMount } from 'svelte';
   import { themeStore, type ThemeOptions } from '~/data/themeStore';
   import { renderLines } from '~/utils/tui/renderLines';
+  import { addDelegateEventListener } from '~/utils/addDelegateEventListener';
+  import { toFzfColorName } from '~/utils/toFzfColorName';
 
   // take all known color tokens and set them as css variables
   $: allTokenVariables = orderedColorTokens
@@ -14,6 +16,9 @@
   let wrapperEl: HTMLDivElement;
   let charWidthEl: HTMLSpanElement;
   let hintEl: HTMLDivElement;
+
+  let currentBg: string | undefined = 'bg';
+  let currentFg: string | undefined = 'fg';
 
   $: theme = $themeStore;
 
@@ -55,6 +60,26 @@
 
     window.addEventListener('resize', onResizeHandler);
 
+    // show tips when hovering over tokens in the terminal
+    addDelegateEventListener(
+      terminalWindowEl,
+      'mouseover',
+      (e) => {
+        const classes = Array.from((e.target as HTMLElement).classList);
+        const bgClasses = classes.filter((cls: string) => cls.startsWith('bg') || cls === 'gutter');
+        const fgClasses = classes.filter((cls) => !bgClasses.includes(cls));
+
+        currentBg = bgClasses.length ? bgClasses[0] : 'bg';
+        currentFg = fgClasses.length ? fgClasses[0] : '';
+      },
+      "span[class]:not(span[class=''])",
+    );
+
+    terminalWindowEl.addEventListener('mouseleave', () => {
+      currentBg = undefined;
+      currentFg = undefined;
+    });
+
     return () => {
       window.removeEventListener('load', onLoadHandler);
       window.removeEventListener('resize', onResizeHandler);
@@ -63,16 +88,21 @@
 </script>
 
 <pre style="font-family: var(--terminal-font)"></pre>
-
+<!-- @todo: toggle show loading, header, preview -->
 <div bind:this={wrapperEl} class="wrapper" style={allTokenVariables}>
   <div bind:this={terminalWindowEl} class="terminal-window"></div>
 
   <!-- This element is used to calculate the current width of chars according
   to users browser window, resolution, zoom amount, etc. -->
   <span bind:this={charWidthEl} class="sample-char-width">▀</span>
-</div>
 
-<div class="hint" bind:this={hintEl}>background: bg text: fg</div>
+  <div class="hint" bind:this={hintEl}>
+    background: <strong>{toFzfColorName(currentBg || '').toUpperCase() || '---'}</strong>
+    {#if currentFg}│&nbsp;foreground:<strong
+        >&nbsp;{toFzfColorName(currentFg || '').toUpperCase() || '---'}</strong
+      >{/if}
+  </div>
+</div>
 
 <style lang="scss">
   :root {

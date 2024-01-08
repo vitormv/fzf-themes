@@ -1,8 +1,8 @@
 <script lang="ts">
   import AboutPanel from '~/components/AboutPanel.svelte';
   import ColorPicker from '~/components/ColorPicker.svelte';
-  import LayoutBox from '~/components/common/LayoutBox.svelte';
-  import ColorGrid from '~/components/palette/ColorGrid.svelte';
+  import Box from '~/components/common/Box.svelte';
+  import Palette from '~/components/Palette.svelte';
   import TerminalWindow from '~/components/TerminalWindow.svelte';
   import OptionsPanel from '~/components/OptionsPanel.svelte';
 </script>
@@ -13,29 +13,29 @@
   </div>
 
   <div style="">
-    <LayoutBox
+    <Box
       title="Theme Options"
       style="display: flex; flex-direction: column; height: 100%;"
       contentStyle="display: flex; overflow-y: auto; gap: var(--box-gap)"
     >
       <OptionsPanel />
-    </LayoutBox>
+    </Box>
   </div>
 
   <div style="overflow: auto">
-    <LayoutBox title="Color Palette">
-      <ColorGrid />
-    </LayoutBox>
+    <Box title="Color Palette">
+      <Palette />
+    </Box>
   </div>
 
   <div style="display: flex; gap: var(--box-gap); width: 100%;">
-    <LayoutBox title="Color Picker" style="flex: 0 1 300px" contentStyle="height: 100%;">
+    <Box title="Color Picker" style="flex: 0 1 300px" contentStyle="height: 100%;">
       <ColorPicker />
-    </LayoutBox>
+    </Box>
 
-    <LayoutBox title="Preview" style="flex: 1;">
+    <Box title="Preview" style="flex: 1;">
       <TerminalWindow />
-    </LayoutBox>
+    </Box>
   </div>
 </main>
 

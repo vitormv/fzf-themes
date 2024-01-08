@@ -17,12 +17,6 @@ const config = {
       files: '*.svelte',
       options: { parser: 'svelte' },
     },
-    {
-      files: '**/tui/**/*.svelte',
-      options: {
-        htmlWhitespaceSensitivity: 'css', // @todo: remove this once TUI window is done via JS
-      },
-    },
   ],
 };
 

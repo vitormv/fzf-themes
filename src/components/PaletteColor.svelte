@@ -4,12 +4,9 @@
   import { getContrastColor } from '~/utils/getContrastColor';
   import { getColorOrFallback, colorsStore } from '~/data/colorsStore';
   import { colorDefinitions } from '~/data/fzfDefinitions';
+  import { toFzfColorName } from '~/utils/toFzfColorName';
 
   export let token: FzfColor;
-
-  const toFzfName = (name: string) => {
-    return name.replace('-plus', '+');
-  };
 
   const getColorLabel = (color: string) => {
     if (color.startsWith('#')) {
@@ -38,7 +35,7 @@
     style:--border-color-hover={`rgba(${borderColor?.r}, ${borderColor?.g}, ${borderColor?.b}, .8)`}
     on:click={void colorsStore.setSelected(token)}
   >
-    <div class="name"><span>{toFzfName(token)}</span></div>
+    <div class="name"><span>{toFzfColorName(token)}</span></div>
     <div class="hex">{getColorLabel($colorsStore.colors[token])}</div>
   </button>
 </div>
