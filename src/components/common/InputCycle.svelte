@@ -23,12 +23,20 @@
     dispatch('change', items.at(newIndex));
   }
 
-  // @todo: add keyboard arrow navigation?
+  function onKeyPressHandler(e: KeyboardEvent) {
+    if (e.key == 'ArrowDown' || e.key === 'ArrowRight') {
+      cycle(1);
+    }
+    if (e.key == 'ArrowUp' || e.key === 'ArrowLeft') {
+      cycle(-1);
+    }
+  }
 </script>
 
 <span class="input-cycle">
   <input
     bind:this={inputEl}
+    on:keydown={onKeyPressHandler}
     type="text"
     readonly
     value={showIndex ? `${currentIndex + 1}. ${value}` : value}
