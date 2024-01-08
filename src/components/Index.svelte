@@ -22,8 +22,12 @@
     </Box>
   </div>
 
-  <div style="overflow: auto">
-    <Box title="Color Palette">
+  <div>
+    <Box
+      title="Color Palette"
+      style="display: flex; flex-direction: column; height: 100%;"
+      contentStyle="flex: 1 1 0; overflow-y: scroll;"
+    >
       <Palette />
     </Box>
   </div>
@@ -44,8 +48,11 @@
     display: grid;
     gap: var(--box-gap);
     grid-template-columns: 350px 1fr;
+    align-items: stretch;
+    justify-content: stretch;
     grid-template-rows: 320px auto;
     align-items: stretch;
+    align-content: stretch;
     height: 100%;
   }
 </style>

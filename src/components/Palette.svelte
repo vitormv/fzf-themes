@@ -19,6 +19,7 @@
 <style>
   .wrapper {
     flex: 1;
+    height: 100%;
   }
 
   button {
