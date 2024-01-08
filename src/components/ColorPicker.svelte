@@ -27,10 +27,10 @@
   {#if inheritsFrom.length > 0}
     <!-- @todo: prevent overflow while animating -->
     <div class="inheritance" transition:fly={{ y: 60, duration: 200 }}>
-      <strong>Inherits: {toFzfColorName($colorsStore.selectedColor)}</strong>
+      <strong>{toFzfColorName($colorsStore.selectedColor)}</strong>
 
       {#each inheritsFrom as parent}
-        {' OR '}{toFzfColorName(parent)}
+        ({'inherits from '}{toFzfColorName(parent)})
       {/each}
     </div>
   {/if}

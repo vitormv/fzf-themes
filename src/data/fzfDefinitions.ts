@@ -3,7 +3,8 @@ import type { FzfColor } from '~/types/fzf';
 type ColorDefinition = {
   initial: string;
   inherits?: FzfColor;
-  nullable?: boolean;
+  nullable: boolean;
+  nullText?: string;
 };
 
 export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
@@ -22,8 +23,7 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
   },
   'bg-plus': {
     initial: '#262626',
-    nullable: true,
-    inherits: 'bg',
+    nullable: false,
   },
   'hl': {
     initial: '#5f87af',
@@ -61,6 +61,7 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
   'gutter': {
     initial: '#262626',
     nullable: false,
+    inherits: 'bg-plus',
   },
   'border': {
     initial: '#262626',
@@ -78,13 +79,11 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
   },
   'label': {
     initial: '',
-    nullable: true,
-    inherits: 'fg',
+    nullable: false,
   },
   'query': {
     initial: '',
-    nullable: true,
-    inherits: 'fg',
+    nullable: false,
   },
   'disabled': {
     initial: '',
@@ -109,12 +108,12 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
   'preview-scrollbar': {
     initial: '',
     nullable: true,
-    inherits: 'preview-border',
+    inherits: 'border',
   },
   'preview-label': {
     initial: '',
     nullable: true,
-    inherits: 'preview-fg',
+    inherits: 'label',
   },
 } as const;
 
