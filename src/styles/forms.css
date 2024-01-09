@@ -7,8 +7,8 @@ input:not([type]), input {
   outline: 0;
   box-sizing: border-box;
 
-      -moz-appearance: textfield;
-    appearance: textfield;
+  /* -moz-appearance: textfield;
+  appearance: textfield; */
 
   &:focus {
     border-color: var(--border-darker-color);

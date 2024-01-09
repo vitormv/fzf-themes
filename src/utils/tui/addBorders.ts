@@ -1,7 +1,7 @@
 import { BorderStyleDefinitions } from '~/data/fzfBorders';
 import type { ThemeOptions } from '~/data/themeStore';
 import { Line } from '~/utils/tui/Line';
-import { token, fillSpace } from '~/utils/tui/Token';
+import { token, fillSpace, Token, FillSpace } from '~/utils/tui/Token';
 
 export const addBorders = (lines: Line[], theme: ThemeOptions) => {
   const borderDefinition = BorderStyleDefinitions[theme.borderStyle || 'none'];
@@ -10,11 +10,46 @@ export const addBorders = (lines: Line[], theme: ThemeOptions) => {
     return lines;
   }
 
+  const isTop = true;
+
+  let borderLabel: Array<Token | FillSpace> = [
+    fillSpace(borderDefinition[isTop ? 'top' : 'bottom'], 'border'),
+  ];
+
+  if (theme.borderLabel) {
+    const borderChar = borderDefinition[isTop ? 'top' : 'bottom'];
+
+    // text-center
+    if (theme.borderLabelPosition === 0) {
+      borderLabel = [
+        fillSpace(borderChar, 'border'),
+        token(theme.borderLabel, 'label'),
+        fillSpace(borderChar, 'border'),
+      ];
+    } else if (theme.borderLabelPosition > 0) {
+      const pos = theme.borderLabelPosition - 1;
+
+      borderLabel = [
+        token(borderChar.repeat(pos), 'border'),
+        token(theme.borderLabel, 'label'),
+        fillSpace(borderChar, 'border'),
+      ];
+    } else if (theme.borderLabelPosition < 0) {
+      const pos = Math.abs(theme.borderLabelPosition) - 1;
+
+      borderLabel = [
+        fillSpace(borderChar, 'border'),
+        token(theme.borderLabel, 'label'),
+        token(borderChar.repeat(pos), 'border'),
+      ];
+    }
+  }
+
   const linesWithBorder = [
     new Line({
       tokens: [
         token(borderDefinition.topLeft, 'border'),
-        fillSpace(borderDefinition.top, 'border'),
+        ...(isTop ? borderLabel : [fillSpace(borderDefinition.top, 'border')]),
         token(borderDefinition.topRight, 'border'),
       ],
     }),

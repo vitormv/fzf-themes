@@ -147,7 +147,7 @@
     display: inline-block;
     font-family: var(--terminal-font);
     font-size: 16px;
-    line-height: 1.3;
+    line-height: 1.1;
     word-wrap: break-word;
     position: relative;
 

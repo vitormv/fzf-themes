@@ -40,6 +40,10 @@ export class Line {
     }, 0);
   }
 
+  private fillSpaceCount(): number {
+    return this.tokens.filter((item) => item instanceof FillSpace).length;
+  }
+
   render(cols: number) {
     const lineElement = document.createElement('div');
 
@@ -48,15 +52,25 @@ export class Line {
     }
 
     const normalizedTokens = this.ensureContainsFillSpace(this.tokens);
-    const fillSpaceLength = cols - this.staticContentLength();
+    const fillSpaceCount = this.fillSpaceCount();
+    const initialFillSpaceChars = cols - this.staticContentLength();
+    let baseFillSpaceLength = Math.floor(initialFillSpaceChars / fillSpaceCount);
+    let fillSpaceRemainder = initialFillSpaceChars % fillSpaceCount;
 
     normalizedTokens.forEach((item) => {
       if (!item) return;
 
-      if (item instanceof FillSpace && fillSpaceLength > 0) {
-        const fillString = item.fillChar.repeat(fillSpaceLength);
+      if (item instanceof FillSpace && baseFillSpaceLength > 0) {
+        let currentFillSpaceLength = baseFillSpaceLength;
+
+        if (fillSpaceRemainder > 0) {
+          currentFillSpaceLength++;
+          fillSpaceRemainder--;
+        }
+
+        const fillString = item.fillChar.repeat(currentFillSpaceLength);
         lineElement.appendChild(
-          token(fillString.substring(0, fillSpaceLength), item.classNames).render(),
+          token(fillString.substring(0, currentFillSpaceLength), item.classNames).render(),
         );
       } else if (typeof item === 'string') {
         lineElement.appendChild(document.createTextNode(item));

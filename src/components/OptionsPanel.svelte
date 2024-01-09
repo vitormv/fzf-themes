@@ -22,11 +22,20 @@
     </FormControl>
 
     <FormControl label="Label">
-      <input type="text" />
+      <input
+        type="text"
+        value={$themeStore.borderLabel}
+        on:input={(e) => void themeStore.set('borderLabel', e.target?.value)}
+      />
     </FormControl>
 
     <FormControl label="Label Pos">
-      <input type="text" />
+      <input
+        type="number"
+        value={$themeStore.borderLabelPosition}
+        on:input={(e) =>
+          void themeStore.set('borderLabelPosition', Number.parseInt(e.target?.value, 10))}
+      />
     </FormControl>
 
     <FormControl label="Separator">

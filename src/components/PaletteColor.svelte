@@ -30,7 +30,6 @@
   });
 
   $: color = getColorOrFallback(token, $colorsStore.colors).value || '#ddd';
-  $: console.log({ color });
   $: contrastColor = getContrastColor(color);
   $: borderColor = hexColorToRgb(contrastColor === 'dark' ? '#dddddd' : '#ffffff');
 </script>

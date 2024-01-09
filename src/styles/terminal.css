@@ -60,7 +60,6 @@
   .bg-plus {
     background-color: var(--fzf-bg-plus);
     font-weight: bold;
-
   }
 
   .fg-plus {
@@ -69,6 +68,10 @@
 
   .hl-plus {
     color: var(--fzf-hl-plus);
+  }
+
+  .label {
+    color: var(--fzf-label);
   }
 
   .query {

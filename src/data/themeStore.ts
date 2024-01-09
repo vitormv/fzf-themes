@@ -11,7 +11,7 @@ export type BoxCoordinates = {
 export type ThemeOptions = {
   borderStyle: BorderStyle;
   borderLabel: string;
-  borderLabelPosition: string;
+  borderLabelPosition: number;
   padding: BoxCoordinates;
   margin: BoxCoordinates;
   prompt: string;
@@ -25,7 +25,7 @@ export type ThemeOptions = {
 const initialSettings: ThemeOptions = {
   borderStyle: 'rounded',
   borderLabel: '',
-  borderLabelPosition: '',
+  borderLabelPosition: 0,
   padding: { top: 0, bottom: 0, left: 0, right: 0 }, // @todo: store plain strings
   margin: { top: 0, bottom: 0, left: 0, right: 0 }, // @todo: store plain strings
   prompt: '> ',
