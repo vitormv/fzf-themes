@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { BorderStyle, Layout } from '~/data/fzfBorders';
+import type { BorderStyle, InfoStyle, Layout } from '~/data/fzfBorders';
 
 export type BoxCoordinates = {
   top: number;
@@ -20,6 +20,7 @@ export type ThemeOptions = {
   separator: string;
   scrollbar: string;
   layout: Layout;
+  info: InfoStyle;
 };
 
 const initialSettings: ThemeOptions = {
@@ -34,6 +35,7 @@ const initialSettings: ThemeOptions = {
   separator: '─',
   scrollbar: '│',
   layout: 'default',
+  info: 'default',
 };
 
 const _optionsStore = writable<ThemeOptions>(initialSettings);

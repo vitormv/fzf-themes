@@ -1,6 +1,6 @@
 <script lang="ts">
   import FormControl from '~/components/common/FormControl.svelte';
-  import { borderTypes, layoutTypes } from '~/data/fzfBorders';
+  import { borderTypes, infoTypes, layoutTypes } from '~/data/fzfBorders';
   import { themeStore } from '~/data/themeStore';
   import InputCycle from '~/components/common/InputCycle.svelte';
   import { boxCoordinatesToString, stringToBoxCoordinates } from '~/utils/boxCoordinates';
@@ -25,6 +25,7 @@
       <input
         type="text"
         value={$themeStore.borderLabel}
+        placeholder="none"
         on:input={(e) => void themeStore.set('borderLabel', e.target?.value)}
       />
     </FormControl>
@@ -131,7 +132,14 @@
     </FormControl>
 
     <FormControl label="Info">
-      <input type="text" />
+      <InputCycle
+        items={infoTypes}
+        value={$themeStore.info}
+        showIndex
+        on:change={(e) => {
+          themeStore.set('info', e.detail);
+        }}
+      />
     </FormControl>
   </div>
 </div>

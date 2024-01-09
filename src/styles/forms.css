@@ -17,6 +17,11 @@ input:not([type]), input {
   &:invalid {
     border: 2px solid #cc383f;
   }
+
+  &::placeholder {
+    font-style: italic;
+    font-family: monospace;
+  }
 }
 
 .btn {

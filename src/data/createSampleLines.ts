@@ -78,8 +78,9 @@ export const createSampleLines = (themeOptions: ThemeOptions) => {
       tokens: [
         token(' ', 'spinner'),
         token(' '),
-        token('35/63 (3) ', 'info'),
+        themeOptions.info === 'default' ? token('35/63 (3) ', 'info') : undefined,
         fillSpace(themeOptions.separator, 'separator'),
+        themeOptions.info === 'right' ? token(' 35/63 (3)', 'info') : undefined,
         token(' '),
       ],
     }),
