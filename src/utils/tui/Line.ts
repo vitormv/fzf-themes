@@ -17,7 +17,7 @@ export class Line {
   }
 
   public clone() {
-    return new Line({ className: this.className, tokens: this.tokens });
+    return new Line({ className: this.className, tokens: [...this.tokens] });
   }
 
   public hasFillSpace() {
