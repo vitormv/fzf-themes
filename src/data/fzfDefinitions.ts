@@ -4,7 +4,6 @@ type ColorDefinition = {
   initial: string;
   inherits?: FzfColor;
   nullable: boolean;
-  nullText?: string;
 };
 
 export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
@@ -60,7 +59,7 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
   },
   'gutter': {
     initial: '#262626',
-    nullable: false,
+    nullable: true,
     inherits: 'bg-plus',
   },
   'border': {
@@ -78,11 +77,11 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
     inherits: 'border',
   },
   'label': {
-    initial: '',
+    initial: '#aeaeae',
     nullable: false,
   },
   'query': {
-    initial: '',
+    initial: '#d9d9d9',
     nullable: false,
   },
   'disabled': {

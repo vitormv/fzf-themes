@@ -101,14 +101,13 @@
   });
 </script>
 
-<pre style="font-family: var(--terminal-font)"></pre>
 <!-- @todo: toggle show loading, header, preview -->
 <div bind:this={wrapperEl} class="wrapper" style={allTokenVariables}>
   <div bind:this={terminalWindowEl} class="terminal-window"></div>
-
   <div class="hint" bind:this={hintEl}>
-    background: <strong>{toFzfColorName(currentBg || '').toUpperCase() || '---'}</strong>
-    {#if currentFg}&nbsp;─&nbsp;&nbsp;foreground:<strong
+    <span class="hint-label">background:</span>
+    <strong>{toFzfColorName(currentBg || '').toUpperCase() || '---'}</strong>
+    {#if currentFg}&nbsp;&nbsp;&nbsp;<span class="hint-label">foreground:</span><strong
         >&nbsp;{toFzfColorName(currentFg || '').toUpperCase() || '---'}</strong
       >{/if}
   </div>
@@ -125,7 +124,10 @@
 
   .wrapper {
     position: relative;
-    display: inline-block;
+  }
+
+  .hint-label {
+    font-weight: 300;
   }
 
   .sample-char-width {

@@ -25,11 +25,12 @@
 
   beforeUpdate(() => {
     if ($colorsStore.selectedColor === token && wrapperEl) {
-      wrapperEl.scrollIntoView({ behavior: 'smooth' });
+      wrapperEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   });
 
-  $: color = getColorOrFallback(token, $colorsStore.colors).value;
+  $: color = getColorOrFallback(token, $colorsStore.colors).value || '#ddd';
+  $: console.log({ color });
   $: contrastColor = getContrastColor(color);
   $: borderColor = hexColorToRgb(contrastColor === 'dark' ? '#dddddd' : '#ffffff');
 </script>
@@ -64,17 +65,39 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    padding: 8px 4px 4px;
+    padding: 8px 4px 12px;
     border-radius: 0;
     border: 0;
     transition: none;
-
     outline: 3px solid transparent;
+    outline-offset: -3px;
+    overflow: hidden;
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 10px;
+      opacity: 0;
+      transform: translateY(100%);
+    }
 
     &.selected,
     &:hover {
       outline: 3px solid var(--border-color-hover);
       border: 0;
+    }
+
+    &.selected::before {
+      opacity: 0.2;
+      transform: translateY(0);
+      background-color: currentColor;
     }
 
     .name {
