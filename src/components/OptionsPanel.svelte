@@ -46,6 +46,17 @@
         on:input={(e) => void themeStore.set('separator', e.target?.value)}
       />
     </FormControl>
+
+    <FormControl label="Preview">
+      <InputCycle
+        items={borderTypes}
+        value={$themeStore.previewBorderStyle}
+        showIndex
+        on:change={(e) => {
+          themeStore.set('previewBorderStyle', e.detail);
+        }}
+      />
+    </FormControl>
   </div>
 
   <div class="group">

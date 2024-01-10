@@ -33,10 +33,6 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
     nullable: false,
     inherits: 'fg',
   },
-  'info': {
-    initial: '#afaf87',
-    nullable: false,
-  },
   'marker': {
     initial: '#87ff00',
     nullable: false,
@@ -53,15 +49,6 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
     initial: '#af5fff',
     nullable: false,
   },
-  'header': {
-    initial: '#87afaf',
-    nullable: false,
-  },
-  'gutter': {
-    initial: '#262626',
-    nullable: true,
-    inherits: 'bg-plus',
-  },
   'border': {
     initial: '#262626',
     nullable: false,
@@ -76,9 +63,10 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
     nullable: true,
     inherits: 'border',
   },
-  'label': {
-    initial: '#aeaeae',
-    nullable: false,
+  'gutter': {
+    initial: '#262626',
+    nullable: true,
+    inherits: 'bg-plus',
   },
   'query': {
     initial: '#d9d9d9',
@@ -113,6 +101,18 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
     initial: '',
     nullable: true,
     inherits: 'label',
+  },
+  'label': {
+    initial: '#aeaeae',
+    nullable: false,
+  },
+  'header': {
+    initial: '#87afaf',
+    nullable: false,
+  },
+  'info': {
+    initial: '#afaf87',
+    nullable: false,
   },
 } as const;
 

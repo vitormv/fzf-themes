@@ -13,12 +13,12 @@ export class Token {
     return this.text.length;
   }
 
-  render() {
+  render(extraClassName = '') {
     const el = document.createElement('span');
     el.innerHTML = escapeHtml(this.text);
 
     if (this.classNames) {
-      el.className = this.classNames;
+      el.className = [this.classNames, extraClassName].filter(Boolean).join(' ');
     }
 
     return el;

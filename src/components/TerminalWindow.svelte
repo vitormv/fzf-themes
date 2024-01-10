@@ -66,7 +66,9 @@
       'mouseover',
       (e) => {
         const classes = Array.from((e.target as HTMLElement).classList);
-        const bgClasses = classes.filter((cls: string) => cls.startsWith('bg') || cls === 'gutter');
+        const bgClasses = classes.filter(
+          (cls: string) => cls.startsWith('bg') || cls.includes('-bg') || cls === 'gutter',
+        );
         const fgClasses = classes.filter((cls) => !bgClasses.includes(cls));
 
         currentBg = bgClasses.length ? bgClasses[0] : 'bg';

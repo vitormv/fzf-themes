@@ -18,7 +18,7 @@ export const createSampleLines = (themeOptions: ThemeOptions) => {
       tokens: [
         token(' '.repeat(themeOptions.pointer.length), 'gutter'),
         token(themeOptions.marker, 'gutter marker'),
-        token('src/fzf/tui/layout/borders', 'fg'),
+        token('src/fzf/tui/borders', 'fg'),
         token('.go', 'hl'),
       ],
     }),

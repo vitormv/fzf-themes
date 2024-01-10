@@ -70,6 +70,26 @@
     color: var(--fzf-hl-plus);
   }
 
+  .preview-fg {
+    color: var(--fzf-preview-fg);
+  }
+
+  .preview-bg {
+    background-color: var(--fzf-preview-bg);
+  }
+
+  .preview-border {
+    color: var(--fzf-preview-border);
+  }
+
+  .preview-scrollbar {
+    color: var(--fzf-preview-scrollbar);
+  }
+
+  .preview-label {
+    color: var(--fzf-preview-labe);
+  }
+
   .label {
     color: var(--fzf-label);
   }

@@ -37,6 +37,11 @@ const envExportConfiguration: ExportDefinitions = {
     exportVariable: 'border-label-pos',
     exportIf: (_, allOptions) => !!allOptions.borderLabel,
   },
+  previewBorderStyle: {
+    exportVariable: 'preview',
+    exportIf: (val) => val !== 'none',
+    format: (val) => `border-${val}`,
+  },
   separator: {
     exportVariable: 'separator',
   },

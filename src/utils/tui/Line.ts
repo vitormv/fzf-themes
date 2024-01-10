@@ -24,8 +24,10 @@ export class Line {
     return this.tokens.filter((item) => item instanceof FillSpace).length;
   }
 
-  private ensureContainsFillSpace(tokens: LineOptions['tokens']) {
-    return this.fillSpaceCount() > 0 ? tokens : [...tokens, new FillSpace(' ')];
+  private ensureContainsFillSpace() {
+    if (!this.fillSpaceCount()) {
+      this.tokens = [...this.tokens, new FillSpace(' ', this.className)];
+    }
   }
 
   private staticContentLength(): number {
@@ -45,14 +47,14 @@ export class Line {
    * that fills N columns
    */
   computeFillSpace(cols: number) {
-    const normalizedTokens = this.ensureContainsFillSpace(this.tokens);
+    this.ensureContainsFillSpace();
     const fillSpaceCount = this.fillSpaceCount();
     const initialFillSpaceChars = cols - this.staticContentLength();
 
     let baseFillSpaceLength = Math.floor(initialFillSpaceChars / fillSpaceCount);
     let fillSpaceRemainder = initialFillSpaceChars % fillSpaceCount;
 
-    const finalTokens: LineToken[] = normalizedTokens.map((item) => {
+    const finalTokens: LineToken[] = this.tokens.map((item) => {
       if (item instanceof FillSpace && baseFillSpaceLength > 0) {
         let currentFillSpaceLength = baseFillSpaceLength;
 
@@ -63,17 +65,17 @@ export class Line {
 
         const fillString = item.fillChar.repeat(currentFillSpaceLength);
 
-
-        return token(fillString.substring(0, currentFillSpaceLength), item.classNames)
+        return token(
+          fillString.substring(0, currentFillSpaceLength),
+          [this.className, item.classNames].filter(Boolean).join(' '),
+        );
       }
 
       // non FillSpace tokens are copied verbatim
-      return item
+      return item;
     });
 
-    console.log({finalTokens})
-
-    this.tokens = finalTokens
+    this.tokens = finalTokens;
   }
 
   render() {
@@ -89,7 +91,7 @@ export class Line {
       if (typeof item === 'string') {
         lineElement.appendChild(document.createTextNode(item));
       } else if (item instanceof Token) {
-        lineElement.appendChild(item.render());
+        lineElement.appendChild(item.render(this.className));
       }
     });
 
