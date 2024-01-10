@@ -10,5 +10,8 @@ export const renderLines = (maxCols: number, theme: ThemeOptions) => {
   lines = addBorders(lines, theme);
   lines = addSpacing(lines, theme.margin);
 
-  return lines.map((line) => line.render(maxCols));
+  return lines.map((line) => {
+    line.computeFillSpace(maxCols)
+    return line.render()
+  });
 };

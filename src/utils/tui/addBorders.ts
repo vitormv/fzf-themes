@@ -56,7 +56,7 @@ export const addBorders = (lines: Line[], theme: ThemeOptions) => {
     ...lines.map((line) => {
       line.tokens.unshift(token(borderDefinition.left, 'border'));
 
-      if (!line.hasFillSpace()) {
+      if (!line.fillSpaceCount()) {
         line.tokens.push(fillSpace(' '));
       }
 

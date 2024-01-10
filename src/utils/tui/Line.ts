@@ -20,12 +20,12 @@ export class Line {
     return new Line({ className: this.className, tokens: [...this.tokens] });
   }
 
-  public hasFillSpace() {
-    return this.tokens.some((item) => item instanceof FillSpace);
+  public fillSpaceCount(): number {
+    return this.tokens.filter((item) => item instanceof FillSpace).length;
   }
 
   private ensureContainsFillSpace(tokens: LineOptions['tokens']) {
-    return this.hasFillSpace() ? tokens : [...tokens, new FillSpace(' ')];
+    return this.fillSpaceCount() > 0 ? tokens : [...tokens, new FillSpace(' ')];
   }
 
   private staticContentLength(): number {
@@ -40,26 +40,19 @@ export class Line {
     }, 0);
   }
 
-  private fillSpaceCount(): number {
-    return this.tokens.filter((item) => item instanceof FillSpace).length;
-  }
-
-  render(cols: number) {
-    const lineElement = document.createElement('div');
-
-    if (this.className) {
-      lineElement.className = this.className;
-    }
-
+  /**
+   * This removes turns any FillSpace and replace them with static string tokens
+   * that fills N columns
+   */
+  computeFillSpace(cols: number) {
     const normalizedTokens = this.ensureContainsFillSpace(this.tokens);
     const fillSpaceCount = this.fillSpaceCount();
     const initialFillSpaceChars = cols - this.staticContentLength();
+
     let baseFillSpaceLength = Math.floor(initialFillSpaceChars / fillSpaceCount);
     let fillSpaceRemainder = initialFillSpaceChars % fillSpaceCount;
 
-    normalizedTokens.forEach((item) => {
-      if (!item) return;
-
+    const finalTokens: LineToken[] = normalizedTokens.map((item) => {
       if (item instanceof FillSpace && baseFillSpaceLength > 0) {
         let currentFillSpaceLength = baseFillSpaceLength;
 
@@ -69,10 +62,31 @@ export class Line {
         }
 
         const fillString = item.fillChar.repeat(currentFillSpaceLength);
-        lineElement.appendChild(
-          token(fillString.substring(0, currentFillSpaceLength), item.classNames).render(),
-        );
-      } else if (typeof item === 'string') {
+
+
+        return token(fillString.substring(0, currentFillSpaceLength), item.classNames)
+      }
+
+      // non FillSpace tokens are copied verbatim
+      return item
+    });
+
+    console.log({finalTokens})
+
+    this.tokens = finalTokens
+  }
+
+  render() {
+    const lineElement = document.createElement('div');
+
+    if (this.className) {
+      lineElement.className = this.className;
+    }
+
+    this.tokens.forEach((item) => {
+      if (!item) return;
+
+      if (typeof item === 'string') {
         lineElement.appendChild(document.createTextNode(item));
       } else if (item instanceof Token) {
         lineElement.appendChild(item.render());
