@@ -5,6 +5,7 @@
   import Palette from '~/components/Palette.svelte';
   import TerminalWindow from '~/components/TerminalWindow.svelte';
   import OptionsPanel from '~/components/OptionsPanel.svelte';
+  import ExportOptions from '~/components/ExportOptions.svelte';
 </script>
 
 <main class="layout">
@@ -37,9 +38,15 @@
       <ColorPicker />
     </Box>
 
-    <Box title="Preview" style="flex: 1;">
-      <TerminalWindow />
-    </Box>
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
+      <Box title="Preview" style="flex: 1;">
+        <TerminalWindow />
+      </Box>
+
+      <Box title="Export" style="flex: 1;">
+        <ExportOptions />
+      </Box>
+    </div>
   </div>
 </main>
 

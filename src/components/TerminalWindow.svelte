@@ -79,7 +79,7 @@
     addDelegateEventListener(
       terminalWindowEl,
       'click',
-      (e) => {
+      () => {
         if (currentFg && isValidColor(currentFg)) {
           colorsStore.setSelected(currentFg);
         } else if (currentBg && isValidColor(currentBg)) {

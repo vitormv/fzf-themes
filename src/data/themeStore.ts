@@ -36,7 +36,7 @@ const initialSettings: ThemeOptions = {
   scrollbar: '│',
   layout: 'default',
   info: 'default',
-};
+} as const;
 
 const _optionsStore = writable<ThemeOptions>(initialSettings);
 
@@ -54,4 +54,8 @@ export const themeStore = {
       borderStyle: style,
     }));
   },
+};
+
+export const isValidOption = <T extends string>(keyName: T): keyName is keyof ThemeOptions => {
+  return keyName in initialSettings;
 };
