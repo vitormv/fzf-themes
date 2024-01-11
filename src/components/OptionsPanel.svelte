@@ -1,6 +1,6 @@
 <script lang="ts">
   import FormControl from '~/components/common/FormControl.svelte';
-  import { borderTypes, infoTypes, layoutTypes } from '~/data/fzfBorders';
+  import { borderTypes, borderTypesNonNullable, infoTypes, layoutTypes } from '~/data/fzfBorders';
   import { themeStore } from '~/data/themeStore';
   import InputCycle from '~/components/common/InputCycle.svelte';
   import { boxCoordinatesToString, stringToBoxCoordinates } from '~/utils/boxCoordinates';
@@ -49,7 +49,7 @@
 
     <FormControl label="Preview">
       <InputCycle
-        items={borderTypes}
+        items={borderTypesNonNullable}
         value={$themeStore.previewBorderStyle}
         showIndex
         on:change={(e) => {
@@ -76,7 +76,7 @@
     <FormControl label="Margin">
       <input
         type="text"
-        pattern={'^[0-9](,[0-9]){0,3}$'}
+        pattern={'^[0-9]+(,[0-9]+){0,3}$'}
         value={boxCoordinatesToString($themeStore.margin)}
         on:input={(e) => {
           const coords = stringToBoxCoordinates(e.target?.value);
@@ -91,7 +91,7 @@
     <FormControl label="Padding">
       <input
         type="text"
-        pattern={'^[0-9](,[0-9]){0,3}$'}
+        pattern={'^[0-9]+(,[0-9]+){0,3}$'}
         value={boxCoordinatesToString($themeStore.padding)}
         on:input={(e) => {
           const coords = stringToBoxCoordinates(e.target?.value);

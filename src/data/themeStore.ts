@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { BorderStyle, InfoStyle, Layout } from '~/data/fzfBorders';
+import type { BorderStyle, BorderStyleNonNullable, InfoStyle, Layout } from '~/data/fzfBorders';
 
 export type BoxCoordinates = {
   top: number;
@@ -12,7 +12,7 @@ export type ThemeOptions = {
   borderStyle: BorderStyle;
   borderLabel: string;
   borderLabelPosition: number;
-  previewBorderStyle: BorderStyle;
+  previewBorderStyle: BorderStyleNonNullable;
   padding: BoxCoordinates;
   margin: BoxCoordinates;
   prompt: string;

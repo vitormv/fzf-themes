@@ -1,8 +1,8 @@
-import AppIndex from './components/Index.svelte';
+import Home from './components/Home.svelte';
 
 import './styles/main.css';
 
-const app = new AppIndex({
+const app = new Home({
   target: document.getElementById('app') as HTMLElement,
 });
 

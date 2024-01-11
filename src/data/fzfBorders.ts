@@ -10,6 +10,7 @@ export type BorderTypeGlyphs = {
 };
 
 export type BorderStyle = 'rounded' | 'sharp' | 'bold' | 'double' | 'block' | 'thinblock' | 'none';
+export type BorderStyleNonNullable = Exclude<BorderStyle, 'none'>;
 
 // @todo: add border disclaimers for block and thinblock
 export const BorderStyleDefinitions: Record<BorderStyle, BorderTypeGlyphs> = {
@@ -101,6 +102,7 @@ export const BorderStyleDefinitions: Record<BorderStyle, BorderTypeGlyphs> = {
 };
 
 export const borderTypes = Object.keys(BorderStyleDefinitions) as BorderStyle[];
+export const borderTypesNonNullable = borderTypes.filter((item) => item !== 'none');
 
 export const layoutTypes = ['default' as const, 'reverse' as const, 'reverse-list' as const];
 export type Layout = (typeof layoutTypes)[number];

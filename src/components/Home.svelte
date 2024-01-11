@@ -9,11 +9,11 @@
 </script>
 
 <main class="layout">
-  <div style="">
+  <div class="panel-about">
     <AboutPanel />
   </div>
 
-  <div style="">
+  <div class="panel-theme-options" style="">
     <Box
       title="Theme Options"
       style="display: flex; flex-direction: column; height: 100%;"
@@ -23,7 +23,7 @@
     </Box>
   </div>
 
-  <div>
+  <div class="panel-palette">
     <Box
       title="Color Palette"
       style="display: flex; flex-direction: column; height: 100%;"
@@ -33,12 +33,12 @@
     </Box>
   </div>
 
-  <div style="display: flex; gap: var(--box-gap); width: 100%;">
+  <div class="panel-color-picker" style="display: flex; gap: var(--box-gap); width: 100%;">
     <Box title="Color Picker" style="flex: 0 1 300px" contentStyle="height: 100%;">
       <ColorPicker />
     </Box>
 
-    <div style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
+    <div class="panel-terminal" style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
       <Box title="Preview" style="flex: 1;">
         <TerminalWindow />
       </Box>
@@ -55,9 +55,9 @@
     display: grid;
     gap: var(--box-gap);
     grid-template-columns: 350px 1fr;
+    grid-template-rows: 350px auto;
     align-items: stretch;
     justify-content: stretch;
-    grid-template-rows: 320px auto;
     align-items: stretch;
     align-content: stretch;
     height: 100%;
