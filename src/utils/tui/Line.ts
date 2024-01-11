@@ -30,7 +30,7 @@ export class Line {
     }
   }
 
-  private staticContentLength(): number {
+  public staticContentLength(): number {
     return this.tokens.reduce((length, item) => {
       if (typeof item === 'string') {
         return length + item.length;

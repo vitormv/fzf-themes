@@ -1,6 +1,7 @@
 import { createPreviewLines } from '~/data/createPreviewLines';
 import { createSampleLines } from '~/data/createSampleLines';
 import type { ThemeOptions } from '~/data/themeStore';
+import type { Line } from '~/utils/tui/Line';
 import { addBorders } from '~/utils/tui/addBorders';
 import { addSpacing } from '~/utils/tui/addSpacing';
 import { mergeRenderedLines } from '~/utils/tui/mergeLines';
@@ -13,30 +14,32 @@ const countNeededHorizontalSpace = (theme: ThemeOptions) => {
   return borderCount + margin + padding;
 };
 
+const minColsNeededForLines = (lines: Line[]) => {
+  return lines.reduce((count, line) => Math.max(count, line.staticContentLength()), 0);
+};
+
 export const renderLines = (maxScreenCols: number, theme: ThemeOptions) => {
   let fileResultsLines = createSampleLines(theme);
   let previewLines = createPreviewLines(theme);
 
-  const fixedTextCols = 40;
-  const variableUiCols = countNeededHorizontalSpace(theme);
+  // calculate min space needed to render: ui, left column, right column
+  const colsNeededForUi = countNeededHorizontalSpace(theme);
+  const minimumLinesLeft = minColsNeededForLines(fileResultsLines);
+  const minimumLinesRight = minColsNeededForLines(previewLines);
 
-  const colsToRender =
-    maxScreenCols >= fixedTextCols + variableUiCols
-      ? maxScreenCols
-      : fixedTextCols + variableUiCols;
+  // total size we need to render all text + all ui elements configured
+  const minStaticContent = minimumLinesLeft + minimumLinesRight + colsNeededForUi;
 
-  console.log({ maxScreenCols, colsToRender });
+  // calculate how much "empty" space to give to each side, given the available screen size
+  const totalEmptySpace =
+    maxScreenCols - minStaticContent > 0 ? maxScreenCols - minStaticContent : 0;
+  const emptySpaceLeft = minimumLinesLeft + Math.floor(totalEmptySpace / 2) + (totalEmptySpace % 2);
+  const emptySpaceRight = minimumLinesRight + Math.floor(totalEmptySpace / 2);
 
-  const leftSideCols = Math.floor(colsToRender / 2) + (colsToRender % 2);
-  const rightSideCols = Math.floor(colsToRender / 2);
+  const colsToRender = Math.max(maxScreenCols, minStaticContent);
 
-  fileResultsLines.forEach((line) => {
-    line.computeFillSpace(leftSideCols);
-  });
-
-  previewLines.forEach((line) => {
-    line.computeFillSpace(rightSideCols);
-  });
+  fileResultsLines.forEach((line) => void line.computeFillSpace(emptySpaceLeft));
+  previewLines.forEach((line) => void line.computeFillSpace(emptySpaceRight));
 
   let mergedLines = mergeRenderedLines(fileResultsLines, previewLines);
 
