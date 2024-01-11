@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "lint": "eslint --cache --cache-location node_modules/.eslintcache .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "deploy": "yarn build && git push origin $(git subtree split --prefix dist main):gh-pages --force"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.1",
