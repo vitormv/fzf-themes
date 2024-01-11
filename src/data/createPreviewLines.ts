@@ -23,7 +23,10 @@ export const createPreviewLines = (themeOptions: ThemeOptions) => {
     new Line({ className: 'preview-bg', tokens: [token('  "os"', 'preview-bg preview-fg')] }),
     new Line({ className: 'preview-bg', tokens: [token('  "strings"', 'preview-bg preview-fg')] }),
     new Line({ className: 'preview-bg', tokens: [token(')', 'preview-bg preview-fg')] }),
-    new Line({ className: 'preview-bg', tokens: [token('')] }),
+    new Line({
+      className: 'preview-bg',
+      tokens: [token('// History struct ', 'preview-bg preview-fg')],
+    }),
   ];
 
   if (themeOptions.previewBorderStyle === 'none') {

@@ -13,14 +13,22 @@ const countNeededHorizontalSpace = (theme: ThemeOptions) => {
   return borderCount + margin + padding;
 };
 
-export const renderLines = (maxCols: number, theme: ThemeOptions) => {
+export const renderLines = (maxScreenCols: number, theme: ThemeOptions) => {
   let fileResultsLines = createSampleLines(theme);
   let previewLines = createPreviewLines(theme);
 
-  const contentChars = maxCols - countNeededHorizontalSpace(theme);
+  const fixedTextCols = 40;
+  const variableUiCols = countNeededHorizontalSpace(theme);
 
-  const leftSideCols = Math.floor(contentChars / 2) + (contentChars % 2);
-  const rightSideCols = Math.floor(contentChars / 2);
+  const colsToRender =
+    maxScreenCols >= fixedTextCols + variableUiCols
+      ? maxScreenCols
+      : fixedTextCols + variableUiCols;
+
+  console.log({ maxScreenCols, colsToRender });
+
+  const leftSideCols = Math.floor(colsToRender / 2) + (colsToRender % 2);
+  const rightSideCols = Math.floor(colsToRender / 2);
 
   fileResultsLines.forEach((line) => {
     line.computeFillSpace(leftSideCols);
@@ -41,7 +49,7 @@ export const renderLines = (maxCols: number, theme: ThemeOptions) => {
   mergedLines = addSpacing(mergedLines, theme.margin);
 
   return mergedLines.map((line) => {
-    line.computeFillSpace(maxCols);
+    line.computeFillSpace(colsToRender);
     return line.render();
   });
 };

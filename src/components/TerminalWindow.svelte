@@ -34,8 +34,7 @@
     const charWidth = charWidthEl.getBoundingClientRect().width;
     const terminalWindowWidth = wrapperEl.getBoundingClientRect().width;
 
-    // cols follow the available screen size, but has a minimum of 50 cols
-    const maxCols = Math.max(50, Math.floor(terminalWindowWidth / charWidth));
+    const maxCols = Math.floor(terminalWindowWidth / charWidth);
 
     const lineElements = renderLines(maxCols, currentTheme);
 
