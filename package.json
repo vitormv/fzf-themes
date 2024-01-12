@@ -10,7 +10,7 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "lint": "eslint --cache --cache-location node_modules/.eslintcache .",
     "format": "prettier --write .",
-    "deploy": "yarn build && bash ./cli/gh-pages-deploy.sh"
+    "deploy": "yarn build && bash ./cli/gh-pages-deploy.sh && git checkout -"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.1",

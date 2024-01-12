@@ -34,4 +34,5 @@ jobs:
       - name: Deploying the static website to gh-pages
         env:
           FILTER_BRANCH_SQUELCH_WARNING: 1
-        run: npm run deploy
+        run: |
+          yarn build && bash ./cli/gh-pages-deploy.sh
