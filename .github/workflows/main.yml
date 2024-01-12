@@ -19,7 +19,7 @@ jobs:
       - run: yarn install
       - run: yarn lint
 
-      - name: Identify git user
+      - name: Setup git credentials
         env: # use github secrets as env variable
           GIT_NAME: ${{ secrets.GIT_NAME }}
           GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
@@ -30,3 +30,7 @@ jobs:
       # Run our deployment command
       - name: Deploying the static website to gh-pages
         run: npm run deploy
+        env:
+          FILTER_BRANCH_SQUELCH_WARNING: 1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
