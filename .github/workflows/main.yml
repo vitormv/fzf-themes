@@ -16,6 +16,9 @@ jobs:
         with:
           node-version: '20.x'
 
+      - run: yarn install
+      - run: yarn lint
+
       # Run our deployment command
       - name: Deploying the static website to gh-pages
         run: npm run deploy
