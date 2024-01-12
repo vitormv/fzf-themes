@@ -19,6 +19,14 @@ jobs:
       - run: yarn install
       - run: yarn lint
 
+      - name: Identify git user
+        env: # use github secrets as env variable
+          GIT_NAME: ${{ secrets.GIT_NAME }}
+          GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
+        run: |
+          git config --global user.name $GIT_NAME
+          git config --global user.email $GIT_EMAIL
+
       # Run our deployment command
       - name: Deploying the static website to gh-pages
         run: npm run deploy
