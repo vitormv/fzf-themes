@@ -104,7 +104,7 @@
 
 <!-- @todo: toggle show loading, header, preview -->
 <div bind:this={wrapperEl} class="wrapper" style={allTokenVariables}>
-  <div bind:this={terminalWindowEl} class="terminal-window"></div>
+  <div bind:this={terminalWindowEl} class="terminal-window bg"></div>
   <div class="hint" bind:this={hintEl}>
     <span class="hint-label">background:</span>
     <strong>{toFzfColorName(currentBg || '').toUpperCase() || '---'}</strong>
@@ -159,7 +159,7 @@
       white-space: nowrap;
     }
 
-    :global(span[class]:not(span[class=''])) {
+    :global(span[class]:not(span[class='']):not(span[class='preview-bg'])) {
       cursor: pointer;
       outline: 2px solid transparent;
 

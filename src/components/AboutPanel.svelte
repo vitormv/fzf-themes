@@ -7,8 +7,7 @@
   <Box>
     <div class="brand">
       <div class="fzf-logo">
-        <span class="gt">&gt;</span>
-        <span class="highlight">fz</span>f
+        <span class="gt">&gt;</span><span class="highlight">fz</span>f
       </div>
       <div style="font-size: 1.5rem; font-weight: bold;">Theme Playground</div>
     </div>

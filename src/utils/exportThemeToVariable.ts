@@ -1,6 +1,7 @@
 import { isValidColor, type ColorsStore } from '~/data/colorsStore';
 import { colorDefinitions } from '~/data/fzfDefinitions';
 import { isValidOption, type ThemeOptions } from '~/data/themeStore';
+import { arrayChunk } from '~/utils/arrayChunk';
 import { boxCoordinatesToString } from '~/utils/boxCoordinates';
 import { toFzfColorName } from '~/utils/toFzfColorName';
 
@@ -67,18 +68,6 @@ const envExportConfiguration: ExportDefinitions = {
   },
 };
 
-function array_chunk(arr: any[], chunkSize: number) {
-  if (chunkSize <= 0) throw 'Invalid chunk size';
-
-  const chunks = [];
-
-  for (let i = 0, len = arr.length; i < len; i += chunkSize) {
-    chunks.push(arr.slice(i, i + chunkSize));
-  }
-
-  return chunks;
-}
-
 const sanitize = (str: string) => {
   return str.includes(' ') ? `"${str}"` : str;
 };
@@ -118,11 +107,11 @@ export const exportThemeToVariable = (
   });
 
   // split all colors into lines with max 4 colors each
-  const colorChunks = array_chunk(colorVariables, 4)
+  const colorChunks = arrayChunk(colorVariables, 4)
     .map((chunk) => `--color=${chunk.join(',')}`)
     .join('\n');
 
-  const optionsChunks = array_chunk(optionsVariables, 4)
+  const optionsChunks = arrayChunk(optionsVariables, 4)
     .map((chunk) => chunk.join(' '))
     .join('\n');
 
