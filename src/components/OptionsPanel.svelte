@@ -2,7 +2,6 @@
   import FormControl from '~/components/common/FormControl.svelte';
   import { themeStore } from '~/data/themeStore';
   import InputCycle from '~/components/common/InputCycle.svelte';
-  import { boxCoordinatesToString, stringToBoxCoordinates } from '~/utils/boxCoordinates';
   import { borderTypes, borderTypesNonNullable, infoTypes, layoutTypes } from '~/fzf/fzfBorders';
 </script>
 
