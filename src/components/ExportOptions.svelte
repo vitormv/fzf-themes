@@ -1,22 +1,29 @@
 <script lang="ts">
+  import Box from '~/components/common/Box.svelte';
+  import Modal from '~/components/common/Modal.svelte';
   import { colorsStore } from '~/data/colorsStore';
   import { themeStore } from '~/data/themeStore';
   import { exportThemeToVariable } from '~/utils/exportThemeToVariable';
 
   $: exportString = exportThemeToVariable($themeStore, $colorsStore);
+
+  let showModal = false;
 </script>
 
 <div class="wrapper">
-  <textarea>{exportString}</textarea>
+  <button on:click={() => (showModal = true)}> show modal </button>
+
+  <Modal bind:showModal={showModal}>
+    <h2 slot="header">Export</h2>
+
+    <textarea readonly>{exportString}</textarea>
+  </Modal>
 </div>
 
 <style lang="scss">
-  .wrapper {
-    height: 100%;
-  }
-
   textarea {
     width: 100%;
     height: 100%;
+    padding: 15px;
   }
 </style>

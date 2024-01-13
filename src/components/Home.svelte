@@ -42,10 +42,6 @@
       <Box title="Preview" style="flex: 1;">
         <TerminalWindow />
       </Box>
-
-      <Box title="Export" style="flex: 1;">
-        <ExportOptions />
-      </Box>
     </div>
   </div>
 </main>
