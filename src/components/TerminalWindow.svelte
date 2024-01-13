@@ -73,7 +73,7 @@
         currentBg = bgClasses.length ? bgClasses[0] : 'bg';
         currentFg = fgClasses.length ? fgClasses[0] : '';
       },
-      "span[class]:not(span[class=''])",
+      "span[class]:not(span[class='']),.bg",
     );
 
     // when clicking a token, set is as the selected color
@@ -87,7 +87,7 @@
           colorsStore.setSelected(currentBg);
         }
       },
-      "span[class]:not(span[class=''])",
+      "span[class]:not(span[class='']),.bg",
     );
 
     terminalWindowEl.addEventListener('mouseleave', () => {
@@ -154,13 +154,13 @@
 
     background-color: var(--fzf-bg);
     color: var(--fzf-fg);
+    cursor: default;
 
     :global(*) {
       white-space: nowrap;
     }
 
     :global(span[class]:not(span[class='']):not(span[class='preview-bg'])) {
-      cursor: pointer;
       outline: 2px solid transparent;
 
       &:hover {

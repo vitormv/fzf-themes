@@ -3,7 +3,7 @@
  * https://youmightnotneedjquery.com/#on
  */
 export const addDelegateEventListener = (
-  el: HTMLElement,
+  wrapperEl: HTMLElement,
   eventName: keyof HTMLElementEventMap,
   eventHandler: (event: Event) => void,
   selector: string,
@@ -11,18 +11,24 @@ export const addDelegateEventListener = (
   if (selector) {
     const wrappedHandler = (e: Event) => {
       if (!e.target) return;
-      const el = (e.target as HTMLElement).closest(selector);
-      if (el) {
-        eventHandler.call(el, e);
+
+      const triggeredEl = (e.target as HTMLElement).closest(selector);
+
+      if (triggeredEl) {
+        eventHandler.call(triggeredEl, e);
       }
     };
-    el.addEventListener(eventName, wrappedHandler);
+
+    wrapperEl.addEventListener(eventName, wrappedHandler);
+
     return wrappedHandler;
   } else {
     const wrappedHandler = (e: Event) => {
-      eventHandler.call(el, e);
+      eventHandler.call(wrapperEl, e);
     };
-    el.addEventListener(eventName, wrappedHandler);
+
+    wrapperEl.addEventListener(eventName, wrappedHandler);
+
     return wrappedHandler;
   }
 };
