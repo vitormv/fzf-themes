@@ -1,6 +1,6 @@
 <script lang="ts">
   import PaletteColor from '~/components/PaletteColor.svelte';
-  import { orderedColorTokens } from '~/data/fzfDefinitions';
+  import { orderedColorTokens } from '~/fzf/fzfColorDefinitions';
   import { colorsStore } from '~/data/colorsStore';
 </script>
 

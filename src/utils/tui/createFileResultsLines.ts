@@ -12,7 +12,7 @@ const addScrollbarToLines = (count: number, lines: Line[], themeOptions: ThemeOp
   return lines;
 };
 
-export const createSampleLines = (themeOptions: ThemeOptions) => {
+export const createFileResultsLines = (themeOptions: ThemeOptions) => {
   const fileResultLines = [
     new Line({
       tokens: [

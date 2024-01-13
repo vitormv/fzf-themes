@@ -3,7 +3,7 @@
   import type { FzfColor } from '~/types/fzf';
   import { getContrastColor } from '~/utils/getContrastColor';
   import { getColorOrFallback, colorsStore } from '~/data/colorsStore';
-  import { colorDefinitions } from '~/data/fzfDefinitions';
+  import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
   import { toFzfColorName } from '~/utils/toFzfColorName';
   import { beforeUpdate } from 'svelte';
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { orderedColorTokens } from '~/data/fzfDefinitions';
+  import { orderedColorTokens } from '~/fzf/fzfColorDefinitions';
   import { getColorOrFallback, colorsStore, isValidColor } from '~/data/colorsStore';
   import { onMount } from 'svelte';
   import { themeStore, type ThemeOptions } from '~/data/themeStore';

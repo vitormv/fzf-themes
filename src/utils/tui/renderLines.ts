@@ -1,9 +1,9 @@
-import { createPreviewLines } from '~/data/createPreviewLines';
-import { createSampleLines } from '~/data/createSampleLines';
 import type { ThemeOptions } from '~/data/themeStore';
 import type { Line } from '~/utils/tui/Line';
 import { addBorders } from '~/utils/tui/addBorders';
 import { addSpacing } from '~/utils/tui/addSpacing';
+import { createFileResultsLines } from '~/utils/tui/createFileResultsLines';
+import { createPreviewLines } from '~/utils/tui/createPreviewLines';
 import { mergeRenderedLines } from '~/utils/tui/mergeLines';
 
 const countNeededHorizontalSpace = (theme: ThemeOptions) => {
@@ -19,7 +19,7 @@ const minColsNeededForLines = (lines: Line[]) => {
 };
 
 export const renderLines = (maxScreenCols: number, theme: ThemeOptions) => {
-  let fileResultsLines = createSampleLines(theme);
+  let fileResultsLines = createFileResultsLines(theme);
   let previewLines = createPreviewLines(theme);
 
   // calculate min space needed to render: ui, left column, right column

@@ -2,7 +2,7 @@
   import { colorsStore } from '~/data/colorsStore';
   import ColorPickerWrapper from '~/components/CustomColorPicker/ColorPickerWrapper.svelte';
   import ColorPicker from 'svelte-awesome-color-picker';
-  import { colorInheritances } from '~/data/fzfDefinitions';
+  import { colorInheritances } from '~/fzf/fzfColorDefinitions';
   import { toFzfColorName } from '~/utils/toFzfColorName';
   import TextInput from '~/components/CustomColorPicker/TextInput.svelte';
   import { onMount } from 'svelte';

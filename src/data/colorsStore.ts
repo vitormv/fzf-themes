@@ -1,6 +1,6 @@
 import type { FzfColor } from '~/types/fzf';
 import { writable } from 'svelte/store';
-import { colorDefinitions, colorInheritances } from '~/data/fzfDefinitions';
+import { colorDefinitions, colorInheritances } from '~/fzf/fzfColorDefinitions';
 
 export type ColorsStore = {
   selectedColor: FzfColor;

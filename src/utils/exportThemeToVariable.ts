@@ -1,6 +1,6 @@
 import { isValidColor, type ColorsStore } from '~/data/colorsStore';
-import { colorDefinitions } from '~/data/fzfDefinitions';
 import { isValidOption, type ThemeOptions } from '~/data/themeStore';
+import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
 import { arrayChunk } from '~/utils/arrayChunk';
 import { boxCoordinatesToString } from '~/utils/boxCoordinates';
 import { toFzfColorName } from '~/utils/toFzfColorName';

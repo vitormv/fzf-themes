@@ -5,12 +5,12 @@
 
 <div class="wrapper">
   <Box>
-    <div class="brand">
+    <a class="brand" href="/">
       <div class="fzf-logo">
         <span class="gt">&gt;</span><span class="highlight">fz</span>f
       </div>
       <div style="font-size: 1.5rem; font-weight: bold;">Theme Playground</div>
-    </div>
+    </a>
   </Box>
 
   <Box title="About" style="flex: 1">
@@ -38,6 +38,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
+    text-decoration: none;
 
     .fzf-logo {
       font-family: var(--brand-font-family);

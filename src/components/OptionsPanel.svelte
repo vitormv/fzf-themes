@@ -1,9 +1,9 @@
 <script lang="ts">
   import FormControl from '~/components/common/FormControl.svelte';
-  import { borderTypes, borderTypesNonNullable, infoTypes, layoutTypes } from '~/data/fzfBorders';
   import { themeStore } from '~/data/themeStore';
   import InputCycle from '~/components/common/InputCycle.svelte';
   import { boxCoordinatesToString, stringToBoxCoordinates } from '~/utils/boxCoordinates';
+  import { borderTypes, borderTypesNonNullable, infoTypes, layoutTypes } from '~/fzf/fzfBorders';
 </script>
 
 <div class="wrapper">
