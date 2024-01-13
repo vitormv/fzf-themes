@@ -19,9 +19,11 @@ export const boxCoordinatesToString = (coords: BoxCoordinates) => {
 };
 
 export const stringToBoxCoordinates = (coordsStr: string) => {
-  const coords = coordsStr.split(',').map((i) => Number.parseInt(i, 10));
+  const coords = String(coordsStr)
+    .split(',')
+    .map((i) => Number.parseInt(i, 10));
 
-  if (coords.some((i) => Number.isNaN(i))) return undefined;
+  if (coords.some((i) => Number.isNaN(i))) return emptyCoords;
 
   if (!coordsStr) {
     return emptyCoords;
@@ -38,6 +40,6 @@ export const stringToBoxCoordinates = (coordsStr: string) => {
       return { top: coords[0], right: coords[0], bottom: coords[0], left: coords[0] };
     }
     default:
-      return undefined;
+      return emptyCoords;
   }
 };

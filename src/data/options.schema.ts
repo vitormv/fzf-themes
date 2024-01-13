@@ -16,8 +16,14 @@ export const themeOptionsSchema = z.object({
   previewBorderStyle: z
     .enum(['rounded', 'sharp', 'bold', 'double', 'block', 'thinblock'])
     .default('rounded'),
-  padding: boxCoordinatesShape,
-  margin: boxCoordinatesShape,
+  margin: z
+    .string()
+    .regex(/^[0-9]+(,[0-9]+){0,3}$/)
+    .default('0'),
+  padding: z
+    .string()
+    .regex(/^[0-9]+(,[0-9]+){0,3}$/)
+    .default('0'),
   prompt: z.string().default('> '),
   pointer: z.string().max(2).default('> '),
   marker: z.string().max(2).default('>'),
@@ -26,5 +32,3 @@ export const themeOptionsSchema = z.object({
   layout: z.enum(['default', 'reverse', 'reverse-list']).default('default'),
   info: z.enum(['default', 'right']).default('default').default('default'),
 });
-
-window.schema = themeOptionsSchema;

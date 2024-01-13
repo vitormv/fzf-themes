@@ -77,12 +77,10 @@
       <input
         type="text"
         pattern={'^[0-9]+(,[0-9]+){0,3}$'}
-        value={boxCoordinatesToString($themeStore.margin)}
+        value={$themeStore.margin}
         on:input={(e) => {
-          const coords = stringToBoxCoordinates(e.target?.value);
-
-          if (coords) {
-            themeStore.set('margin', coords);
+          if (e.target.checkValidity()) {
+            themeStore.set('margin', e.target?.value);
           }
         }}
       />
@@ -92,12 +90,10 @@
       <input
         type="text"
         pattern={'^[0-9]+(,[0-9]+){0,3}$'}
-        value={boxCoordinatesToString($themeStore.padding)}
+        value={$themeStore.padding}
         on:input={(e) => {
-          const coords = stringToBoxCoordinates(e.target?.value);
-
-          if (coords) {
-            themeStore.set('padding', coords);
+          if (e.target.checkValidity()) {
+            themeStore.set('padding', e.target?.value);
           }
         }}
       />

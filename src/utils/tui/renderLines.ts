@@ -1,4 +1,5 @@
 import type { ThemeOptions } from '~/data/themeStore';
+import { stringToBoxCoordinates } from '~/utils/boxCoordinates';
 import type { Line } from '~/utils/tui/Line';
 import { addBorders } from '~/utils/tui/addBorders';
 import { addSpacing } from '~/utils/tui/addSpacing';
@@ -7,9 +8,12 @@ import { createPreviewLines } from '~/utils/tui/createPreviewLines';
 import { mergeRenderedLines } from '~/utils/tui/mergeLines';
 
 const countNeededHorizontalSpace = (theme: ThemeOptions) => {
+  const marginCoords = stringToBoxCoordinates(theme.margin);
+  const paddingCoords = stringToBoxCoordinates(theme.padding);
+
   const borderCount = theme.borderStyle === 'none' ? 0 : 2;
-  const margin = theme.margin.left + theme.margin.right;
-  const padding = theme.padding.left + theme.padding.right;
+  const margin = marginCoords.left + marginCoords.right;
+  const padding = paddingCoords.left + paddingCoords.right;
 
   return borderCount + margin + padding;
 };
@@ -43,13 +47,16 @@ export const renderLines = (maxScreenCols: number, theme: ThemeOptions) => {
 
   let mergedLines = mergeRenderedLines(fileResultsLines, previewLines);
 
-  mergedLines = addSpacing(mergedLines, theme.padding);
+  const margin = stringToBoxCoordinates(theme.margin);
+  const padding = stringToBoxCoordinates(theme.padding);
+
+  mergedLines = addSpacing(mergedLines, padding);
   mergedLines = addBorders(mergedLines, {
     style: theme.borderStyle,
     label: theme.borderLabel,
     position: theme.borderLabelPosition,
   });
-  mergedLines = addSpacing(mergedLines, theme.margin);
+  mergedLines = addSpacing(mergedLines, margin);
 
   return mergedLines.map((line) => {
     line.computeFillSpace(colsToRender);
