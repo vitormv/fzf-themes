@@ -5,7 +5,6 @@
   import Palette from '~/components/Palette.svelte';
   import TerminalWindow from '~/components/TerminalWindow.svelte';
   import OptionsPanel from '~/components/OptionsPanel.svelte';
-  import ExportOptions from '~/components/ExportOptions.svelte';
 </script>
 
 <main class="layout">

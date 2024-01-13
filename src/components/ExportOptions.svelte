@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Box from '~/components/common/Box.svelte';
   import Modal from '~/components/common/Modal.svelte';
   import { colorsStore } from '~/data/colorsStore';
   import { themeStore } from '~/data/themeStore';
