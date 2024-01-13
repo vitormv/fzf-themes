@@ -1,5 +1,7 @@
 import { writable } from 'svelte/store';
-import type { BorderStyle, BorderStyleNonNullable, Layout, InfoStyle } from '~/fzf/fzfBorders';
+import { z } from 'zod';
+import { themeOptionsSchema } from '~/data/options.schema';
+import type { BorderStyle } from '~/fzf/fzfBorders';
 
 export type BoxCoordinates = {
   top: number;
@@ -8,21 +10,7 @@ export type BoxCoordinates = {
   right: number;
 };
 
-export type ThemeOptions = {
-  borderStyle: BorderStyle;
-  borderLabel: string;
-  borderLabelPosition: number;
-  previewBorderStyle: BorderStyleNonNullable;
-  padding: BoxCoordinates;
-  margin: BoxCoordinates;
-  prompt: string;
-  pointer: string;
-  marker: string;
-  separator: string;
-  scrollbar: string;
-  layout: Layout;
-  info: InfoStyle;
-};
+export type ThemeOptions = z.infer<typeof themeOptionsSchema>;
 
 const initialSettings: ThemeOptions = {
   borderStyle: 'rounded',
