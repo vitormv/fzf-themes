@@ -2,6 +2,7 @@ import { isValidColor, type ColorsStore } from '~/data/colorsStore';
 import { isValidOption, type ThemeOptions } from '~/data/themeStore';
 import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
 import { arrayChunk } from '~/utils/arrayChunk';
+import { base64Encode } from '~/utils/base64';
 import { toFzfColorName } from '~/utils/toFzfColorName';
 
 type ExportItemDefinition<T extends keyof ThemeOptions> = {
@@ -135,4 +136,28 @@ export const exportThemeToEnvVariable = (
   return `export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'\n${colorChunks}${
     optionsChunks.length > 0 ? `\n${optionsChunks}` : ''
   }'`;
+};
+
+export const exportToUrlHash = (themeOptions: ThemeOptions, colorStore: ColorsStore) => {
+  const { colorVariables, optionsVariables } = prepareForExport(themeOptions, colorStore);
+
+  const colorsString = [...colorVariables.keys()]
+    .map((color) => {
+      return `${color}:${colorVariables.get(color)}`;
+    })
+    .join(',');
+
+  const optionsForEnv = Object.fromEntries(
+    [...optionsVariables.keys()].map((option) => {
+      return [option, optionsVariables.get(option)];
+    }),
+  );
+
+  const exportedObj = {
+    ...optionsForEnv,
+    colors: colorsString,
+  };
+
+  console.log(JSON.stringify(exportedObj));
+  console.log(base64Encode(JSON.stringify(exportedObj)));
 };
