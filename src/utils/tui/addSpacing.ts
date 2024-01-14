@@ -16,8 +16,7 @@ export const addSpacing = (lines: Line[], space: BoxCoordinates, className?: str
   const linesWithSpacing = [
     ...getVerticalSpace(space.top, className),
     ...lines.map((line) => {
-      const lineClone = new Line({ className, tokens: line.tokens });
-      // line.className = className;
+      const lineClone = new Line({ tokens: line.tokens });
 
       if (space.left > 0) {
         lineClone.tokens.unshift(token(' '.repeat(space.left), className));

@@ -10,13 +10,13 @@ export const createPreviewLines = (themeOptions: ThemeOptions) => {
       className: 'preview-bg',
       tokens: [
         token('package fzf', 'preview-fg'),
-        fillSpace(' '),
+        fillSpace(' ', 'preview-bg'),
         token(themeOptions.scrollbar, 'preview-scrollbar'),
       ],
     }),
     new Line({
       className: 'preview-bg',
-      tokens: [fillSpace(' '), token(themeOptions.scrollbar, 'preview-scrollbar')],
+      tokens: [fillSpace(' ', 'preview-bg'), token(themeOptions.scrollbar, 'preview-scrollbar')],
     }),
     new Line({ className: 'preview-bg', tokens: [token('import (', 'preview-fg')] }),
     new Line({ className: 'preview-bg', tokens: [token('  "errors"', 'preview-fg')] }),
@@ -28,6 +28,10 @@ export const createPreviewLines = (themeOptions: ThemeOptions) => {
       tokens: [token('// History struct ', 'preview-fg')],
     }),
   ];
+
+  for (const line of previewLines) {
+    line.ensureContainsFillSpace();
+  }
 
   previewLines = addSpacing(previewLines, { top: 0, bottom: 0, left: 1, right: 0 }, 'preview-bg');
   previewLines = addBorders(previewLines, {

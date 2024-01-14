@@ -34,7 +34,7 @@ export class Line {
     return this.tokens.filter((item) => item instanceof FillSpace).length;
   }
 
-  private ensureContainsFillSpace() {
+  public ensureContainsFillSpace() {
     if (!this.fillSpaceCount()) {
       this.tokens = [...this.tokens, new FillSpace(' ', this.className)];
     }
