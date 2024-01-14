@@ -12,40 +12,32 @@
     <AboutPanel />
   </div>
 
-  <div class="panel-theme-options" style="">
-    <Box
-      title="Theme Options"
-      style="display: flex; flex-direction: column; height: 100%;"
-      contentStyle="display: flex; overflow-y: auto; gap: var(--box-gap)"
-    >
+  <div class="panel-theme-options">
+    <Box title="Theme Options">
       <OptionsPanel />
     </Box>
   </div>
 
   <div class="panel-palette">
-    <Box
-      title="Color Palette"
-      style="display: flex; flex-direction: column; height: 100%;"
-      contentStyle="flex: 1 1 0; overflow-y: scroll;"
-    >
+    <Box title="Color Palette">
       <Palette />
     </Box>
   </div>
 
-  <div class="panel-color-picker" style="display: flex; gap: var(--box-gap); width: 100%;">
-    <Box title="Color Picker" style="flex: 0 1 300px" contentStyle="height: 100%;">
+  <div class="panel-color-picker">
+    <Box title="Color Picker">
       <ColorPicker />
     </Box>
 
-    <div class="panel-terminal" style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
-      <Box title="Preview" style="flex: 1;">
+    <div class="panel-terminal">
+      <Box title="Preview">
         <TerminalWindow />
       </Box>
     </div>
   </div>
 </main>
 
-<style>
+<style lang="scss">
   .layout {
     display: grid;
     gap: var(--box-gap);
@@ -56,5 +48,55 @@
     align-items: stretch;
     align-content: stretch;
     height: 100%;
+  }
+
+  .panel-theme-options {
+    :global(.box) {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    :global(.box > .content) {
+      display: flex;
+      overflow-y: auto;
+      gap: var(--box-gap);
+    }
+  }
+  .panel-palette {
+    :global(.box) {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    :global(.box > .content) {
+      flex: 1 1 0;
+      overflow-y: scroll;
+    }
+  }
+  .panel-color-picker {
+    display: flex;
+    gap: var(--box-gap);
+    width: 100%;
+
+    :global(.box) {
+      flex: 0 1 300px;
+    }
+
+    :global(.box > .content) {
+      height: 100%;
+    }
+  }
+
+  .panel-terminal {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    :global(.box) {
+      flex: 1;
+    }
   }
 </style>

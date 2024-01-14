@@ -5,7 +5,7 @@
 
 <div class="wrapper">
   <Box>
-    <a class="brand" href="/">
+    <a class="brand" href={import.meta.env.BASE_URL}>
       <div class="fzf-logo">
         <span class="gt">&gt;</span><span class="highlight">fz</span>f
       </div>
