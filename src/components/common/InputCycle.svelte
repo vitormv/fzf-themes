@@ -76,6 +76,7 @@
   input {
     display: block;
     width: 100%;
+    padding-right: 50px;
   }
 
   .prev {

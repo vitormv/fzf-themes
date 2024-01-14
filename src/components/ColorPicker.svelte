@@ -45,7 +45,7 @@
     }}
     --picker-radius="0"
     --slider-width="15px"
-    --picker-width="300px"
+    --picker-width="280px"
     --picker-height={pickerHeight}
   />
 

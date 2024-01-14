@@ -151,12 +151,27 @@
 </div>
 
 <style lang="scss">
-  .wrapper {
-    display: flex;
-    gap: 20px;
+  @media (min-width: $tablet-breakpoint) {
+    .wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
 
-    > div {
-      flex: 1 1 0;
+      > div {
+        max-width: 50%;
+        flex: 1 0 0;
+      }
+    }
+  }
+
+  @media (min-width: $desktop-breakpoint) {
+    .wrapper {
+      display: flex;
+      gap: 20px;
+
+      > div {
+        flex: 1 1 0;
+      }
     }
   }
 

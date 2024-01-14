@@ -10,4 +10,12 @@ export default defineConfig({
       '~': '/src',
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // make SASS variables global by auto-importing them on top of each file
+        additionalData: `@import "src/styles/global-variables.scss";`,
+      },
+    },
+  },
 });

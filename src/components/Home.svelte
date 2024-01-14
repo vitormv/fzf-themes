@@ -28,75 +28,85 @@
     <Box title="Color Picker">
       <ColorPicker />
     </Box>
+  </div>
 
-    <div class="panel-terminal">
-      <Box title="Preview">
-        <TerminalWindow />
-      </Box>
-    </div>
+  <div class="panel-terminal">
+    <Box title="Preview">
+      <TerminalWindow />
+    </Box>
   </div>
 </main>
 
 <style lang="scss">
   .layout {
-    display: grid;
-    gap: var(--box-gap);
-    grid-template-columns: 350px 1fr;
-    grid-template-rows: 350px auto;
-    align-items: stretch;
-    justify-content: stretch;
-    align-items: stretch;
-    align-content: stretch;
-    height: 100%;
-  }
-
-  .panel-theme-options {
-    :global(.box) {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    :global(.box > .content) {
-      display: flex;
-      overflow-y: auto;
-      gap: var(--box-gap);
-    }
-  }
-  .panel-palette {
-    :global(.box) {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    :global(.box > .content) {
-      flex: 1 1 0;
-      overflow-y: scroll;
-    }
-  }
-  .panel-color-picker {
-    display: flex;
-    gap: var(--box-gap);
-    width: 100%;
-
-    :global(.box) {
-      flex: 0 1 300px;
-    }
-
-    :global(.box > .content) {
-      height: 100%;
-    }
-  }
-
-  .panel-terminal {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: var(--box-gap);
+  }
 
-    :global(.box) {
+  @media (min-width: $desktop-breakpoint) {
+    .layout {
+      display: grid;
+      gap: var(--box-gap);
+      grid-template-columns: 350px min-content 1fr;
+      grid-template-rows: 350px 1fr;
+      align-items: stretch;
+      justify-content: stretch;
+      align-content: stretch;
+      height: 100%;
+    }
+
+    .panel-theme-options {
+      grid-column: 2 / span 2;
+      :global(.box) {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      :global(.box > .content) {
+        display: flex;
+        overflow-y: auto;
+        gap: var(--box-gap);
+      }
+    }
+    .panel-palette {
+      // grid-row: 2 / span 1;
+
+      :global(.box) {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      :global(.box > .content) {
+        flex: 1 1 0;
+        overflow-y: scroll;
+      }
+    }
+    .panel-color-picker {
+      display: flex;
+      gap: var(--box-gap);
+      width: 100%;
+
+      :global(.box) {
+        flex: 0 1 300px;
+      }
+
+      :global(.box > .content) {
+        height: 100%;
+      }
+    }
+
+    .panel-terminal {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      :global(.box) {
+        flex: 1;
+      }
     }
   }
 </style>
