@@ -18,7 +18,7 @@ const initialSettings: ThemeOptions = {
   borderLabelPosition: 0,
   previewBorderStyle: 'rounded',
   padding: '0',
-  margin: 0,
+  margin: '0',
   prompt: '> ',
   marker: '>',
   pointer: '◆',

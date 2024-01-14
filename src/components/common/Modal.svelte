@@ -15,10 +15,10 @@
 >
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="wrapper" on:click|stopPropagation>
-    <div class="header">
+    <div class="header-row">
       <slot name="header" />
       <button on:click={() => dialog.close()}>
-        <Close size="16" style="vertical-align: middle;" /></button
+        <Close size="32" style="vertical-align: middle;" /></button
       >
     </div>
 
@@ -56,7 +56,7 @@
     flex-direction: column;
   }
 
-  .header {
+  .header-row {
     display: flex;
     gap: 10px;
     width: 100%;
@@ -65,13 +65,21 @@
     padding: 15px;
     margin-bottom: var(--box-gap);
 
+    button {
+      background-color: transparent;
+      color: var(--text-color);
+      border: 0;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--bg-color);
+      }
+    }
+
     :global(h2) {
       padding: 0;
       margin: 0;
     }
-  }
-  button {
-    display: block;
   }
 
   .content {

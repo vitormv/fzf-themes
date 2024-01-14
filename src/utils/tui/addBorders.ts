@@ -27,14 +27,15 @@ export const addBorders = (lines: Line[], border: BorderOptions) => {
   if (border.label) {
     const borderChar = borderDefinition[isTop ? 'top' : 'bottom'];
 
-    // text-center
     if (border.position === 0) {
+      // text-center
       borderLabel = [
         fillSpace(borderChar, className),
         token(border.label, 'label'),
         fillSpace(borderChar, className),
       ];
     } else if (border.position > 0) {
+      // left-aligned
       const pos = border.position - 1;
 
       borderLabel = [
@@ -43,6 +44,7 @@ export const addBorders = (lines: Line[], border: BorderOptions) => {
         fillSpace(borderChar, className),
       ];
     } else if (border.position < 0) {
+      // right-aligned
       const pos = Math.abs(border.position) - 1;
 
       borderLabel = [

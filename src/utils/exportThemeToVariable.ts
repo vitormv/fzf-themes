@@ -2,7 +2,6 @@ import { isValidColor, type ColorsStore } from '~/data/colorsStore';
 import { isValidOption, type ThemeOptions } from '~/data/themeStore';
 import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
 import { arrayChunk } from '~/utils/arrayChunk';
-import { boxCoordinatesToString } from '~/utils/boxCoordinates';
 import { toFzfColorName } from '~/utils/toFzfColorName';
 
 type ExportItemDefinition<T extends keyof ThemeOptions> = {
@@ -19,12 +18,12 @@ const envExportConfiguration: ExportDefinitions = {
   margin: {
     exportVariable: 'margin',
     exportIf: (val) => val !== '0',
-    format: (val) => boxCoordinatesToString(val),
+    format: (val) => val,
   },
   padding: {
     exportVariable: 'padding',
     exportIf: (val) => val !== '0',
-    format: (val) => boxCoordinatesToString(val),
+    format: (val) => val,
   },
   borderStyle: {
     exportVariable: 'border',
