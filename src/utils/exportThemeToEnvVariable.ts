@@ -71,12 +71,9 @@ const sanitize = (str: string) => {
   return str.includes(' ') ? `"${str}"` : str;
 };
 
-export const exportThemeToVariable = (
-  themeOptions: ThemeOptions,
-  colorStore: ColorsStore,
-): string => {
-  const optionsVariables: string[] = [];
-  const colorVariables: string[] = [];
+const prepareForExport = (themeOptions: ThemeOptions, colorStore: ColorsStore) => {
+  const optionsVariables: Map<string, string> = new Map();
+  const colorVariables: Map<string, string> = new Map();
 
   Object.entries(colorStore.colors).forEach(([name, value]) => {
     if (!isValidColor(name)) return;
@@ -85,9 +82,9 @@ export const exportThemeToVariable = (
     const definitions = colorDefinitions[name];
 
     if (value) {
-      colorVariables.push(`${fzfColorName}:${value}`);
+      colorVariables.set(fzfColorName, value);
     } else if (definitions.nullable && !definitions.inherits) {
-      colorVariables.push(`${fzfColorName}:-1`);
+      colorVariables.set(fzfColorName, '-1');
     }
   });
 
@@ -97,20 +94,41 @@ export const exportThemeToVariable = (
     const conf = envExportConfiguration[key];
     const storeValue = themeOptions[key];
 
-    const formatted = conf.format ? conf.format(storeValue, themeOptions) : String(storeValue);
+    if (!storeValue || !conf) return;
+
+    const formatted = conf.format
+      ? conf.format(String(storeValue), themeOptions)
+      : String(storeValue);
 
     // abort early if shouldnt export
     if (conf.exportIf && !conf.exportIf(formatted, themeOptions)) return;
 
-    optionsVariables.push(`--${conf.exportVariable}=${sanitize(formatted)}`);
+    optionsVariables.set(conf.exportVariable, formatted);
+  });
+
+  return { optionsVariables, colorVariables };
+};
+
+export const exportThemeToEnvVariable = (
+  themeOptions: ThemeOptions,
+  colorStore: ColorsStore,
+): string => {
+  const { colorVariables, optionsVariables } = prepareForExport(themeOptions, colorStore);
+
+  const colorsForEnv = [...colorVariables.keys()].map((color) => {
+    return `${color}:${colorVariables.get(color)}`;
+  });
+
+  const optionsForEnv = [...optionsVariables.keys()].map((option) => {
+    return `${option}=${sanitize(optionsVariables.get(option) ?? '')}`;
   });
 
   // split all colors into lines with max 4 colors each
-  const colorChunks = arrayChunk(colorVariables, 4)
+  const colorChunks = arrayChunk(colorsForEnv, 4)
     .map((chunk) => `--color=${chunk.join(',')}`)
     .join('\n');
 
-  const optionsChunks = arrayChunk(optionsVariables, 4)
+  const optionsChunks = arrayChunk(optionsForEnv, 4)
     .map((chunk) => chunk.join(' '))
     .join('\n');
 

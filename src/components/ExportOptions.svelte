@@ -2,10 +2,10 @@
   import Modal from '~/components/common/Modal.svelte';
   import { colorsStore } from '~/data/colorsStore';
   import { themeStore } from '~/data/themeStore';
-  import { exportThemeToVariable } from '~/utils/exportThemeToVariable';
+  import { exportThemeToEnvVariable } from '~/utils/exportThemeToEnvVariable';
   import { ChevronForwardOutline } from 'svelte-ionicons';
 
-  $: exportString = exportThemeToVariable($themeStore, $colorsStore);
+  $: exportString = exportThemeToEnvVariable($themeStore, $colorsStore);
 
   let showModal = false;
 </script>
