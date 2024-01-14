@@ -53,6 +53,6 @@ input:not([type]), input {
   }
 
   &:active {
-    transform: scale(0.98);
+    transform: translateY(1px);
   }
 }
