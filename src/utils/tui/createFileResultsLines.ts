@@ -15,6 +15,7 @@ const addScrollbarToLines = (count: number, lines: Line[], themeOptions: ThemeOp
 export const createFileResultsLines = (themeOptions: ThemeOptions) => {
   const fileResultLines = [
     new Line({
+      className: 'bg',
       tokens: [
         token(' '.repeat(themeOptions.pointer.length), 'gutter'),
         token(themeOptions.marker, 'gutter marker'),
@@ -23,6 +24,7 @@ export const createFileResultsLines = (themeOptions: ThemeOptions) => {
       ],
     }),
     new Line({
+      className: 'bg',
       tokens: [
         token(' '.repeat(themeOptions.pointer.length), 'gutter'),
         token(' '.repeat(themeOptions.marker.length)),
@@ -31,6 +33,7 @@ export const createFileResultsLines = (themeOptions: ThemeOptions) => {
       ],
     }),
     new Line({
+      className: 'bg',
       tokens: [
         token(' '.repeat(themeOptions.pointer.length), 'gutter'),
         token(themeOptions.marker, 'gutter marker'),
@@ -39,6 +42,7 @@ export const createFileResultsLines = (themeOptions: ThemeOptions) => {
       ],
     }),
     new Line({
+      className: 'bg',
       tokens: [
         token(' '.repeat(themeOptions.pointer.length), 'gutter'),
         token(' '.repeat(themeOptions.marker.length)),
@@ -47,6 +51,7 @@ export const createFileResultsLines = (themeOptions: ThemeOptions) => {
       ],
     }),
     new Line({
+      className: 'bg',
       tokens: [
         token(themeOptions.pointer, 'pointer bg-plus'),
         token(' '.repeat(themeOptions.marker.length), 'bg-plus'),
@@ -55,6 +60,7 @@ export const createFileResultsLines = (themeOptions: ThemeOptions) => {
       ],
     }),
     new Line({
+      className: 'bg',
       tokens: [
         token(' '.repeat(themeOptions.pointer.length), 'gutter'),
         token(' '.repeat(themeOptions.marker.length)),
@@ -63,6 +69,7 @@ export const createFileResultsLines = (themeOptions: ThemeOptions) => {
       ],
     }),
     new Line({
+      className: 'bg',
       tokens: [
         token(' '.repeat(themeOptions.pointer.length), 'gutter'),
         token(' '.repeat(themeOptions.marker.length)),
@@ -73,8 +80,9 @@ export const createFileResultsLines = (themeOptions: ThemeOptions) => {
   ];
 
   const uiLines = [
-    new Line({ tokens: [token('  '), token('This is Header', 'header')] }),
+    new Line({ className: 'bg', tokens: [token('  '), token('This is Header', 'header')] }),
     new Line({
+      className: 'bg',
       tokens: [
         token(' ', 'spinner'),
         token(' '),
@@ -85,6 +93,7 @@ export const createFileResultsLines = (themeOptions: ThemeOptions) => {
       ],
     }),
     new Line({
+      className: 'bg',
       tokens: [token(themeOptions.prompt, 'prompt'), token('.go$', 'query')],
     }),
   ];

@@ -48,11 +48,13 @@
 
 @keyframes zoom {
   from {
-    transform: scale(0.95);
+    transform: translateY(4%);
+    opacity: 0;
   }
 
   to {
-    transform: scale(1);
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 

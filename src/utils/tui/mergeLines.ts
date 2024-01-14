@@ -7,7 +7,7 @@ export const mergeRenderedLines = (leftRenderedLines: Line[], rightRenderedLines
   const numberOfLines = Math.max(leftRenderedLines.length, rightRenderedLines.length);
 
   for (let i = 0; i < numberOfLines; i++) {
-    const mergedLine = leftRenderedLines[i].clone();
+    const mergedLine = leftRenderedLines[i].clone(false);
     mergedLine.tokens.push(...rightRenderedLines[i].tokens);
 
     mergedLines.push(mergedLine);

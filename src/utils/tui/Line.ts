@@ -12,12 +12,22 @@ export class Line {
   public className: string | undefined;
 
   constructor(options: LineOptions) {
-    this.tokens = options.tokens;
+    this.tokens = options.tokens.map((token) => {
+      if (token instanceof Token) {
+        token.addClass(options.className);
+      }
+
+      return token;
+    });
+
     this.className = options.className;
   }
 
-  public clone() {
-    return new Line({ className: this.className, tokens: [...this.tokens] });
+  public clone(withClass = true) {
+    return new Line({
+      className: withClass ? this.className : undefined,
+      tokens: [...this.tokens],
+    });
   }
 
   public fillSpaceCount(): number {
@@ -65,9 +75,8 @@ export class Line {
 
         const fillString = item.fillChar.repeat(currentFillSpaceLength);
 
-        return token(
-          fillString.substring(0, currentFillSpaceLength),
-          [this.className, item.classNames].filter(Boolean).join(' '),
+        return token(fillString.substring(0, currentFillSpaceLength), item.classNames).addClass(
+          this.className,
         );
       }
 

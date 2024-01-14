@@ -149,7 +149,7 @@
     word-wrap: break-word;
     position: relative;
 
-    background-color: var(--fzf-bg);
+    // background-color: var(--fzf-bg);
     color: var(--fzf-fg);
     cursor: default;
 
@@ -157,7 +157,7 @@
       white-space: nowrap;
     }
 
-    :global(span[class]:not(span[class='']):not(span[class='preview-bg'])) {
+    :global(span[class]:not(span[class='']):not(span[class='preview-bg']):not(span[class='bg'])) {
       outline: 2px solid transparent;
 
       &:hover {

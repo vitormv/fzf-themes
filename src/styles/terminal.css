@@ -4,6 +4,10 @@
     white-space: nowrap;
   }
 
+  .bg {
+    background-color: var(--fzf-bg);
+  }
+
   .hl {
     color: var(--fzf-hl);
   }

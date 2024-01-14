@@ -1,4 +1,4 @@
-import { BorderStyleDefinitions } from '~/fzf/fzfBorders';
+import { BorderStyleDefinitions, type BorderStyle } from '~/fzf/fzfBorders';
 import { Line } from '~/utils/tui/Line';
 import { token, fillSpace, Token, FillSpace } from '~/utils/tui/Token';
 

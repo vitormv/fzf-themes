@@ -2,11 +2,19 @@ import { escapeHtml } from '~/utils/htmlEscape';
 
 export class Token {
   public readonly text: string;
-  public readonly classNames: string | undefined;
+  private classNames: string | undefined;
 
   constructor(text: string, classNames?: string) {
     this.text = text;
     this.classNames = classNames;
+  }
+
+  addClass(className: string | undefined) {
+    if (className && !this.classNames?.split(' ').includes(className)) {
+      this.classNames = [this.classNames, className].filter(Boolean).join(' ');
+    }
+
+    return this;
   }
 
   length() {
