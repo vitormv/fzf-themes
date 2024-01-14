@@ -21,8 +21,6 @@
   let currentBg: string | undefined = 'bg';
   let currentFg: string | undefined = 'fg';
 
-  $: theme = $themeStore;
-
   themeStore.subscribe((borderSettings) => {
     if (!terminalWindowEl) return;
     renderTerminalWindow(borderSettings);
@@ -47,13 +45,13 @@
   }
 
   onMount(() => {
-    const onLoadHandler = () => void renderTerminalWindow(theme);
-    const onResizeHandler = () => void renderTerminalWindow(theme);
+    const onLoadHandler = () => void renderTerminalWindow($themeStore);
+    const onResizeHandler = () => void renderTerminalWindow($themeStore);
 
     // if document already finished loading, just fire the
     // event without registering listener
     if (document.readyState === 'complete') {
-      renderTerminalWindow(theme);
+      renderTerminalWindow($themeStore);
     } else {
       window.addEventListener('load', onResizeHandler);
     }
@@ -124,10 +122,6 @@
 <style lang="scss">
   :root {
     --terminal-font: monospace;
-  }
-
-  .wrapper {
-    position: relative;
   }
 
   .hint-label {

@@ -3,15 +3,18 @@
   import { colorsStore } from '~/data/colorsStore';
   import { themeStore } from '~/data/themeStore';
   import { exportThemeToVariable } from '~/utils/exportThemeToVariable';
+  import { ChevronForwardOutline } from 'svelte-ionicons';
 
   $: exportString = exportThemeToVariable($themeStore, $colorsStore);
 
   let showModal = false;
 </script>
 
-<div class="wrapper">
-  <button on:click={() => (showModal = true)}> show modal </button>
+<button class="btn btn-primary" on:click={() => (showModal = true)}
+  >Export <ChevronForwardOutline size="16" /></button
+>
 
+<div class="wrapper">
   <Modal bind:showModal={showModal}>
     <h2 slot="header">Export</h2>
 
@@ -20,6 +23,12 @@
 </div>
 
 <style lang="scss">
+  .btn.btn-primary {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+
   textarea {
     width: 100%;
     height: 100%;

@@ -25,10 +25,22 @@ input:not([type]), input {
 }
 
 .btn {
+  display: inline-flex;
+  align-items: center;
   padding: 4px 10px;
   border-radius: 4px;
   cursor: pointer;
   transition: color 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out;
+
+  &.btn-primary {
+    background-color: #922D50;
+    color: var(--text-color);
+    border: 0;
+
+    &:hover {
+      background-color: #6D223C;
+    }
+  }
 
   &.btn-outline {
     color: var(--text-color);
