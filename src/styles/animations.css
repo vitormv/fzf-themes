@@ -46,7 +46,7 @@
   }
 }
 
-@keyframes zoom {
+@keyframes modal-appear {
   from {
     transform: translateY(4%);
     opacity: 0;

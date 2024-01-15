@@ -40,7 +40,7 @@
     padding: 1em;
   }
   dialog[open] {
-    animation: zoom 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: modal-appear 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   dialog[open]::backdrop {
