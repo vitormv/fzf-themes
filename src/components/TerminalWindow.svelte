@@ -16,10 +16,11 @@
   let terminalWindowEl: HTMLDivElement;
   let wrapperEl: HTMLDivElement;
   let charWidthEl: HTMLSpanElement;
-  let hintEl: HTMLDivElement;
 
   let currentBg: string | undefined = 'bg';
   let currentFg: string | undefined = 'fg';
+
+  let maxTerminalWidth = '';
 
   themeStore.subscribe((borderSettings) => {
     if (!terminalWindowEl) return;
@@ -28,7 +29,6 @@
 
   function renderTerminalWindow(currentTheme: ThemeOptions) {
     terminalWindowEl.innerHTML = '';
-    hintEl.style.width = '';
 
     const charWidth = charWidthEl.getBoundingClientRect().width;
     const terminalWindowWidth = wrapperEl.getBoundingClientRect().width;
@@ -41,7 +41,7 @@
       terminalWindowEl.appendChild(lineEl);
     });
 
-    hintEl.style.width = `${terminalWindowEl.getBoundingClientRect().width}px`;
+    maxTerminalWidth = `${terminalWindowEl.getBoundingClientRect().width}px`;
   }
 
   onMount(() => {
@@ -102,11 +102,19 @@
 </script>
 
 <!-- @todo: toggle show loading, header, preview -->
+
+<div class="window-title" style:max-width={maxTerminalWidth}>
+  <div class="dot red"></div>
+  <div class="dot amber"></div>
+  <div class="dot green"></div>
+</div>
+
 <div bind:this={wrapperEl} class="wrapper" style={allTokenVariables}>
   <ExportOptions />
 
   <div bind:this={terminalWindowEl} class="terminal-window"></div>
-  <div class="hint" bind:this={hintEl}>
+
+  <div class="hint" style:max-width={maxTerminalWidth}>
     <span class="hint-label">background:</span>
     <strong>{toFzfColorName(currentBg || '').toUpperCase() || '---'}</strong>
     {#if currentFg}&nbsp;&nbsp;&nbsp;<span class="hint-label">foreground:</span><strong
@@ -173,5 +181,36 @@
     background-color: var(--gray-900);
     line-height: 1.5;
     padding: 6px 12px;
+  }
+
+  .window-title {
+    background: black;
+    width: 100%;
+    padding: 10px;
+    border-radius: 7px 7px 0px 0px;
+
+    .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #f9f9f9;
+      border-radius: 50%;
+      margin: 0 4px 0 0;
+
+      &.red {
+        background: #ff6057;
+        border: 1px solid #e14640;
+      }
+
+      &.amber {
+        background: #ffbd2e;
+        border: 1px solid #dfa123;
+      }
+
+      &.green {
+        background: #27c93f;
+        border: 1px solid #1dad2b;
+      }
+    }
   }
 </style>
