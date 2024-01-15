@@ -105,7 +105,7 @@
 <div bind:this={wrapperEl} class="wrapper" style={allTokenVariables}>
   <ExportOptions />
 
-  <div bind:this={terminalWindowEl} class="terminal-window bg"></div>
+  <div bind:this={terminalWindowEl} class="terminal-window"></div>
   <div class="hint" bind:this={hintEl}>
     <span class="hint-label">background:</span>
     <strong>{toFzfColorName(currentBg || '').toUpperCase() || '---'}</strong>
