@@ -13,8 +13,7 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
   },
   'fg-plus': {
     initial: '#d0d0d0',
-    nullable: true,
-    inherits: 'fg',
+    nullable: false,
   },
   'bg': {
     initial: '#121212',

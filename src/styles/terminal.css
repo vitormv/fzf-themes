@@ -4,6 +4,10 @@
     white-space: nowrap;
   }
 
+  .fg {
+    color: var(--fzf-fg);
+  }
+
   .bg {
     background-color: var(--fzf-bg);
   }

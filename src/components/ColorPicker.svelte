@@ -2,7 +2,7 @@
   import { colorsStore } from '~/data/colorsStore';
   import ColorPickerWrapper from '~/components/CustomColorPicker/ColorPickerWrapper.svelte';
   import ColorPicker from 'svelte-awesome-color-picker';
-  import { colorInheritances } from '~/fzf/fzfColorDefinitions';
+  import { colorDefinitions, colorInheritances } from '~/fzf/fzfColorDefinitions';
   import { toFzfColorName } from '~/utils/toFzfColorName';
   import TextInput from '~/components/CustomColorPicker/TextInput.svelte';
   import { onMount } from 'svelte';
@@ -34,6 +34,21 @@
 </script>
 
 <div class="wrapper" bind:this={wrapperEl}>
+  {#if colorDefinitions[$colorsStore.selectedColor].nullable && $colorsStore.colors[$colorsStore.selectedColor]}
+    <div class="unset">
+      <button
+        type="button"
+        class="btn btn-outline"
+        on:click={() => {
+          colorsStore.updateColor($colorsStore.selectedColor, '');
+        }}
+        title={`inherit from ${inheritsFrom[0] || 'terminal'}`}
+      >
+        Unset
+      </button>
+    </div>
+  {/if}
+
   <ColorPicker
     isAlpha={false}
     isDialog={false}
@@ -52,10 +67,10 @@
   <div class="description">
     <strong>{toFzfColorName($colorsStore.selectedColor)}</strong>
 
-    {#if inheritsFrom.length > 0}
-      {#each inheritsFrom as parent}
-        ({'inherits from '}{toFzfColorName(parent)})
-      {/each}
+    {#if !$colorsStore.colors[$colorsStore.selectedColor] && !inheritsFrom[0]}
+      (use terminal default)
+    {:else if inheritsFrom.length > 0}
+      ({'inherits from '}{toFzfColorName(inheritsFrom[0])})
     {/if}
   </div>
 </div>
@@ -66,7 +81,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden;
+    position: relative;
   }
 
   .description {
@@ -77,6 +92,13 @@
     padding: 15px;
     bottom: 0;
     left: 0;
+    right: 0;
+    font-size: 14px;
+  }
+
+  .unset {
+    position: absolute;
+    top: -40px;
     right: 0;
   }
 </style>

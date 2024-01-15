@@ -157,9 +157,7 @@
     word-wrap: break-word;
     position: relative;
     background-color: black;
-
-    // background-color: var(--fzf-bg);
-    color: var(--fzf-fg);
+    color: white;
     cursor: default;
 
     :global(*) {
