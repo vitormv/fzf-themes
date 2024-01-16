@@ -32,6 +32,7 @@
     "vite": "^5.0.8"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "svelte-awesome-color-picker": "^3.0.0-beta.11",
     "svelte-select": "^5.8.3",
     "zod": "^3.22.4"
