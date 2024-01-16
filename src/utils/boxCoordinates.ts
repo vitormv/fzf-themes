@@ -21,7 +21,7 @@ export const boxCoordinatesToString = (coords: BoxCoordinates) => {
 export const stringToBoxCoordinates = (coordsStr: string) => {
   const coords = String(coordsStr)
     .split(',')
-    .map((i) => Number.parseInt(i, 10));
+    .map((i) => Math.min(Number.parseInt(i, 10), 50));
 
   if (coords.some((i) => Number.isNaN(i))) return emptyCoords;
 
