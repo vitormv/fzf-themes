@@ -87,7 +87,7 @@ export const createFinderLines = (themeOptions: ThemeOptions) => {
         token(' ', 'spinner'),
         token(' '),
         themeOptions.info === 'default' ? token('35/63 (3) ', 'info') : undefined,
-        fillSpace(themeOptions.separator, 'separator'),
+        fillSpace(themeOptions.separator || ' ', 'separator'),
         themeOptions.info === 'right' ? token(' 35/63 (3)', 'info') : undefined,
         token(' '),
       ],
