@@ -27,8 +27,9 @@
     gap: 10px;
     align-items: center;
 
-    :global(> *) {
+    :global(> *:not(.icon)) {
       flex: 1;
+      width: 0;
     }
 
     .icon {

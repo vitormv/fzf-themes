@@ -8,6 +8,9 @@
   import { html as paddingHelp } from '~/data/help/padding.md';
   import { html as borderLabelPositionHelp } from '~/data/help/borderLabelPosition.md';
   import InputWithHelp from '~/components/common/InputWithHelp.svelte';
+
+  $: hasBorder = $themeStore.borderStyle !== 'none';
+  $: hasBorderLabel = $themeStore.borderLabel;
 </script>
 
 <div class="wrapper">
@@ -25,20 +28,22 @@
       />
     </FormControl>
 
-    <FormControl label="Label">
+    <FormControl label="B. Label" disabled={!hasBorder}>
       <input
         type="text"
         value={$themeStore.borderLabel}
+        disabled={!hasBorder}
         placeholder="none"
         on:input={(e) => void themeStore.set('borderLabel', e.target?.value)}
       />
     </FormControl>
 
-    <FormControl label="Label Pos">
+    <FormControl label="Label Pos" disabled={!hasBorder || !hasBorderLabel}>
       <InputWithHelp tooltipContent={borderLabelPositionHelp}>
         <input
           slot="input"
           type="number"
+          disabled={!hasBorder || !hasBorderLabel}
           value={$themeStore.borderLabelPosition}
           on:input={(e) =>
             void themeStore.set('borderLabelPosition', Number.parseInt(e.target?.value, 10))}
