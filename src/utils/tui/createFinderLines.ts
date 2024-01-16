@@ -12,7 +12,7 @@ const addScrollbarToLines = (count: number, lines: Line[], themeOptions: ThemeOp
   return lines;
 };
 
-export const createFileResultsLines = (themeOptions: ThemeOptions) => {
+export const createFinderLines = (themeOptions: ThemeOptions) => {
   const fileResultLines = [
     new Line({
       className: 'bg',

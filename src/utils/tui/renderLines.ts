@@ -3,7 +3,7 @@ import { stringToBoxCoordinates } from '~/utils/boxCoordinates';
 import type { Line } from '~/utils/tui/Line';
 import { addBorders } from '~/utils/tui/addBorders';
 import { addSpacing } from '~/utils/tui/addSpacing';
-import { createFileResultsLines } from '~/utils/tui/createFileResultsLines';
+import { createFinderLines } from '~/utils/tui/createFinderLines';
 import { createPreviewLines } from '~/utils/tui/createPreviewLines';
 import { mergeRenderedLines } from '~/utils/tui/mergeLines';
 
@@ -23,12 +23,12 @@ const minColsNeededForLines = (lines: Line[]) => {
 };
 
 export const renderLines = (maxScreenCols: number, theme: ThemeOptions) => {
-  let fileResultsLines = createFileResultsLines(theme);
+  let finderLines = createFinderLines(theme);
   let previewLines = createPreviewLines(theme);
 
   // calculate min space needed to render: ui, left column, right column
   const colsNeededForUi = countNeededHorizontalSpace(theme);
-  const minimumLinesLeft = minColsNeededForLines(fileResultsLines);
+  const minimumLinesLeft = minColsNeededForLines(finderLines);
   const minimumLinesRight = minColsNeededForLines(previewLines);
 
   // total size we need to render all text + all ui elements configured
@@ -42,10 +42,10 @@ export const renderLines = (maxScreenCols: number, theme: ThemeOptions) => {
 
   const colsToRender = Math.max(maxScreenCols, minStaticContent);
 
-  fileResultsLines.forEach((line) => void line.computeFillSpace(emptySpaceLeft));
+  finderLines.forEach((line) => void line.computeFillSpace(emptySpaceLeft));
   previewLines.forEach((line) => void line.computeFillSpace(emptySpaceRight));
 
-  let mergedLines = mergeRenderedLines(fileResultsLines, previewLines);
+  let mergedLines = mergeRenderedLines(finderLines, previewLines);
 
   mergedLines = addSpacing(mergedLines, stringToBoxCoordinates(theme.padding), 'bg');
   mergedLines = addBorders(mergedLines, {

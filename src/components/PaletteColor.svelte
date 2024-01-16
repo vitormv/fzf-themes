@@ -29,7 +29,7 @@
     }
   });
 
-  $: color = getColorOrFallback(token, $colorsStore.colors).value || '#ddd';
+  $: color = getColorOrFallback(token, $colorsStore.colors).value || 'transparent';
   $: contrastColor = getContrastColor(color);
   $: borderColor = hexColorToRgb(contrastColor === 'dark' ? '#dddddd' : '#ffffff');
 </script>
@@ -39,6 +39,7 @@
     type="button"
     class="color"
     class:selected={$colorsStore.selectedColor === token}
+    class:unset={!getColorOrFallback(token, $colorsStore.colors).value}
     style:color={contrastColor === 'dark' ? '#000' : '#fff'}
     style:background-color={color}
     style:--border-color-hover={`rgba(${borderColor?.r}, ${borderColor?.g}, ${borderColor?.b}, .8)`}
@@ -113,6 +114,10 @@
       font-size: 1rem;
       flex: 0;
       opacity: 0.7;
+    }
+
+    &.unset {
+      border: 2px dashed var(--bg-color);
     }
   }
 </style>
