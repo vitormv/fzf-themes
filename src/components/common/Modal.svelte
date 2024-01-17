@@ -49,7 +49,7 @@
 
   .wrapper {
     min-width: 700px;
-    min-height: 400px;
+    min-height: 500px;
     background-color: var(--bg-color);
     color: var(--text-color);
     display: flex;
@@ -83,7 +83,7 @@
   }
 
   .content {
-    flex: 1;
+    flex: 1 1 0;
     background-color: var(--box-bg-color);
     padding: 15px;
     margin-bottom: var(--box-gap);

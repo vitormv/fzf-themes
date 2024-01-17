@@ -91,7 +91,7 @@
         height: 100%;
       }
 
-      :global(.box > .content) {
+      :global(> .box > .content) {
         flex: 1 1 0;
         overflow-y: scroll;
       }
@@ -105,7 +105,7 @@
         flex: 0 1 300px;
       }
 
-      :global(.box > .content) {
+      :global( > .box > .content) {
         height: 100%;
       }
     }
@@ -116,11 +116,11 @@
       gap: 10px;
       overflow: auto;
 
-      :global(.box) {
+      :global(> .box) {
         height: 100%;
         flex: 1;
 
-        :global(.content) {
+        :global(> .content) {
           overflow: auto;
         }
       }

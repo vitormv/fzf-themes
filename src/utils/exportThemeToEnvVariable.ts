@@ -158,6 +158,9 @@ export const exportToUrlHash = (themeOptions: ThemeOptions, colorStore: ColorsSt
     colors: colorsString,
   };
 
-  console.log(JSON.stringify(exportedObj));
-  console.log(base64Encode(JSON.stringify(exportedObj)));
+  const host = `${document.location.protocol}//${document.location.host}`;
+  const path = import.meta.env.BASE_URL;
+  const hash = base64Encode(JSON.stringify(exportedObj));
+
+  return `${host}${path}#${hash}`;
 };

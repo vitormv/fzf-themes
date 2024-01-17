@@ -71,7 +71,11 @@
 
     &:hover {
       opacity: 1;
-      background-color: var(--border-color);
+      background-color: var(--border-dark-color);
+    }
+
+    &:active {
+      transform: translateY(1px);
     }
   }
 

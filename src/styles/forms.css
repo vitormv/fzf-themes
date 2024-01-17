@@ -1,18 +1,15 @@
 input:not([type]),
 input {
   color: var(--text-color);
-  background: transparent;
+  background: var(--bg-color);
   border: 2px solid var(--border-color);
   padding: 3px 5px;
   line-height: 24px;
   outline: 0;
   box-sizing: border-box;
 
-  /* -moz-appearance: textfield;
-  appearance: textfield; */
-
   &:focus {
-    border-color: var(--border-darker-color);
+    border-color: var(--border-dark-color);
   }
 
   &:invalid {
@@ -25,19 +22,41 @@ input {
   }
 }
 
+textarea {
+  padding: 15px;
+  color: var(--text-color);
+  background: var(--bg-color);
+  border: 2px solid var(--border-color);
+
+  &:focus {
+    outline: 2px solid var(--border-dark-color);
+  }
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
   padding: 4px 10px;
   border-radius: 4px;
   cursor: pointer;
+  line-height: 1.5;
   transition:
     color 150ms ease-out,
     background-color 150ms ease-out,
     border-color 150ms ease-out;
 
   &.btn-primary {
-    background-color: #922d50;
+    background-color: var(--color-primary);
+    color: var(--text-color);
+    border: 0;
+
+    &:hover {
+      background-color: var(--color-primary-stronger);
+    }
+  }
+
+  &.btn-secondary {
+    background-color: var(--color-secondary);
     color: var(--text-color);
     border: 0;
 
