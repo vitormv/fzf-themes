@@ -65,3 +65,11 @@ a:hover {
 .hidden {
   display: none;
 }
+
+.is-being-dragged {
+  user-select: none !important;
+
+  > .outer-spacing {
+    pointer-events: none;
+  }
+}

@@ -47,14 +47,14 @@ export const renderLines = (maxScreenCols: number, theme: ThemeOptions) => {
 
   let mergedLines = mergeRenderedLines(finderLines, previewLines);
 
-  mergedLines = addSpacing(mergedLines, stringToBoxCoordinates(theme.padding), 'bg');
+  mergedLines = addSpacing(mergedLines, stringToBoxCoordinates(theme.padding), 'bg outer-spacing');
   mergedLines = addBorders(mergedLines, {
     style: theme.borderStyle,
     label: theme.borderLabel ?? '',
     position: theme.borderLabelPosition,
     className: 'bg border',
   });
-  mergedLines = addSpacing(mergedLines, stringToBoxCoordinates(theme.margin));
+  mergedLines = addSpacing(mergedLines, stringToBoxCoordinates(theme.margin), 'outer-spacing');
 
   return mergedLines.map((line) => {
     line.computeFillSpace(colsToRender);

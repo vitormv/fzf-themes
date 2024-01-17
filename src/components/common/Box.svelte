@@ -3,6 +3,8 @@
   export let title: string = '';
   export let style: string = '';
   export let contentStyle: string = '';
+
+  export let contentEl: HTMLDivElement | undefined = undefined;
 </script>
 
 <div class="box" style={style}>
@@ -10,7 +12,7 @@
     <h2 class="title">{title}</h2>
   {/if}
 
-  <div class="content" style={contentStyle}><slot /></div>
+  <div bind:this={contentEl} class="content" style={contentStyle}><slot /></div>
 </div>
 
 <style>

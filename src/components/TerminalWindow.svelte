@@ -22,9 +22,9 @@
 
   let maxTerminalWidth = '';
 
-  themeStore.subscribe((borderSettings) => {
+  themeStore.subscribe((themeSettings) => {
     if (!terminalWindowEl) return;
-    renderTerminalWindow(borderSettings);
+    renderTerminalWindow(themeSettings);
   });
 
   function renderTerminalWindow(currentTheme: ThemeOptions) {
@@ -42,6 +42,15 @@
     });
 
     maxTerminalWidth = `${terminalWindowEl.getBoundingClientRect().width}px`;
+
+    const div = document.querySelector('.panel-terminal > .box > .content');
+
+    if (!div) return;
+
+    const hasHorizontalScrollbar = div.scrollWidth > div.clientWidth;
+    const hasVerticalScrollbar = div.scrollHeight > div.clientHeight;
+
+    div.classList.toggle('is-draggable', hasHorizontalScrollbar || hasVerticalScrollbar);
   }
 
   onMount(() => {
@@ -63,7 +72,9 @@
       terminalWindowEl,
       'mouseover',
       (e) => {
-        const classes = Array.from((e.target as HTMLElement).classList);
+        const classes = Array.from((e.target as HTMLElement).classList).filter(
+          (item) => item !== 'outer-spacing',
+        );
         const bgClasses = classes.filter(
           (cls: string) => cls.startsWith('bg') || cls.includes('-bg') || cls === 'gutter',
         );
@@ -79,7 +90,9 @@
     addDelegateEventListener(
       terminalWindowEl,
       'click',
-      () => {
+      (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         if (currentFg && isValidColor(currentFg)) {
           colorsStore.setSelected(currentFg);
         } else if (currentBg && isValidColor(currentBg)) {
@@ -103,14 +116,14 @@
 
 <!-- @todo: toggle show loading, header, preview -->
 
-<div class="window-title" style:max-width={maxTerminalWidth}>
-  <div class="dot red"></div>
-  <div class="dot amber"></div>
-  <div class="dot green"></div>
-</div>
+<ExportOptions />
 
 <div bind:this={wrapperEl} class="wrapper" style={allTokenVariables}>
-  <ExportOptions />
+  <div class="window-title" style:max-width={maxTerminalWidth}>
+    <div class="dot red"></div>
+    <div class="dot amber"></div>
+    <div class="dot green"></div>
+  </div>
 
   <div bind:this={terminalWindowEl} class="terminal-window"></div>
 
@@ -164,7 +177,11 @@
       white-space: nowrap;
     }
 
-    :global(span[class]:not(span[class='']):not(span[class='preview-bg']):not(span[class='bg'])) {
+    :global(
+        span[class]:not(span[class='']):not(span[class='preview-bg']):not(span[class='bg']):not(
+            span[class*='outer-spacing']
+          )
+      ) {
       outline: 2px solid transparent;
 
       &:hover {
@@ -173,6 +190,10 @@
         outline-offset: 2px;
       }
     }
+  }
+
+  :global(.is-draggable .outer-spacing) {
+    cursor: move;
   }
 
   .hint {

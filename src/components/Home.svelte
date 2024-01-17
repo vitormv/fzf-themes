@@ -5,6 +5,18 @@
   import Palette from '~/components/Palette.svelte';
   import TerminalWindow from '~/components/TerminalWindow.svelte';
   import OptionsPanel from '~/components/OptionsPanel.svelte';
+  import { onMount } from 'svelte';
+  import { dragScroll } from '~/utils/useDragScroll';
+
+  let terminalContentEl: HTMLDivElement;
+
+  // allow Preview Panel to be scrolled by dragging. Useful when very big
+  // margin/paddings are being used and content overflows
+  onMount(() => {
+    if (!terminalContentEl) return;
+
+    dragScroll(terminalContentEl);
+  });
 </script>
 
 <main class="layout">
@@ -31,7 +43,7 @@
   </div>
 
   <div class="panel-terminal">
-    <Box title="Preview">
+    <Box title="Preview" bind:contentEl={terminalContentEl}>
       <TerminalWindow />
     </Box>
   </div>
@@ -99,13 +111,18 @@
     }
 
     .panel-terminal {
-      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 10px;
+      overflow: auto;
 
       :global(.box) {
+        height: 100%;
         flex: 1;
+
+        :global(.content) {
+          overflow: auto;
+        }
       }
     }
   }
