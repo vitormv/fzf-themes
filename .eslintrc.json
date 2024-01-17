@@ -1,6 +1,7 @@
 {
   "root": true,
   "extends": ["eslint:recommended", "plugin:svelte/recommended", "plugin:svelte/prettier"],
+  "plugins": ["@typescript-eslint", "unicorn"],
   "parser": "@typescript-eslint/parser",
   "ignorePatterns": [
     "node_modules/",
@@ -10,15 +11,17 @@
     "prettier.config.js",
     "prettier.config.ts"
   ],
-  "plugins": ["unicorn"],
   "env": {
     "es2022": true,
     "browser": true
   },
   "parserOptions": {
-    // ...
     "project": "tsconfig.json",
     "extraFileExtensions": [".svelte"] // This is a required setting in `@typescript-eslint/parser` v4.24.0.
+  },
+  "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error"
   },
   "overrides": [
     {

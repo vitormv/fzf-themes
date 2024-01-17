@@ -92,7 +92,7 @@ const prepareForExport = (themeOptions: ThemeOptions, colorStore: ColorsStore) =
   Object.keys(themeOptions).forEach((key) => {
     if (!isValidOption(key)) return;
 
-    const conf = envExportConfiguration[key];
+    const conf = envExportConfiguration[key] as ExportItemDefinition<typeof key>;
     const storeValue = themeOptions[key];
 
     if (!storeValue || !conf) return;

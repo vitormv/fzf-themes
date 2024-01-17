@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "lint": "eslint --cache --cache-location node_modules/.eslintcache .",
+    "lint": "tsc --noemit && eslint --cache --cache-location node_modules/.eslintcache .",
     "format": "prettier --write .",
     "deploy": "yarn build && bash ./cli/gh-pages-deploy.sh && git checkout -"
   },

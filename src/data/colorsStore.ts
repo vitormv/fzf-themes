@@ -37,7 +37,7 @@ export const getColorOrFallback = (color: FzfColor, currentColors: Record<FzfCol
   return firstMatched ? { color: firstMatched, value: currentColors[firstMatched] } : thisColor;
 };
 
-export const isValidColor = <T extends string>(color: T): color is FzfColor => {
+export const isValidColor = (color: string): color is FzfColor => {
   return color in colorDefinitions;
 };
 

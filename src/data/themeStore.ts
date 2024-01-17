@@ -46,6 +46,6 @@ export const themeStore = {
   },
 };
 
-export const isValidOption = <T extends string>(keyName: T): keyName is keyof ThemeOptions => {
+export const isValidOption = (keyName: string): keyName is keyof ThemeOptions => {
   return keyName in initialSettings;
 };
