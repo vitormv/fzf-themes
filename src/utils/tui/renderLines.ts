@@ -50,7 +50,7 @@ export const renderLines = (maxScreenCols: number, theme: ThemeOptions) => {
   mergedLines = addSpacing(mergedLines, stringToBoxCoordinates(theme.padding), 'bg outer-spacing');
   mergedLines = addBorders(mergedLines, {
     style: theme.borderStyle,
-    label: theme.borderLabel ?? '',
+    label: theme.borderLabel?.substring(0, colsToRender - 2) ?? '',
     position: theme.borderLabelPosition,
     className: 'bg border',
   });

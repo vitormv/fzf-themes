@@ -63,7 +63,7 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
     inherits: 'border',
   },
   'gutter': {
-    initial: '#262626',
+    initial: '',
     nullable: true,
     inherits: 'bg-plus',
   },

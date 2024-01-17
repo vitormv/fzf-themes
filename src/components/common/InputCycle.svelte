@@ -41,12 +41,12 @@
     readonly
     value={showIndex ? `${currentIndex + 1}. ${value}` : value}
   />
-  <span class="prev">
-    <ChevronBackOutline size="18" on:click={() => cycle(-1)} />
-  </span>
-  <span class="next">
-    <ChevronForwardOutline size="18" on:click={() => cycle(1)} />
-  </span>
+  <button type="button" class="prev" on:click={() => cycle(-1)}>
+    <ChevronBackOutline size="18" />
+  </button>
+  <button type="button" class="next" on:click={() => cycle(1)}>
+    <ChevronForwardOutline size="18" />
+  </button>
 </span>
 
 <style lang="scss">
@@ -66,6 +66,8 @@
     color: var(--text-color);
     cursor: pointer;
     opacity: 0.8;
+    background-color: transparent;
+    border: 0;
 
     &:hover {
       opacity: 1;
