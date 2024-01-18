@@ -2,8 +2,8 @@ import { isValidColor, type ColorValues } from '~/data/colors.store';
 import { isValidOption, type ThemeOptions } from '~/data/options.store';
 import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
 import { arrayChunk } from '~/utils/arrayChunk';
-import { base64Encode } from '~/utils/base64';
-import { toFzfColorName } from '~/utils/toFzfColorName';
+import { toFzfColorName } from '~/utils/colors/toFzfColorName';
+import { base64Encode } from '~/utils/strings/base64';
 
 type ExportItemDefinition<T extends keyof ThemeOptions> = {
   exportVariable: string;

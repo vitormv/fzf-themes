@@ -1,6 +1,6 @@
 import { validateAndParseThemeOptions } from '~/data/import/validateAndParseThemeOptions';
-import { base64Decode } from '~/utils/base64';
-import { toStoreColorName } from '~/utils/toFzfColorName';
+import { toStoreColorName } from '~/utils/colors/toFzfColorName';
+import { base64Decode } from '~/utils/strings/base64';
 
 export const importFromUrlHash = (hash: string) => {
   const jsonString = base64Decode(hash);

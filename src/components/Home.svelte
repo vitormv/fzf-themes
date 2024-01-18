@@ -6,7 +6,7 @@
   import TerminalWindow from '~/components/TerminalWindow.svelte';
   import OptionsPanel from '~/components/OptionsPanel.svelte';
   import { onMount } from 'svelte';
-  import { dragScroll } from '~/utils/useDragScroll';
+  import { dragScroll } from '~/utils/svelte/useDragScroll';
 
   let terminalContentEl: HTMLDivElement;
 

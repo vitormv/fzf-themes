@@ -1,4 +1,4 @@
-import { escapeHtml } from '~/utils/htmlEscape';
+import { escapeHtml } from '~/utils/strings/htmlEscape';
 
 export class Token {
   public readonly text: string;

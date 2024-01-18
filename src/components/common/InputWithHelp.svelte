@@ -1,5 +1,5 @@
 <script lang="ts">
-  import createPopperAction from '~/utils/usePopper';
+  import createPopperAction from '~/utils/svelte/usePopper';
 
   export let tooltipContent: string;
 
