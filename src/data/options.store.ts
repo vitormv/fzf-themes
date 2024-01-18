@@ -3,13 +3,6 @@ import { z } from 'zod';
 import { themeOptionsSchema } from '~/data/options.schema';
 import type { BorderStyle } from '~/fzf/fzfBorders';
 
-export type BoxCoordinates = {
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
-};
-
 export type ThemeOptions = z.infer<typeof themeOptionsSchema>;
 
 export const initialOptions: ThemeOptions = {
