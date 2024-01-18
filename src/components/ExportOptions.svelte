@@ -28,7 +28,7 @@
   Export <ChevronForwardOutline size="16" />
 </button>
 
-<div class="wrapper">
+<div class="wrapper" on:mousemove|stopPropagation>
   <Modal bind:showModal={isModalOpen}>
     <h2 slot="header">Export & Share</h2>
 

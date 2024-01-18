@@ -14,7 +14,7 @@
   on:click|self={() => dialog.close()}
 >
   <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div class="wrapper" on:click|stopPropagation>
+  <div class="wrapper" on:click|stopPropagation on:mousedown|stopPropagation>
     <div class="header-row">
       <slot name="header" />
       <button on:click={() => dialog.close()}>
