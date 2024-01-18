@@ -2,8 +2,8 @@ import { isValidColor, type ColorValues } from '~/data/color.store';
 import { isValidOption, type ThemeOptions } from '~/data/theme.store';
 import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
 import { arrayChunk } from '~/utils/arrayChunk';
-import { base64Decode, base64Encode } from '~/utils/base64';
-import { toFzfColorName, toStoreColorName } from '~/utils/toFzfColorName';
+import { base64Encode } from '~/utils/base64';
+import { toFzfColorName } from '~/utils/toFzfColorName';
 
 type ExportItemDefinition<T extends keyof ThemeOptions> = {
   exportVariable: string;
@@ -168,24 +168,4 @@ export const exportToUrlHash = (themeOptions: ThemeOptions, colors: ColorValues)
   const hash = base64Encode(JSON.stringify(exportedObj));
 
   return `${host}${path}#${hash}`;
-};
-
-export const importFromUrlHash = (hash: string) => {
-  const jsonString = base64Decode(hash);
-
-  const themeOptions = JSON.parse(jsonString);
-
-  const colorsStr = themeOptions.colors as string;
-
-  const colors = Object.fromEntries(
-    colorsStr.split(',').map((colorPair) => {
-      const [name, value] = colorPair.split(':');
-
-      return [toStoreColorName(name), value];
-    }),
-  );
-
-  delete themeOptions.colors;
-
-  return { themeOptions, colors };
 };

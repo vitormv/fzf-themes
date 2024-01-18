@@ -1,12 +1,5 @@
 import { z } from 'zod';
 
-const boxCoordinatesShape = z.object({
-  top: z.number().finite().positive(),
-  bottom: z.number().finite().positive(),
-  left: z.number().finite().positive(),
-  right: z.number().finite().positive(),
-});
-
 export const themeOptionsSchema = z.object({
   borderStyle: z
     .enum(['rounded', 'sharp', 'bold', 'double', 'block', 'thinblock', 'none'])

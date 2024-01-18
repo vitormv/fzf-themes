@@ -1,9 +1,10 @@
 import { expect, it, describe } from 'vitest';
-import { exportToUrlHash, importFromUrlHash } from './exportThemeToEnvVariable';
 
 import { filterEmptyObjValues } from '~/utils/filterEmptyObjValues';
 import type { ThemeOptions } from '~/data/theme.store';
 import type { ColorValues } from '~/data/color.store';
+import { exportToUrlHash } from '~/utils/exportThemeToEnvVariable';
+import { importFromUrlHash } from '~/data/import/importFromUrlHash';
 
 const sampleThemeOptions: ThemeOptions = {
   borderStyle: 'rounded',

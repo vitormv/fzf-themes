@@ -12,7 +12,7 @@ export type BoxCoordinates = {
 
 export type ThemeOptions = z.infer<typeof themeOptionsSchema>;
 
-const initialSettings: ThemeOptions = {
+export const initialOptions: ThemeOptions = {
   borderStyle: 'rounded',
   borderLabel: '',
   borderLabelPosition: 0,
@@ -28,7 +28,7 @@ const initialSettings: ThemeOptions = {
   info: 'default',
 } as const;
 
-const _optionsStore = writable<ThemeOptions>(initialSettings);
+const _optionsStore = writable<ThemeOptions>(initialOptions);
 
 export const themeStore = {
   subscribe: _optionsStore.subscribe,
@@ -47,5 +47,5 @@ export const themeStore = {
 };
 
 export const isValidOption = (keyName: string): keyName is keyof ThemeOptions => {
-  return keyName in initialSettings;
+  return keyName in initialOptions;
 };
