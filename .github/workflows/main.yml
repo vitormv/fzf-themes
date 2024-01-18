@@ -21,6 +21,7 @@ jobs:
 
       - run: yarn install
       - run: yarn lint
+      - run: yarn test
 
       - name: Setup git credentials
         env: # use github secrets as env variable

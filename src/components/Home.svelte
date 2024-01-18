@@ -105,7 +105,7 @@
         flex: 0 1 300px;
       }
 
-      :global( > .box > .content) {
+      :global(> .box > .content) {
         height: 100%;
       }
     }

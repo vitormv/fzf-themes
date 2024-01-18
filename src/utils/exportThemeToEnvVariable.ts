@@ -1,9 +1,9 @@
-import { isValidColor, type ColorsStore } from '~/data/colorsStore';
+import { isValidColor, type ColorOptions } from '~/data/colorsStore';
 import { isValidOption, type ThemeOptions } from '~/data/themeStore';
 import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
 import { arrayChunk } from '~/utils/arrayChunk';
-import { base64Encode } from '~/utils/base64';
-import { toFzfColorName } from '~/utils/toFzfColorName';
+import { base64Decode, base64Encode } from '~/utils/base64';
+import { toFzfColorName, toStoreColorName } from '~/utils/toFzfColorName';
 
 type ExportItemDefinition<T extends keyof ThemeOptions> = {
   exportVariable: string;
@@ -19,12 +19,10 @@ const envExportConfiguration: ExportDefinitions = {
   margin: {
     exportVariable: 'margin',
     exportIf: (val) => val !== '0',
-    format: (val) => val,
   },
   padding: {
     exportVariable: 'padding',
     exportIf: (val) => val !== '0',
-    format: (val) => val,
   },
   borderStyle: {
     exportVariable: 'border',
@@ -72,11 +70,11 @@ const sanitize = (str: string) => {
   return str.includes(' ') ? `"${str}"` : str;
 };
 
-const prepareForExport = (themeOptions: ThemeOptions, colorStore: ColorsStore) => {
+const prepareForEnvExport = (themeOptions: ThemeOptions, colors: ColorOptions) => {
   const optionsVariables: Map<string, string> = new Map();
   const colorVariables: Map<string, string> = new Map();
 
-  Object.entries(colorStore.colors).forEach(([name, value]) => {
+  Object.entries(colors).forEach(([name, value]) => {
     if (!isValidColor(name)) return;
 
     const fzfColorName = toFzfColorName(name);
@@ -110,11 +108,8 @@ const prepareForExport = (themeOptions: ThemeOptions, colorStore: ColorsStore) =
   return { optionsVariables, colorVariables };
 };
 
-export const exportThemeToEnvVariable = (
-  themeOptions: ThemeOptions,
-  colorStore: ColorsStore,
-): string => {
-  const { colorVariables, optionsVariables } = prepareForExport(themeOptions, colorStore);
+export const exportThemeToEnvVariable = (themeOptions: ThemeOptions, colors: ColorOptions) => {
+  const { colorVariables, optionsVariables } = prepareForEnvExport(themeOptions, colors);
 
   const colorsForEnv = [...colorVariables.keys()].map((color) => {
     return `${color}:${colorVariables.get(color)}`;
@@ -138,8 +133,18 @@ export const exportThemeToEnvVariable = (
   }'`;
 };
 
-export const exportToUrlHash = (themeOptions: ThemeOptions, colorStore: ColorsStore) => {
-  const { colorVariables, optionsVariables } = prepareForExport(themeOptions, colorStore);
+export const exportToUrlHash = (themeOptions: ThemeOptions, colors: ColorOptions) => {
+  const colorVariables: Map<string, string> = new Map();
+
+  Object.entries(colors).forEach(([name, value]) => {
+    if (!isValidColor(name)) return;
+
+    const fzfColorName = toFzfColorName(name);
+
+    if (value) {
+      colorVariables.set(fzfColorName, value);
+    }
+  });
 
   const colorsString = [...colorVariables.keys()]
     .map((color) => {
@@ -148,8 +153,8 @@ export const exportToUrlHash = (themeOptions: ThemeOptions, colorStore: ColorsSt
     .join(',');
 
   const optionsForEnv = Object.fromEntries(
-    [...optionsVariables.keys()].map((option) => {
-      return [option, optionsVariables.get(option)];
+    Object.keys(themeOptions).map((option) => {
+      return [option, themeOptions[option as keyof ThemeOptions]];
     }),
   );
 
@@ -163,4 +168,24 @@ export const exportToUrlHash = (themeOptions: ThemeOptions, colorStore: ColorsSt
   const hash = base64Encode(JSON.stringify(exportedObj));
 
   return `${host}${path}#${hash}`;
+};
+
+export const importFromUrlHash = (hash: string) => {
+  const jsonString = base64Decode(hash);
+
+  const themeOptions = JSON.parse(jsonString);
+
+  const colorsStr = themeOptions.colors as string;
+
+  const colors = Object.fromEntries(
+    colorsStr.split(',').map((colorPair) => {
+      const [name, value] = colorPair.split(':');
+
+      return [toStoreColorName(name), value];
+    }),
+  );
+
+  delete themeOptions.colors;
+
+  return { themeOptions, colors };
 };

@@ -5,11 +5,16 @@
   import { exportThemeToEnvVariable, exportToUrlHash } from '~/utils/exportThemeToEnvVariable';
   import { ChevronForwardOutline, ClipboardOutline } from 'svelte-ionicons';
 
-  $: exportEnvString = exportThemeToEnvVariable($themeStore, $colorsStore);
-  $: exportPermalink = exportToUrlHash($themeStore, $colorsStore);
+  let exportEnvString = '';
+  let exportPermalink = '';
 
   let urlEl: HTMLInputElement;
   let isModalOpen = false;
+
+  $: if (isModalOpen) {
+    exportEnvString = exportThemeToEnvVariable($themeStore, $colorsStore.colors);
+    exportPermalink = exportToUrlHash($themeStore, $colorsStore.colors);
+  }
 
   function onCopyUrl() {
     if (!urlEl) return;

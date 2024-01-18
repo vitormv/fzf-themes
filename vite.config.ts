@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import mdPlugin, { Mode } from 'vite-plugin-markdown';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 
@@ -18,5 +18,8 @@ export default defineConfig({
         additionalData: `@import "src/styles/global-variables.scss";`,
       },
     },
+  },
+  test: {
+    globals: true,
   },
 });

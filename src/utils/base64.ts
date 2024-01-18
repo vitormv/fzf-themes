@@ -8,12 +8,13 @@ export function base64Encode(input: string): string {
   return btoa(base64);
 }
 
-// Function to decode a Base64 string
 export function base64Decode(input: string): string {
   const base64 = atob(input);
+
   let utf8 = '';
   for (let i = 0; i < base64.length; i++) {
     utf8 += '%' + ('00' + base64.charCodeAt(i).toString(16)).slice(-2);
   }
-  return decodeURIComponent(escape(utf8));
+
+  return decodeURIComponent(utf8);
 }
