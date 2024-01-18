@@ -1,4 +1,4 @@
-import { isValidColor, type ColorOptions } from '~/data/colorsStore';
+import { isValidColor, type ColorValues } from '~/data/colorsStore';
 import { isValidOption, type ThemeOptions } from '~/data/themeStore';
 import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
 import { arrayChunk } from '~/utils/arrayChunk';
@@ -70,7 +70,7 @@ const sanitize = (str: string) => {
   return str.includes(' ') ? `"${str}"` : str;
 };
 
-const prepareForEnvExport = (themeOptions: ThemeOptions, colors: ColorOptions) => {
+const prepareForEnvExport = (themeOptions: ThemeOptions, colors: ColorValues) => {
   const optionsVariables: Map<string, string> = new Map();
   const colorVariables: Map<string, string> = new Map();
 
@@ -99,7 +99,7 @@ const prepareForEnvExport = (themeOptions: ThemeOptions, colors: ColorOptions) =
       ? conf.format(String(storeValue), themeOptions)
       : String(storeValue);
 
-    // abort early if shouldnt export
+    // abort early if shouldn't export
     if (conf.exportIf && !conf.exportIf(formatted, themeOptions)) return;
 
     optionsVariables.set(conf.exportVariable, formatted);
@@ -108,7 +108,7 @@ const prepareForEnvExport = (themeOptions: ThemeOptions, colors: ColorOptions) =
   return { optionsVariables, colorVariables };
 };
 
-export const exportThemeToEnvVariable = (themeOptions: ThemeOptions, colors: ColorOptions) => {
+export const exportThemeToEnvVariable = (themeOptions: ThemeOptions, colors: ColorValues) => {
   const { colorVariables, optionsVariables } = prepareForEnvExport(themeOptions, colors);
 
   const colorsForEnv = [...colorVariables.keys()].map((color) => {
@@ -133,7 +133,7 @@ export const exportThemeToEnvVariable = (themeOptions: ThemeOptions, colors: Col
   }'`;
 };
 
-export const exportToUrlHash = (themeOptions: ThemeOptions, colors: ColorOptions) => {
+export const exportToUrlHash = (themeOptions: ThemeOptions, colors: ColorValues) => {
   const colorVariables: Map<string, string> = new Map();
 
   Object.entries(colors).forEach(([name, value]) => {

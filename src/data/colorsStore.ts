@@ -2,29 +2,29 @@ import type { FzfColor } from '~/types/fzf';
 import { writable } from 'svelte/store';
 import { colorDefinitions, colorInheritances } from '~/fzf/fzfColorDefinitions';
 
-export type ColorOptions = Record<FzfColor, string>;
+export type ColorValues = Record<FzfColor, string>;
 
-export type ColorsStore = {
+export type ColorOptions = {
   selectedColor: FzfColor;
   colorPickerColor: string;
-  colors: ColorOptions;
+  colors: ColorValues;
 };
 
-const initialSettings: ColorsStore = {
+const initialSettings: ColorOptions = {
   selectedColor: 'fg',
   colorPickerColor: colorDefinitions.fg.initial,
   colors: Object.fromEntries(
     Object.entries(colorDefinitions).map(([token, options]) => [token, options.initial ?? '']),
-  ) as ColorsStore['colors'],
+  ) as ColorOptions['colors'],
 };
 
-const _colorsStore = writable<ColorsStore>(initialSettings);
+const _colorsStore = writable<ColorOptions>(initialSettings);
 
 /**
  * Given a color token, get its value from the store, or recursively try
  * to find the first parent with a color.
  */
-export const getColorOrFallback = (color: FzfColor, currentColors: ColorOptions) => {
+export const getColorOrFallback = (color: FzfColor, currentColors: ColorValues) => {
   const thisColor = { color, value: currentColors[color] };
 
   if (currentColors[color]) {

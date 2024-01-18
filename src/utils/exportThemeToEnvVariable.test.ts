@@ -1,7 +1,8 @@
 import { expect, it, describe } from 'vitest';
 import { exportToUrlHash, importFromUrlHash } from './exportThemeToEnvVariable';
 import type { ThemeOptions } from '~/data/themeStore';
-import type { ColorOptions } from '~/data/colorsStore';
+import type { ColorValues } from '~/data/colorsStore';
+import { filterEmptyObjValues } from '~/utils/filterEmptyObjValues';
 
 const sampleThemeOptions: ThemeOptions = {
   borderStyle: 'rounded',
@@ -19,7 +20,7 @@ const sampleThemeOptions: ThemeOptions = {
   info: 'default',
 };
 
-const sampleColorOptions: ColorOptions = {
+const sampleColorOptions: ColorValues = {
   'fg': '#d0d0d0',
   'fg-plus': '#d0d0d0',
   'bg': '#121212',
@@ -46,14 +47,6 @@ const sampleColorOptions: ColorOptions = {
   'info': '#afaf87',
 };
 
-const withoutEmptyValues = (obj: Record<string, string>) => {
-  return Object.fromEntries(
-    Object.keys(obj)
-      .filter((key) => obj[key])
-      .map((k) => [k, obj[k]]),
-  );
-};
-
 describe('exportToUrlHash()', () => {
   it('should be able to encode and decode url hash to same object', () => {
     const urlOutput = exportToUrlHash(sampleThemeOptions, sampleColorOptions);
@@ -64,7 +57,7 @@ describe('exportToUrlHash()', () => {
 
     expect(imported).toEqual({
       themeOptions: sampleThemeOptions,
-      colors: withoutEmptyValues(sampleColorOptions),
+      colors: filterEmptyObjValues(sampleColorOptions),
     });
   });
 });
