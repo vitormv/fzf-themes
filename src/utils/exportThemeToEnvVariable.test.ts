@@ -1,8 +1,9 @@
 import { expect, it, describe } from 'vitest';
 import { exportToUrlHash, importFromUrlHash } from './exportThemeToEnvVariable';
-import type { ThemeOptions } from '~/data/themeStore';
-import type { ColorValues } from '~/data/colorsStore';
+
 import { filterEmptyObjValues } from '~/utils/filterEmptyObjValues';
+import type { ThemeOptions } from '~/data/theme.store';
+import type { ColorValues } from '~/data/color.store';
 
 const sampleThemeOptions: ThemeOptions = {
   borderStyle: 'rounded',
@@ -15,7 +16,7 @@ const sampleThemeOptions: ThemeOptions = {
   marker: '>',
   pointer: '◆',
   separator: '─',
-  scrollbar: '│',
+  scrollbar: '',
   layout: 'default',
   info: 'default',
 };

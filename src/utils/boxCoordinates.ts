@@ -1,4 +1,4 @@
-import type { BoxCoordinates } from '~/data/themeStore';
+import type { BoxCoordinates } from '~/data/theme.store';
 
 const emptyCoords = { top: 0, right: 0, bottom: 0, left: 0 };
 

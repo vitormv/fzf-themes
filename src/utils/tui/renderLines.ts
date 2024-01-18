@@ -1,4 +1,4 @@
-import type { ThemeOptions } from '~/data/themeStore';
+import type { ThemeOptions } from '~/data/theme.store';
 import { stringToBoxCoordinates } from '~/utils/boxCoordinates';
 import type { Line } from '~/utils/tui/Line';
 import { addBorders } from '~/utils/tui/addBorders';

@@ -2,7 +2,7 @@
   import { hexColorToRgb } from '~/utils/hexColorToRgb';
   import type { FzfColor } from '~/types/fzf';
   import { getContrastColor } from '~/utils/getContrastColor';
-  import { getColorOrFallback, colorsStore } from '~/data/colorsStore';
+  import { getColorOrFallback, colorsStore } from '~/data/color.store';
   import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
   import { toFzfColorName } from '~/utils/toFzfColorName';
   import { beforeUpdate } from 'svelte';

@@ -1,7 +1,7 @@
 <script lang="ts">
   import Modal from '~/components/common/Modal.svelte';
-  import { colorsStore } from '~/data/colorsStore';
-  import { themeStore } from '~/data/themeStore';
+  import { colorsStore } from '~/data/color.store';
+  import { themeStore } from '~/data/theme.store';
   import { exportThemeToEnvVariable, exportToUrlHash } from '~/utils/exportThemeToEnvVariable';
   import { ChevronForwardOutline, ClipboardOutline } from 'svelte-ionicons';
 
@@ -38,7 +38,9 @@
         <h3>Permalink</h3>
         <div style="flex: 1;">
           <input
+            type="text"
             bind:this={urlEl}
+            readonly
             style="display: inline-block; width: 100%;"
             value={exportPermalink}
           />

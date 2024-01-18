@@ -1,5 +1,5 @@
-import { isValidColor, type ColorValues } from '~/data/colorsStore';
-import { isValidOption, type ThemeOptions } from '~/data/themeStore';
+import { isValidColor, type ColorValues } from '~/data/color.store';
+import { isValidOption, type ThemeOptions } from '~/data/theme.store';
 import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
 import { arrayChunk } from '~/utils/arrayChunk';
 import { base64Decode, base64Encode } from '~/utils/base64';
@@ -93,7 +93,7 @@ const prepareForEnvExport = (themeOptions: ThemeOptions, colors: ColorValues) =>
     const conf = envExportConfiguration[key] as ExportItemDefinition<typeof key>;
     const storeValue = themeOptions[key];
 
-    if (!storeValue || !conf) return;
+    if (!conf) return;
 
     const formatted = conf.format
       ? conf.format(String(storeValue), themeOptions)
@@ -116,7 +116,7 @@ export const exportThemeToEnvVariable = (themeOptions: ThemeOptions, colors: Col
   });
 
   const optionsForEnv = [...optionsVariables.keys()].map((option) => {
-    return `${option}=${sanitize(optionsVariables.get(option) ?? '')}`;
+    return `${option}=${sanitize(optionsVariables.get(option) ?? '""')}`;
   });
 
   // split all colors into lines with max 4 colors each

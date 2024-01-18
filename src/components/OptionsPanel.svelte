@@ -1,6 +1,6 @@
 <script lang="ts">
   import FormControl from '~/components/common/FormControl.svelte';
-  import { themeStore } from '~/data/themeStore';
+  import { themeStore } from '~/data/theme.store';
   import InputCycle from '~/components/common/InputCycle.svelte';
   import { borderTypes, borderTypesNonNullable, infoTypes, layoutTypes } from '~/fzf/fzfBorders';
   import { InformationCircleOutline } from 'svelte-ionicons';

@@ -32,9 +32,11 @@
   dialog {
     border: none;
     padding: 0;
+    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.5);
   }
   dialog::backdrop {
     background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
   }
   dialog > div {
     padding: 1em;
