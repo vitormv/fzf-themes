@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { colorsStore } from '~/data/color.store';
+  import { colorsStore } from '~/data/colors.store';
   import ColorPickerWrapper from '~/components/CustomColorPicker/ColorPickerWrapper.svelte';
   import ColorPicker from 'svelte-awesome-color-picker';
   import { colorDefinitions, colorInheritances } from '~/fzf/fzfColorDefinitions';

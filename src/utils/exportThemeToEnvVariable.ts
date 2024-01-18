@@ -1,5 +1,5 @@
-import { isValidColor, type ColorValues } from '~/data/color.store';
-import { isValidOption, type ThemeOptions } from '~/data/theme.store';
+import { isValidColor, type ColorValues } from '~/data/colors.store';
+import { isValidOption, type ThemeOptions } from '~/data/options.store';
 import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
 import { arrayChunk } from '~/utils/arrayChunk';
 import { base64Encode } from '~/utils/base64';

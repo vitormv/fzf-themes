@@ -1,8 +1,8 @@
 <script lang="ts">
   import { orderedColorTokens } from '~/fzf/fzfColorDefinitions';
-  import { getColorOrFallback, colorsStore, isValidColor } from '~/data/color.store';
+  import { getColorOrFallback, colorsStore, isValidColor } from '~/data/colors.store';
   import { onMount } from 'svelte';
-  import { themeStore, type ThemeOptions } from '~/data/theme.store';
+  import { themeStore, type ThemeOptions } from '~/data/options.store';
   import { renderLines } from '~/utils/tui/renderLines';
   import { addDelegateEventListener } from '~/utils/addDelegateEventListener';
   import { toFzfColorName } from '~/utils/toFzfColorName';

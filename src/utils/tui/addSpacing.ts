@@ -1,4 +1,4 @@
-import type { BoxCoordinates } from '~/data/theme.store';
+import type { BoxCoordinates } from '~/data/options.store';
 import { Line } from '~/utils/tui/Line';
 import { token, fillSpace } from '~/utils/tui/Token';
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   import PaletteColor from '~/components/PaletteColor.svelte';
   import { orderedColorTokens } from '~/fzf/fzfColorDefinitions';
-  import { colorsStore } from '~/data/color.store';
+  import { colorsStore } from '~/data/colors.store';
 </script>
 
 <div class="wrapper">

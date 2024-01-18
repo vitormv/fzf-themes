@@ -1,5 +1,5 @@
 import { themeOptionsSchema } from '~/data/options.schema';
-import { initialOptions, isValidOption, type ThemeOptions } from '~/data/theme.store';
+import { initialOptions, isValidOption, type ThemeOptions } from '~/data/options.store';
 
 export const validateAndParseThemeOptions = (rawObj: Record<string, any>) => {
   if (!rawObj) return initialOptions;

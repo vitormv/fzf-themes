@@ -1,7 +1,7 @@
 import { expect, it, describe } from 'vitest';
 import { validateAndParseThemeOptions } from '~/data/import/validateAndParseThemeOptions';
 
-import { initialOptions, type ThemeOptions } from '~/data/theme.store';
+import { initialOptions, type ThemeOptions } from '~/data/options.store';
 
 const sampleThemeOptions: ThemeOptions = {
   borderStyle: 'block',

@@ -10,7 +10,7 @@ export type ColorOptions = {
   colors: ColorValues;
 };
 
-const initialSettings: ColorOptions = {
+const initialColors: ColorOptions = {
   selectedColor: 'fg',
   colorPickerColor: colorDefinitions.fg.initial,
   colors: Object.fromEntries(
@@ -18,7 +18,7 @@ const initialSettings: ColorOptions = {
   ) as ColorOptions['colors'],
 };
 
-const _colorsStore = writable<ColorOptions>(initialSettings);
+const _colorsStore = writable<ColorOptions>(initialColors);
 
 /**
  * Given a color token, get its value from the store, or recursively try
@@ -54,7 +54,7 @@ export const colorsStore = {
   },
   resetAllColors: () => {
     _colorsStore.update((settings) => ({
-      ...initialSettings,
+      ...initialColors,
       selectedColor: settings.selectedColor,
       colorPickerColor: colorDefinitions[settings.selectedColor].initial,
     }));

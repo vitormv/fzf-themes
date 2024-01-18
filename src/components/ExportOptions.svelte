@@ -1,7 +1,7 @@
 <script lang="ts">
   import Modal from '~/components/common/Modal.svelte';
-  import { colorsStore } from '~/data/color.store';
-  import { themeStore } from '~/data/theme.store';
+  import { colorsStore } from '~/data/colors.store';
+  import { themeStore } from '~/data/options.store';
   import { exportThemeToEnvVariable, exportToUrlHash } from '~/utils/exportThemeToEnvVariable';
   import { ChevronForwardOutline, ClipboardOutline } from 'svelte-ionicons';
 
