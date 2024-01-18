@@ -1,18 +1,22 @@
 const ENC = {
   '+': '-',
   '/': '_',
-} as const;
+};
 
 const DEC = {
   '-': '+',
   '_': '/',
   '.': '=',
-} as const;
+};
 
 export const encodeHash = (base64: string) => {
-  return base64.replace(/[+/]/g, (m: string) => ENC[m]);
+  return base64.replace(/[+/]/g, (match: string) =>
+    match in ENC ? ENC[match as keyof typeof ENC] : match,
+  );
 };
 
 export const decode = (safe: string) => {
-  return safe.replace(/[-_.]/g, (m: string) => DEC[m]);
+  return safe.replace(/[-_.]/g, (match: string) =>
+    match in DEC ? DEC[match as keyof typeof DEC] : match,
+  );
 };
