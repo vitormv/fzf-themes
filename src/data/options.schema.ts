@@ -21,7 +21,7 @@ export const themeOptionsSchema = z.object({
   pointer: z.string().max(2).default('> '),
   marker: z.string().max(2).default('>'),
   separator: z.string().default('─'),
-  scrollbar: z.string().max(2).default('│'),
+  scrollbar: z.string().max(1).default('│'),
   layout: z.enum(['default', 'reverse', 'reverse-list']).default('default'),
   info: z.enum(['default', 'right']).default('default').default('default'),
 });
