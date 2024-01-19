@@ -1,9 +1,8 @@
-import { colorsSchema } from '~/data/colors.schema';
+import { colorsSchema, type ColorName } from '~/data/colors.schema';
 import { initialColors, type ColorValues } from '~/data/colors.store';
 import { validateAndParseColors } from '~/data/import/validateAndParseColors';
 import { validateAndParseThemeOptions } from '~/data/import/validateAndParseThemeOptions';
 import { initialOptions, type ThemeOptions } from '~/data/options.store';
-import type { FzfColor } from '~/types/fzf';
 import { toStoreColorName } from '~/utils/colors/toFzfColorName';
 import { base64Decode } from '~/utils/strings/base64';
 
@@ -31,7 +30,7 @@ export const importFromUrlHash = (hash: string): ImportFromUrlHashOutput => {
       colorsStr.split(',').map((colorPair) => {
         const [name, value] = colorPair.split(':');
 
-        return [toStoreColorName(name) as FzfColor, value as string];
+        return [toStoreColorName(name) as ColorName, value as string];
       }),
     );
 

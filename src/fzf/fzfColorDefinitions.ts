@@ -1,12 +1,12 @@
-import type { FzfColor } from '~/types/fzf';
+import type { ColorName } from '~/data/colors.schema';
 
 type ColorDefinition = {
   initial: string;
-  inherits?: FzfColor;
+  inherits?: ColorName;
   nullable: boolean;
 };
 
-export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
+export const colorDefinitions: Record<ColorName, ColorDefinition> = {
   'fg': {
     initial: '#d0d0d0',
     nullable: true,
@@ -120,7 +120,7 @@ export const colorDefinitions: Record<FzfColor, ColorDefinition> = {
  */
 export const colorInheritances = Object.fromEntries(
   Object.entries(colorDefinitions).map(([k, v]) => {
-    let inherits: FzfColor[] = [];
+    let inherits: ColorName[] = [];
 
     let tokenLookup = v.inherits;
 
@@ -132,10 +132,10 @@ export const colorInheritances = Object.fromEntries(
 
     return [k, inherits];
   }),
-) as Record<FzfColor, FzfColor[]>;
+) as Record<ColorName, ColorName[]>;
 
 /**
  * The order of colors is constantly changing in the settings store, so prefer
  * to use {@link colorDefinitions} to guarantee consistent order
  */
-export const orderedColorTokens = Object.keys(colorDefinitions) as FzfColor[];
+export const orderedColorTokens = Object.keys(colorDefinitions) as ColorName[];

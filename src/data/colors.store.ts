@@ -1,12 +1,11 @@
-import type { FzfColor } from '~/types/fzf';
 import { writable } from 'svelte/store';
 import { colorDefinitions, colorInheritances } from '~/fzf/fzfColorDefinitions';
-import { colorsSchema } from '~/data/colors.schema';
+import { colorsSchema, type ColorName } from '~/data/colors.schema';
 
-export type ColorValues = Record<FzfColor, string>;
+export type ColorValues = Record<ColorName, string>;
 
 export type ColorOptions = {
-  selectedColor: FzfColor;
+  selectedColor: ColorName;
   colorPickerColor: string;
   colors: ColorValues;
 };
@@ -25,7 +24,7 @@ const _colorsStore = writable<ColorOptions>(initialColorStore);
  * Given a color token, get its value from the store, or recursively try
  * to find the first parent with a color.
  */
-export const getColorOrFallback = (color: FzfColor, currentColors: ColorValues) => {
+export const getColorOrFallback = (color: ColorName, currentColors: ColorValues) => {
   const thisColor = { color, value: currentColors[color] };
 
   if (currentColors[color]) {
@@ -40,13 +39,13 @@ export const getColorOrFallback = (color: FzfColor, currentColors: ColorValues) 
   return firstMatched ? { color: firstMatched, value: currentColors[firstMatched] } : thisColor;
 };
 
-export const isValidColor = (color: string): color is FzfColor => {
+export const isValidColor = (color: string): color is ColorName => {
   return color in colorDefinitions;
 };
 
 export const colorsStore = {
   subscribe: _colorsStore.subscribe,
-  setSelected: (token: FzfColor) => {
+  setSelected: (token: ColorName) => {
     _colorsStore.update((settings) => ({
       ...settings,
       selectedColor: token,

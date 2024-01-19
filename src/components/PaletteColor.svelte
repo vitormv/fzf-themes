@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type { FzfColor } from '~/types/fzf';
   import { getColorOrFallback, colorsStore } from '~/data/colors.store';
   import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
   import { toFzfColorName } from '~/utils/colors/toFzfColorName';
   import { beforeUpdate } from 'svelte';
   import { getContrastColor } from '~/utils/colors/getContrastColor';
   import { hexColorToRgb } from '~/utils/colors/hexColorToRgb';
+  import type { ColorName } from '~/data/colors.schema';
 
-  export let token: FzfColor;
+  export let token: ColorName;
 
   let wrapperEl: HTMLDivElement;
 

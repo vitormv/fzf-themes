@@ -1,3 +1,7 @@
 import failOnConsole from 'vitest-fail-on-console';
 
-failOnConsole();
+// force tests to fail if there are any console warnings/errors
+failOnConsole({
+  shouldFailOnError: true,
+  shouldFailOnWarn: true,
+});

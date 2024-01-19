@@ -32,3 +32,5 @@ export const colorsSchema = z.object({
   'query': hexColor.default('#d9d9d9').catch('#d9d9d9'),
   'disabled': hexColorOptional,
 });
+
+export type ColorName = keyof z.infer<typeof colorsSchema>;
