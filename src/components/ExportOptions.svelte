@@ -1,9 +1,10 @@
 <script lang="ts">
   import Modal from '~/components/common/Modal.svelte';
   import { colorsStore } from '~/data/colors.store';
-  import { themeStore } from '~/data/options.store';
-  import { exportThemeToEnvVariable, exportToUrlHash } from '~/utils/exportThemeToEnvVariable';
+  import { optionsStore } from '~/data/options.store';
   import { ChevronForwardOutline, ClipboardOutline } from 'svelte-ionicons';
+  import { exportToEnvVariable } from '~/data/export/exportToEnvVariable';
+  import { exportToUrlHash } from '~/data/export/exportToUrlHash';
 
   let exportEnvString = '';
   let exportPermalink = '';
@@ -12,8 +13,8 @@
   let isModalOpen = false;
 
   $: if (isModalOpen) {
-    exportEnvString = exportThemeToEnvVariable($themeStore, $colorsStore.colors);
-    exportPermalink = exportToUrlHash($themeStore, $colorsStore.colors);
+    exportEnvString = exportToEnvVariable($optionsStore, $colorsStore.colors);
+    exportPermalink = exportToUrlHash($optionsStore, $colorsStore.colors);
   }
 
   function onCopyUrl() {

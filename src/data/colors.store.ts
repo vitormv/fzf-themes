@@ -1,6 +1,7 @@
 import type { FzfColor } from '~/types/fzf';
 import { writable } from 'svelte/store';
 import { colorDefinitions, colorInheritances } from '~/fzf/fzfColorDefinitions';
+import { colorsSchema } from '~/data/colors.schema';
 
 export type ColorValues = Record<FzfColor, string>;
 
@@ -10,15 +11,15 @@ export type ColorOptions = {
   colors: ColorValues;
 };
 
-const initialColors: ColorOptions = {
+export const initialColors = colorsSchema.parse({});
+
+const initialColorStore: ColorOptions = {
   selectedColor: 'fg',
   colorPickerColor: colorDefinitions.fg.initial,
-  colors: Object.fromEntries(
-    Object.entries(colorDefinitions).map(([token, options]) => [token, options.initial ?? '']),
-  ) as ColorOptions['colors'],
+  colors: initialColors,
 };
 
-const _colorsStore = writable<ColorOptions>(initialColors);
+const _colorsStore = writable<ColorOptions>(initialColorStore);
 
 /**
  * Given a color token, get its value from the store, or recursively try
@@ -54,7 +55,7 @@ export const colorsStore = {
   },
   resetAllColors: () => {
     _colorsStore.update((settings) => ({
-      ...initialColors,
+      ...initialColorStore,
       selectedColor: settings.selectedColor,
       colorPickerColor: colorDefinitions[settings.selectedColor].initial,
     }));
@@ -66,6 +67,12 @@ export const colorsStore = {
         ...settings.colors,
         [token]: color,
       },
+    }));
+  },
+  updateAllColors: (values: ColorValues) => {
+    _colorsStore.update((settings) => ({
+      ...settings,
+      colors: values,
     }));
   },
 };

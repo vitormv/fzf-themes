@@ -1,25 +1,4 @@
-export type FzfColor =
-  | 'fg'
-  | 'fg-plus'
-  | 'bg'
-  | 'bg-plus'
-  | 'hl'
-  | 'hl-plus'
-  | 'info'
-  | 'marker'
-  | 'prompt'
-  | 'spinner'
-  | 'pointer'
-  | 'header'
-  | 'gutter'
-  | 'border'
-  | 'separator'
-  | 'scrollbar'
-  | 'preview-fg'
-  | 'preview-bg'
-  | 'preview-border'
-  | 'preview-scrollbar'
-  | 'preview-label'
-  | 'label'
-  | 'query'
-  | 'disabled';
+import type { z } from 'zod';
+import type { colorsSchema } from '~/data/colors.schema';
+
+export type FzfColor = keyof z.infer<typeof colorsSchema>;

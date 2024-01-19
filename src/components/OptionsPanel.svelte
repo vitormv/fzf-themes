@@ -1,6 +1,6 @@
 <script lang="ts">
   import FormControl from '~/components/common/FormControl.svelte';
-  import { themeStore } from '~/data/options.store';
+  import { optionsStore } from '~/data/options.store';
   import InputCycle from '~/components/common/InputCycle.svelte';
   import { borderTypes, borderTypesNonNullable, infoTypes, layoutTypes } from '~/fzf/fzfBorders';
   import { InformationCircleOutline } from 'svelte-ionicons';
@@ -9,8 +9,8 @@
   import { html as borderLabelPositionHelp } from '~/data/help/borderLabelPosition.md';
   import InputWithHelp from '~/components/common/InputWithHelp.svelte';
 
-  $: hasBorder = $themeStore.borderStyle !== 'none';
-  $: hasBorderLabel = $themeStore.borderLabel;
+  $: hasBorder = $optionsStore.borderStyle !== 'none';
+  $: hasBorderLabel = $optionsStore.borderLabel;
 </script>
 
 <div class="wrapper">
@@ -20,10 +20,10 @@
     <FormControl label="Border">
       <InputCycle
         items={borderTypes}
-        value={$themeStore.borderStyle}
+        value={$optionsStore.borderStyle}
         showIndex
         on:change={(e) => {
-          themeStore.set('borderStyle', e.detail);
+          optionsStore.set('borderStyle', e.detail);
         }}
       />
     </FormControl>
@@ -31,10 +31,10 @@
     <FormControl label="B. Label" disabled={!hasBorder}>
       <input
         type="text"
-        value={$themeStore.borderLabel}
+        value={$optionsStore.borderLabel}
         disabled={!hasBorder}
         placeholder="none"
-        on:input={(e) => void themeStore.set('borderLabel', e.target?.value)}
+        on:input={(e) => void optionsStore.set('borderLabel', e.target?.value)}
       />
     </FormControl>
 
@@ -44,9 +44,9 @@
           slot="input"
           type="number"
           disabled={!hasBorder || !hasBorderLabel}
-          value={$themeStore.borderLabelPosition}
+          value={$optionsStore.borderLabelPosition}
           on:input={(e) =>
-            void themeStore.set('borderLabelPosition', Number.parseInt(e.target?.value, 10))}
+            void optionsStore.set('borderLabelPosition', Number.parseInt(e.target?.value, 10))}
         />
         <InformationCircleOutline size="24" slot="icon" />
       </InputWithHelp>
@@ -55,18 +55,18 @@
     <FormControl label="Separator">
       <input
         type="text"
-        value={$themeStore.separator}
-        on:input={(e) => void themeStore.set('separator', e.target?.value)}
+        value={$optionsStore.separator}
+        on:input={(e) => void optionsStore.set('separator', e.target?.value)}
       />
     </FormControl>
 
     <FormControl label="Preview">
       <InputCycle
         items={borderTypesNonNullable}
-        value={$themeStore.previewBorderStyle}
+        value={$optionsStore.previewBorderStyle}
         showIndex
         on:change={(e) => {
-          themeStore.set('previewBorderStyle', e.detail);
+          optionsStore.set('previewBorderStyle', e.detail);
         }}
       />
     </FormControl>
@@ -79,9 +79,9 @@
       <InputCycle
         showIndex
         items={layoutTypes}
-        value={$themeStore.layout}
+        value={$optionsStore.layout}
         on:change={(e) => {
-          themeStore.set('layout', e.detail);
+          optionsStore.set('layout', e.detail);
         }}
       />
     </FormControl>
@@ -93,10 +93,10 @@
           type="text"
           pattern={'^[0-9]+(,[0-9]+){0,3}$'}
           style="flex: 1; width: 0;"
-          value={$themeStore.margin}
+          value={$optionsStore.margin}
           on:input={(e) => {
             if (e.target?.checkValidity()) {
-              themeStore.set('margin', e.target?.value);
+              optionsStore.set('margin', e.target?.value);
             }
           }}
         />
@@ -110,10 +110,10 @@
           slot="input"
           type="text"
           pattern={'^[0-9]+(,[0-9]+){0,3}$'}
-          value={$themeStore.padding}
+          value={$optionsStore.padding}
           on:input={(e) => {
             if (e.target?.checkValidity()) {
-              themeStore.set('padding', e.target?.value);
+              optionsStore.set('padding', e.target?.value);
             }
           }}
         />
@@ -125,8 +125,8 @@
       <input
         type="text"
         maxlength="2"
-        value={$themeStore.scrollbar}
-        on:input={(e) => void themeStore.set('scrollbar', e.target?.value)}
+        value={$optionsStore.scrollbar}
+        on:input={(e) => void optionsStore.set('scrollbar', e.target?.value)}
       />
     </FormControl>
   </div>
@@ -137,8 +137,8 @@
     <FormControl label="Prompt">
       <input
         type="text"
-        value={$themeStore.prompt}
-        on:input={(e) => void themeStore.set('prompt', e.target?.value)}
+        value={$optionsStore.prompt}
+        on:input={(e) => void optionsStore.set('prompt', e.target?.value)}
       />
     </FormControl>
 
@@ -146,8 +146,8 @@
       <input
         type="text"
         maxlength="2"
-        value={$themeStore.pointer}
-        on:input={(e) => void themeStore.set('pointer', e.target?.value)}
+        value={$optionsStore.pointer}
+        on:input={(e) => void optionsStore.set('pointer', e.target?.value)}
       />
     </FormControl>
 
@@ -155,18 +155,18 @@
       <input
         type="text"
         maxlength="2"
-        value={$themeStore.marker}
-        on:input={(e) => void themeStore.set('marker', e.target?.value)}
+        value={$optionsStore.marker}
+        on:input={(e) => void optionsStore.set('marker', e.target?.value)}
       />
     </FormControl>
 
     <FormControl label="Info">
       <InputCycle
         items={infoTypes}
-        value={$themeStore.info}
+        value={$optionsStore.info}
         showIndex
         on:change={(e) => {
-          themeStore.set('info', e.detail);
+          optionsStore.set('info', e.detail);
         }}
       />
     </FormControl>

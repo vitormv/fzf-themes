@@ -3,7 +3,6 @@ import { isValidOption, type ThemeOptions } from '~/data/options.store';
 import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
 import { arrayChunk } from '~/utils/arrayChunk';
 import { toFzfColorName } from '~/utils/colors/toFzfColorName';
-import { base64Encode } from '~/utils/strings/base64';
 
 type ExportItemDefinition<T extends keyof ThemeOptions> = {
   exportVariable: string;
@@ -108,7 +107,7 @@ const prepareForEnvExport = (themeOptions: ThemeOptions, colors: ColorValues) =>
   return { optionsVariables, colorVariables };
 };
 
-export const exportThemeToEnvVariable = (themeOptions: ThemeOptions, colors: ColorValues) => {
+export const exportToEnvVariable = (themeOptions: ThemeOptions, colors: ColorValues) => {
   const { colorVariables, optionsVariables } = prepareForEnvExport(themeOptions, colors);
 
   const colorsForEnv = [...colorVariables.keys()].map((color) => {
@@ -131,41 +130,4 @@ export const exportThemeToEnvVariable = (themeOptions: ThemeOptions, colors: Col
   return `export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'\n${colorChunks}${
     optionsChunks.length > 0 ? `\n${optionsChunks}` : ''
   }'`;
-};
-
-export const exportToUrlHash = (themeOptions: ThemeOptions, colors: ColorValues) => {
-  const colorVariables: Map<string, string> = new Map();
-
-  Object.entries(colors).forEach(([name, value]) => {
-    if (!isValidColor(name)) return;
-
-    const fzfColorName = toFzfColorName(name);
-
-    if (value) {
-      colorVariables.set(fzfColorName, value);
-    }
-  });
-
-  const colorsString = [...colorVariables.keys()]
-    .map((color) => {
-      return `${color}:${colorVariables.get(color)}`;
-    })
-    .join(',');
-
-  const optionsForEnv = Object.fromEntries(
-    Object.keys(themeOptions).map((option) => {
-      return [option, themeOptions[option as keyof ThemeOptions]];
-    }),
-  );
-
-  const exportedObj = {
-    ...optionsForEnv,
-    colors: colorsString,
-  };
-
-  const host = `${document.location.protocol}//${document.location.host}`;
-  const path = import.meta.env.BASE_URL;
-  const hash = base64Encode(JSON.stringify(exportedObj));
-
-  return `${host}${path}#${hash}`;
 };

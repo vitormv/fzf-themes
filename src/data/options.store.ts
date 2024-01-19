@@ -23,12 +23,17 @@ export const initialOptions: ThemeOptions = {
 
 const _optionsStore = writable<ThemeOptions>(initialOptions);
 
-export const themeStore = {
+export const optionsStore = {
   subscribe: _optionsStore.subscribe,
   set: <TKey extends keyof ThemeOptions>(key: TKey, value: ThemeOptions[TKey]) => {
     _optionsStore.update((settings) => ({
       ...settings,
       [key]: value,
+    }));
+  },
+  updateAll: (value: ThemeOptions) => {
+    _optionsStore.update(() => ({
+      ...value,
     }));
   },
   setStyle: (style: BorderStyle) => {

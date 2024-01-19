@@ -3,8 +3,8 @@ import { expect, it, describe } from 'vitest';
 import { filterEmptyObjValues } from '~/utils/filterEmptyObjValues';
 import type { ThemeOptions } from '~/data/options.store';
 import type { ColorValues } from '~/data/colors.store';
-import { exportToUrlHash } from '~/utils/exportThemeToEnvVariable';
 import { importFromUrlHash } from '~/data/import/importFromUrlHash';
+import { exportToUrlHash } from '~/data/export/exportToUrlHash';
 
 const sampleThemeOptions: ThemeOptions = {
   borderStyle: 'rounded',
@@ -59,7 +59,7 @@ describe('exportToUrlHash()', () => {
 
     expect(imported).toEqual({
       themeOptions: sampleThemeOptions,
-      colors: filterEmptyObjValues(sampleColorOptions),
+      colors: sampleColorOptions,
     });
   });
 });

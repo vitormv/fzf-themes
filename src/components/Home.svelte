@@ -7,8 +7,22 @@
   import OptionsPanel from '~/components/OptionsPanel.svelte';
   import { onMount } from 'svelte';
   import { dragScroll } from '~/utils/svelte/useDragScroll';
+  import { importFromUrlHash } from '~/data/import/importFromUrlHash';
+  import { colorsStore } from '~/data/colors.store';
+  import { optionsStore } from '~/data/options.store';
 
   let terminalContentEl: HTMLDivElement;
+
+  function updateStoreFromHash() {
+    const hash = document.location.hash;
+
+    if (!hash || !hash.startsWith('#')) return;
+
+    const imported = importFromUrlHash(hash.substring(1));
+
+    colorsStore.updateAllColors(imported.colors as any);
+    optionsStore.updateAll(imported.themeOptions);
+  }
 
   // allow Preview Panel to be scrolled by dragging. Useful when very big
   // margin/paddings are being used and content overflows
@@ -16,6 +30,16 @@
     if (!terminalContentEl) return;
 
     dragScroll(terminalContentEl);
+
+    updateStoreFromHash(); // run once on load
+
+    const hashChangeHandler = () => void updateStoreFromHash();
+
+    window.addEventListener('hashchange', hashChangeHandler);
+
+    return () => {
+      window.removeEventListener('hashchange', hashChangeHandler);
+    };
   });
 </script>
 

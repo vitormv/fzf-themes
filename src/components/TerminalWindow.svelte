@@ -2,7 +2,7 @@
   import { orderedColorTokens } from '~/fzf/fzfColorDefinitions';
   import { getColorOrFallback, colorsStore, isValidColor } from '~/data/colors.store';
   import { onMount } from 'svelte';
-  import { themeStore, type ThemeOptions } from '~/data/options.store';
+  import { optionsStore, type ThemeOptions } from '~/data/options.store';
   import { renderLines } from '~/utils/tui/renderLines';
   import { addDelegateEventListener } from '~/utils/addDelegateEventListener';
   import { toFzfColorName } from '~/utils/colors/toFzfColorName';
@@ -22,7 +22,7 @@
 
   let maxTerminalWidth = '';
 
-  themeStore.subscribe((themeSettings) => {
+  optionsStore.subscribe((themeSettings) => {
     if (!terminalWindowEl) return;
     renderTerminalWindow(themeSettings);
   });
@@ -54,13 +54,13 @@
   }
 
   onMount(() => {
-    const onLoadHandler = () => void renderTerminalWindow($themeStore);
-    const onResizeHandler = () => void renderTerminalWindow($themeStore);
+    const onLoadHandler = () => void renderTerminalWindow($optionsStore);
+    const onResizeHandler = () => void renderTerminalWindow($optionsStore);
 
     // if document already finished loading, just fire the
     // event without registering listener
     if (document.readyState === 'complete') {
-      renderTerminalWindow($themeStore);
+      renderTerminalWindow($optionsStore);
     } else {
       window.addEventListener('load', onResizeHandler);
     }
