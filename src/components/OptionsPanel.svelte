@@ -34,7 +34,7 @@
         value={$optionsStore.borderLabel}
         disabled={!hasBorder}
         placeholder="none"
-        on:input={(e) => void optionsStore.set('borderLabel', e.target?.value)}
+        on:input={(e) => void optionsStore.set('borderLabel', e.currentTarget.value)}
       />
     </FormControl>
 
@@ -46,7 +46,10 @@
           disabled={!hasBorder || !hasBorderLabel}
           value={$optionsStore.borderLabelPosition}
           on:input={(e) =>
-            void optionsStore.set('borderLabelPosition', Number.parseInt(e.target?.value, 10))}
+            void optionsStore.set(
+              'borderLabelPosition',
+              Number.parseInt(e.currentTarget.value, 10),
+            )}
         />
         <InformationCircleOutline size="24" slot="icon" />
       </InputWithHelp>
@@ -56,7 +59,7 @@
       <input
         type="text"
         value={$optionsStore.separator}
-        on:input={(e) => void optionsStore.set('separator', e.target?.value)}
+        on:input={(e) => void optionsStore.set('separator', e.currentTarget.value)}
       />
     </FormControl>
 
@@ -95,8 +98,8 @@
           style="flex: 1; width: 0;"
           value={$optionsStore.margin}
           on:input={(e) => {
-            if (e.target?.checkValidity()) {
-              optionsStore.set('margin', e.target?.value);
+            if (e.currentTarget.checkValidity()) {
+              optionsStore.set('margin', e.currentTarget.value);
             }
           }}
         />
@@ -112,8 +115,8 @@
           pattern={'^[0-9]+(,[0-9]+){0,3}$'}
           value={$optionsStore.padding}
           on:input={(e) => {
-            if (e.target?.checkValidity()) {
-              optionsStore.set('padding', e.target?.value);
+            if (e.currentTarget.checkValidity()) {
+              optionsStore.set('padding', e.currentTarget.value);
             }
           }}
         />
@@ -126,7 +129,7 @@
         type="text"
         maxlength="1"
         value={$optionsStore.scrollbar}
-        on:input={(e) => void optionsStore.set('scrollbar', e.target?.value)}
+        on:input={(e) => void optionsStore.set('scrollbar', e.currentTarget.value)}
       />
     </FormControl>
   </div>
@@ -138,7 +141,7 @@
       <input
         type="text"
         value={$optionsStore.prompt}
-        on:input={(e) => void optionsStore.set('prompt', e.target?.value)}
+        on:input={(e) => void optionsStore.set('prompt', e.currentTarget.value)}
       />
     </FormControl>
 
@@ -147,7 +150,7 @@
         type="text"
         maxlength="2"
         value={$optionsStore.pointer}
-        on:input={(e) => void optionsStore.set('pointer', e.target?.value)}
+        on:input={(e) => void optionsStore.set('pointer', e.currentTarget.value)}
       />
     </FormControl>
 
@@ -156,7 +159,7 @@
         type="text"
         maxlength="2"
         value={$optionsStore.marker}
-        on:input={(e) => void optionsStore.set('marker', e.target?.value)}
+        on:input={(e) => void optionsStore.set('marker', e.currentTarget.value)}
       />
     </FormControl>
 

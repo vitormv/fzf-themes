@@ -66,7 +66,7 @@ const envExportConfiguration: ExportDefinitions = {
 };
 
 const sanitize = (str: string) => {
-  return str.includes(' ') ? `"${str}"` : str;
+  return `"${str}"`;
 };
 
 const prepareForEnvExport = (themeOptions: ThemeOptions, colors: ColorValues) => {
