@@ -1,6 +1,5 @@
 import { expect, it, describe } from 'vitest';
 
-import { filterEmptyObjValues } from '~/utils/filterEmptyObjValues';
 import type { ThemeOptions } from '~/data/options.store';
 import type { ColorValues } from '~/data/colors.store';
 import { importFromUrlHash } from '~/data/import/importFromUrlHash';

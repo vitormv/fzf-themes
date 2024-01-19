@@ -121,13 +121,13 @@ export const exportToEnvVariable = (themeOptions: ThemeOptions, colors: ColorVal
   // split all colors into lines with max 4 colors each
   const colorChunks = arrayChunk(colorsForEnv, 4)
     .map((chunk) => `--color=${chunk.join(',')}`)
-    .join('\n');
+    .join('\n  ');
 
   const optionsChunks = arrayChunk(optionsForEnv, 4)
     .map((chunk) => chunk.join(' '))
-    .join('\n');
+    .join('\n  ');
 
-  return `export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'\n${colorChunks}${
-    optionsChunks.length > 0 ? `\n${optionsChunks}` : ''
+  return `export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'\n  ${colorChunks}${
+    optionsChunks.length > 0 ? `\n  ${optionsChunks}` : ''
   }'`;
 };
