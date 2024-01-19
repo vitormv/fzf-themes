@@ -36,7 +36,7 @@ const envExportConfiguration: ExportDefinitions = {
     exportIf: (_, allOptions) => !!allOptions.borderLabel,
   },
   previewBorderStyle: {
-    exportVariable: 'preview',
+    exportVariable: 'preview-window',
     exportIf: (val) => val !== 'none',
     format: (val) => `border-${val}`,
   },
@@ -115,7 +115,7 @@ export const exportToEnvVariable = (themeOptions: ThemeOptions, colors: ColorVal
   });
 
   const optionsForEnv = [...optionsVariables.keys()].map((option) => {
-    return `${option}=${sanitize(optionsVariables.get(option) ?? '""')}`;
+    return `--${option}=${sanitize(optionsVariables.get(option) ?? '""')}`;
   });
 
   // split all colors into lines with max 4 colors each
