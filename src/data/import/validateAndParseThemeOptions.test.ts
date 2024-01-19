@@ -14,7 +14,7 @@ const sampleThemeOptions: ThemeOptions = {
   marker: '->',
   pointer: '*',
   separator: 'LALA',
-  scrollbar: '++',
+  scrollbar: '+',
   layout: 'reverse',
   info: 'right',
 };
