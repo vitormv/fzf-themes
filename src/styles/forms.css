@@ -50,7 +50,8 @@ textarea {
     color: var(--text-color);
     border: 0;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: var(--color-primary-stronger);
     }
   }
@@ -60,7 +61,8 @@ textarea {
     color: var(--text-color);
     border: 0;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: #6d223c;
     }
   }
@@ -70,7 +72,8 @@ textarea {
     background-color: transparent;
     border: 2px solid var(--border-color);
 
-    &:hover {
+    &:hover,
+    &:focus {
       border-color: var(--border-darker-color);
     }
   }
