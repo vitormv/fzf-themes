@@ -24,7 +24,8 @@
   };
 
   beforeUpdate(() => {
-    if ($colorsStore.selectedColor === token && wrapperEl) {
+    const isDesktop = document.body.getBoundingClientRect().width >= 1200;
+    if (isDesktop && $colorsStore.selectedColor === token && wrapperEl) {
       wrapperEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   });

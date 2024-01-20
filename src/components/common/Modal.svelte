@@ -88,7 +88,6 @@
     flex: 1 1 0;
     background-color: var(--box-bg-color);
     padding: 15px;
-    margin-bottom: var(--box-gap);
     height: 100%;
   }
 </style>

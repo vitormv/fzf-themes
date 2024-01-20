@@ -16,7 +16,8 @@
     // the color picker does not support percentages as height,
     // so calculate boundaries on resize and set height in pixels
     const resizeObserver = new ResizeObserver(([entry]) => {
-      pickerHeight = `${entry.contentBoxSize[0].blockSize - 200}px`;
+      const height = Math.max(entry.contentBoxSize[0].blockSize - 200, 150);
+      pickerHeight = `${height}px`;
     });
 
     resizeObserver.observe(wrapperEl);
