@@ -29,16 +29,10 @@
   }
 
   .color-grid {
-    /**
-   * User input values.
-   */
     --grid-layout-gap: 10px;
     --grid-column-count: 4;
     --grid-item--min-width: 136px;
 
-    /**
-   * Calculated values.
-   */
     --gap-count: calc(var(--grid-column-count) - 1);
     --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
     --grid-item--max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));

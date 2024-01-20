@@ -45,9 +45,24 @@ body {
   min-width: 320px;
   padding: var(--box-gap);
   height: 100vh;
+  min-height: 830px;
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: 'Inconsolata', monospace;
+}
+
+@media (min-height: 860px) and (max-height: 1080px) {
+  body {
+    min-height: auto;
+    height: 100vh;
+  }
+}
+
+@media (min-height: 1080px) {
+  body {
+    min-height: auto;
+    height: 1080px;
+  }
 }
 
 #app {

@@ -15,20 +15,14 @@
   onMount(() => {
     // the color picker does not support percentages as height,
     // so calculate boundaries on resize and set height in pixels
-    const onResizeHandler = () => {
-      const targetEl = wrapperEl;
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      pickerHeight = `${entry.contentBoxSize[0].blockSize - 200}px`;
+    });
 
-      if (!targetEl) return;
-
-      pickerHeight = `${targetEl.getBoundingClientRect().height - 200}px`;
-    };
-
-    onResizeHandler();
-
-    window.addEventListener('resize', onResizeHandler);
+    resizeObserver.observe(wrapperEl);
 
     return () => {
-      window.removeEventListener('resize', onResizeHandler);
+      resizeObserver.disconnect();
     };
   });
 </script>
