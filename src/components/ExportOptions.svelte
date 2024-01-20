@@ -26,6 +26,20 @@
     permalinkInputEl.select();
     navigator.clipboard.writeText(permalinkInputEl.value);
   }
+
+  function onToggleColorsOnly(e: Event) {
+    exportColorsOnly = (e.currentTarget as HTMLInputElement)?.checked;
+  }
+
+  function onToggleInheritBgColor(e: Event) {
+    const isChecked = (e.currentTarget as HTMLInputElement)?.checked;
+    colorsStore.updateColor('bg', isChecked ? '' : initialColors.bg);
+  }
+
+  function onToggleInheritFgColor(e: Event) {
+    const isChecked = (e.currentTarget as HTMLInputElement)?.checked;
+    colorsStore.updateColor('fg', isChecked ? '' : initialColors.fg);
+  }
 </script>
 
 <button class="export btn btn-primary" on:click={() => (isModalOpen = true)}>
@@ -39,28 +53,16 @@
 
     <div class="content">
       <div class="row-url-export" style="justify-content: space-between;">
-        <Checkbox
-          checked={exportColorsOnly}
-          label="Colors only?"
-          on:change={(e) => {
-            exportColorsOnly = e.currentTarget?.checked;
-          }}
-        />
+        <Checkbox checked={exportColorsOnly} label="Colors only?" on:change={onToggleColorsOnly} />
         <Checkbox
           checked={!$colorsStore.colors.bg}
           label="Use terminal bg"
-          on:change={(e) => {
-            const isChecked = e.currentTarget?.checked;
-            colorsStore.updateColor('bg', isChecked ? '' : initialColors.bg);
-          }}
+          on:change={onToggleInheritBgColor}
         />
         <Checkbox
           checked={!$colorsStore.colors.fg}
           label="Use terminal fg"
-          on:change={(e) => {
-            const isChecked = e.currentTarget?.checked;
-            colorsStore.updateColor('fg', isChecked ? '' : initialColors.fg);
-          }}
+          on:change={onToggleInheritFgColor}
         />
       </div>
       <div class="row-url-export">

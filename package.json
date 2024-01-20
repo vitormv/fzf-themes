@@ -9,9 +9,8 @@
     "preview": "vite preview",
     "test": "vitest --environment=jsdom",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "lint": "tsc --noemit && eslint --cache --cache-location node_modules/.eslintcache .",
-    "format": "prettier --write .",
-    "deploy": "yarn build && bash ./cli/gh-pages-deploy.sh && git checkout -"
+    "lint": "eslint --cache --cache-location node_modules/.eslintcache . && yarn check",
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.1",

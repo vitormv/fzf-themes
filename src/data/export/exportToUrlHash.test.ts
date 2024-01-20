@@ -1,6 +1,6 @@
 import { expect, it, describe } from 'vitest';
 
-import type { ThemeOptions } from '~/data/options.store';
+import { initialOptions, type ThemeOptions } from '~/data/options.store';
 import type { ColorValues } from '~/data/colors.store';
 import { importFromUrlHash } from '~/data/import/importFromUrlHash';
 import { exportToUrlHash } from '~/data/export/exportToUrlHash';
@@ -49,8 +49,8 @@ const sampleColorOptions: ColorValues = {
 };
 
 describe('exportToUrlHash()', () => {
-  it('should be able to encode and decode url hash to same object', () => {
-    const urlOutput = exportToUrlHash(sampleThemeOptions, sampleColorOptions);
+  it('should be able to encode and decode url hash to same object when exporting all options', () => {
+    const urlOutput = exportToUrlHash(sampleThemeOptions, sampleColorOptions, false);
 
     const url = new URL(urlOutput);
 
@@ -58,6 +58,19 @@ describe('exportToUrlHash()', () => {
 
     expect(imported).toEqual({
       themeOptions: sampleThemeOptions,
+      colors: sampleColorOptions,
+    });
+  });
+
+  it('should be able to encode and decode url hash to same object when exporting colorsOnly', () => {
+    const urlOutput = exportToUrlHash(sampleThemeOptions, sampleColorOptions, true);
+
+    const url = new URL(urlOutput);
+
+    const imported = importFromUrlHash(url.hash.substring(1));
+
+    expect(imported).toEqual({
+      themeOptions: initialOptions, // ignores provided options and uses default
       colors: sampleColorOptions,
     });
   });
