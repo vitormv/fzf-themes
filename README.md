@@ -1,4 +1,4 @@
-# fzf Themes Playground
+# fzf Theme Playground
 
 ![Front page of fzf Theme Playground](./screenshot.png)
 
