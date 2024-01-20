@@ -107,7 +107,11 @@ const prepareForEnvExport = (themeOptions: ThemeOptions, colors: ColorValues) =>
   return { optionsVariables, colorVariables };
 };
 
-export const exportToEnvVariable = (themeOptions: ThemeOptions, colors: ColorValues) => {
+export const exportToEnvVariable = (
+  themeOptions: ThemeOptions,
+  colors: ColorValues,
+  colorsOnly: boolean,
+) => {
   const { colorVariables, optionsVariables } = prepareForEnvExport(themeOptions, colors);
 
   const colorsForEnv = [...colorVariables.keys()].map((color) => {
@@ -123,9 +127,11 @@ export const exportToEnvVariable = (themeOptions: ThemeOptions, colors: ColorVal
     .map((chunk) => `--color=${chunk.join(',')}`)
     .join('\n  ');
 
-  const optionsChunks = arrayChunk(optionsForEnv, 4)
-    .map((chunk) => chunk.join(' '))
-    .join('\n  ');
+  const optionsChunks = colorsOnly
+    ? []
+    : arrayChunk(optionsForEnv, 4)
+        .map((chunk) => chunk.join(' '))
+        .join('\n  ');
 
   return `export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'\n  ${colorChunks}${
     optionsChunks.length > 0 ? `\n  ${optionsChunks}` : ''

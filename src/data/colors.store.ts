@@ -59,7 +59,7 @@ export const colorsStore = {
       colorPickerColor: colorDefinitions[settings.selectedColor].initial,
     }));
   },
-  updateColor: (token: string, color: string | undefined) => {
+  updateColor: (token: ColorName, color: string | undefined) => {
     _colorsStore.update((settings) => ({
       ...settings,
       colors: {

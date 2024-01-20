@@ -1,27 +1,30 @@
 <script lang="ts">
   import Modal from '~/components/common/Modal.svelte';
-  import { colorsStore } from '~/data/colors.store';
+  import { colorsStore, initialColors } from '~/data/colors.store';
   import { optionsStore } from '~/data/options.store';
   import { ChevronForwardOutline, ClipboardOutline } from 'svelte-ionicons';
   import { exportToEnvVariable } from '~/data/export/exportToEnvVariable';
   import { exportToUrlHash } from '~/data/export/exportToUrlHash';
+  import Checkbox from '~/components/common/Checkbox.svelte';
 
   let exportEnvString = '';
   let exportPermalink = '';
 
-  let urlEl: HTMLInputElement;
+  let permalinkInputEl: HTMLInputElement;
   let isModalOpen = false;
 
+  let exportColorsOnly = false;
+
   $: if (isModalOpen) {
-    exportEnvString = exportToEnvVariable($optionsStore, $colorsStore.colors);
-    exportPermalink = exportToUrlHash($optionsStore, $colorsStore.colors);
+    exportEnvString = exportToEnvVariable($optionsStore, $colorsStore.colors, exportColorsOnly);
+    exportPermalink = exportToUrlHash($optionsStore, $colorsStore.colors, exportColorsOnly);
   }
 
   function onCopyUrl() {
-    if (!urlEl) return;
+    if (!permalinkInputEl) return;
 
-    urlEl.select();
-    navigator.clipboard.writeText(urlEl.value);
+    permalinkInputEl.select();
+    navigator.clipboard.writeText(permalinkInputEl.value);
   }
 </script>
 
@@ -35,12 +38,37 @@
     <h2 slot="header">Export & Share</h2>
 
     <div class="content">
+      <div class="row-url-export" style="justify-content: space-between;">
+        <Checkbox
+          checked={exportColorsOnly}
+          label="Colors only?"
+          on:change={(e) => {
+            exportColorsOnly = e.currentTarget?.checked;
+          }}
+        />
+        <Checkbox
+          checked={!$colorsStore.colors.bg}
+          label="Use terminal bg"
+          on:change={(e) => {
+            const isChecked = e.currentTarget?.checked;
+            colorsStore.updateColor('bg', isChecked ? '' : initialColors.bg);
+          }}
+        />
+        <Checkbox
+          checked={!$colorsStore.colors.fg}
+          label="Use terminal fg"
+          on:change={(e) => {
+            const isChecked = e.currentTarget?.checked;
+            colorsStore.updateColor('fg', isChecked ? '' : initialColors.fg);
+          }}
+        />
+      </div>
       <div class="row-url-export">
         <h3>Permalink</h3>
         <div style="flex: 1;">
           <input
             type="text"
-            bind:this={urlEl}
+            bind:this={permalinkInputEl}
             readonly
             style="display: inline-block; width: 100%;"
             value={exportPermalink}

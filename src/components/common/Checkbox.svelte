@@ -49,14 +49,20 @@
       display: block;
       height: 6px;
       width: 6px;
-      transition: background-color 150ms ease-out;
+      transform: scale(0);
+      transition: transform 100ms ease-out;
+      background-color: var(--text-color);
     }
   }
 
   input:checked + span.checkbox {
     &::after {
-      background-color: var(--text-color);
+      transform: scale(1);
     }
+  }
+
+  input:focus + span.checkbox {
+    outline: 1px solid var(--text-color);
   }
 
   .label {

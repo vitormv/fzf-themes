@@ -7,7 +7,11 @@ export const encodeObjForUrlHash = (obj: Record<string, any>) => {
   return base64Encode(JSON.stringify(obj));
 };
 
-export const exportToUrlHash = (themeOptions: ThemeOptions, colors: ColorValues) => {
+export const exportToUrlHash = (
+  themeOptions: ThemeOptions,
+  colors: ColorValues,
+  colorsOnly: boolean,
+) => {
   const colorVariables: Map<string, string> = new Map();
 
   Object.entries(colors).forEach(([name, value]) => {
@@ -33,7 +37,7 @@ export const exportToUrlHash = (themeOptions: ThemeOptions, colors: ColorValues)
   );
 
   const exportedObj = {
-    ...optionsForEnv,
+    ...(!colorsOnly ? optionsForEnv : undefined),
     colors: colorsString,
   };
 
