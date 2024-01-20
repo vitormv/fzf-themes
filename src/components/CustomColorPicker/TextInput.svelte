@@ -1,5 +1,15 @@
 <script lang="ts">
   import type { RgbaColor, HsvaColor } from 'colord';
+  import type { Texts } from 'node_modules/svelte-awesome-color-picker/dist/utils/texts';
+
+  /** if set to false, disables the alpha channel */
+  export let isAlpha: boolean;
+
+  /** configure which hex, rgb and hsv inputs will be visible and in which order. If overridden, it is necessary to provide at least one value */
+  export let textInputModes: Array<'hex' | 'rgb' | 'hsv'>;
+
+  /** all translation tokens used in the library; can be partially overridden; see [full object type](https://github.com/Ennoriel/svelte-awesome-color-picker/blob/master/src/lib/texts.ts) */
+  export let texts: Texts;
 
   export let rgb: RgbaColor;
   export let hsv: HsvaColor;
@@ -33,82 +43,88 @@
   }
 </script>
 
-<div class="text-input">
-  <div class="input-container">
-    <input value={hex || '---'} on:input={updateHex} style="flex: 3" />
-  </div>
+<div class="text-input" data-alpha={isAlpha}>
+  {#if textInputModes.includes('hex')}
+    <div class="input-container">
+      <input value={hex || '---'} on:input={updateHex} style="flex: 3" />
+    </div>
+  {/if}
 
-  <div class="input-container group">
-    <div>
-      <div class="label">R</div>
-      <input
-        aria-label="red chanel color"
-        value={rgb.r}
-        type="number"
-        min="0"
-        max="255"
-        on:input={updateRgb('r')}
-      />
+  {#if textInputModes.includes('rgb')}
+    <div class="input-container group">
+      <div>
+        <div class="label">R</div>
+        <input
+          aria-label="red chanel color"
+          value={rgb.r}
+          type="number"
+          min="0"
+          max="255"
+          on:input={updateRgb('r')}
+        />
+      </div>
+      <div>
+        <div class="label">G</div>
+        <input
+          aria-label="green chanel color"
+          value={rgb.g}
+          type="number"
+          min="0"
+          max="255"
+          on:input={updateRgb('g')}
+        />
+      </div>
+      <div>
+        <div class="label">B</div>
+        <input
+          aria-label="blue chanel color"
+          value={rgb.b}
+          type="number"
+          min="0"
+          max="255"
+          on:input={updateRgb('b')}
+        />
+      </div>
     </div>
-    <div>
-      <div class="label">G</div>
-      <input
-        aria-label="green chanel color"
-        value={rgb.g}
-        type="number"
-        min="0"
-        max="255"
-        on:input={updateRgb('g')}
-      />
-    </div>
-    <div>
-      <div class="label">B</div>
-      <input
-        aria-label="blue chanel color"
-        value={rgb.b}
-        type="number"
-        min="0"
-        max="255"
-        on:input={updateRgb('b')}
-      />
-    </div>
-  </div>
+  {/if}
 
-  <div class="input-container group">
-    <div>
-      <div class="label">H</div>
-      <input
-        aria-label="hue chanel color"
-        value={h}
-        type="number"
-        min="0"
-        max="360"
-        on:input={updateHsv('h')}
-      />
+  {#if textInputModes.includes('hsv')}
+    <div class="input-container group">
+      <div>
+        <div class="label">H</div>
+        <input
+          aria-label={texts.label.h}
+          value={h}
+          type="number"
+          min="0"
+          max="360"
+          on:input={updateHsv('h')}
+        />
+      </div>
+      <div>
+        <div class="label">S</div>
+        <input
+          aria-label="saturation chanel color"
+          value={s}
+          type="number"
+          min="0"
+          max="100"
+          on:input={updateHsv('s')}
+        />
+      </div>
+      <div>
+        <div class="label">V</div>
+        <input
+          aria-label="brightness chanel color"
+          value={v}
+          type="number"
+          min="0"
+          max="100"
+          on:input={updateHsv('v')}
+        />
+      </div>
     </div>
-    <div>
-      <div class="label">S</div>
-      <input
-        aria-label="saturation chanel color"
-        value={s}
-        type="number"
-        min="0"
-        max="100"
-        on:input={updateHsv('s')}
-      />
-    </div>
-    <div>
-      <div class="label">B</div>
-      <input
-        aria-label="brightness chanel color"
-        value={v}
-        type="number"
-        min="0"
-        max="100"
-        on:input={updateHsv('v')}
-      />
-    </div>
-  </div>
+  {/if}
 </div>
 
 <style lang="scss">
