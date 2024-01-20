@@ -149,6 +149,7 @@
       <input
         type="text"
         maxlength="2"
+        required
         value={$optionsStore.pointer}
         on:input={(e) => void optionsStore.set('pointer', e.currentTarget.value)}
       />
@@ -158,6 +159,7 @@
       <input
         type="text"
         maxlength="2"
+        required
         value={$optionsStore.marker}
         on:input={(e) => void optionsStore.set('marker', e.currentTarget.value)}
       />

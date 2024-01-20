@@ -15,12 +15,16 @@
 
   <Box title="About" style="flex: 1">
     <div>
-      Very heavily inspired by <a href="https://terminal.sexy" target="_blank">terminal.sexy</a>
-      and
-      <a href="https://terminal.love" target="_blank">terminal.love</a>, this offers a quick way to
-      preview <strong>*some*</strong> of the many styling options available for fzf.<br />Made with
+      Heavily inspired by <a href="https://terminal.sexy" target="_blank" rel="noopener noreferrer"
+        >terminal.sexy</a
+      >, this offers a quick way to preview <strong>*some*</strong> of the many styling options
+      available for fzf. Create & share your themes.
+      <br /><br />Made with
       <Heart size="16" style="color: red; vertical-align: middle;" />
-      by <a href="https://github.com/vitormv" target="_blank">@vitormv</a>.
+      by
+      <a href="https://github.com/vitormv" target="_blank" rel="noopener noreferrer">@vitormv</a>.
+      <br />
+      Checkout the source code at <a href="https://github.com/vitormv/fzf-themes">Github</a>
     </div>
   </Box>
 </div>
