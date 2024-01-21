@@ -71,7 +71,10 @@ export const colorsStore = {
   updateAllColors: (values: ColorValues) => {
     _colorsStore.update((settings) => ({
       ...settings,
-      colors: values,
+      colors: {
+        ...settings.colors,
+        ...values,
+      },
     }));
   },
 };

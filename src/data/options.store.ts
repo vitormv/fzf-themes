@@ -27,19 +27,20 @@ const _optionsStore = writable<ThemeOptions>(initialOptions);
 export const optionsStore = {
   subscribe: _optionsStore.subscribe,
   set: <TKey extends ThemeOption>(key: TKey, value: ThemeOptions[TKey]) => {
-    _optionsStore.update((settings) => ({
-      ...settings,
+    _optionsStore.update((currentOptions) => ({
+      ...currentOptions,
       [key]: value,
     }));
   },
   updateAll: (value: ThemeOptions) => {
-    _optionsStore.update(() => ({
+    _optionsStore.update((currentOptions) => ({
+      ...currentOptions,
       ...value,
     }));
   },
   setStyle: (style: BorderStyle) => {
-    _optionsStore.update((settings) => ({
-      ...settings,
+    _optionsStore.update((currentOptions) => ({
+      ...currentOptions,
       borderStyle: style,
     }));
   },
