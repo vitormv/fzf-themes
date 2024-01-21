@@ -1,17 +1,17 @@
 import { isValidColor, type ColorValues } from '~/data/colors.store';
-import { isValidOption, type ThemeOptions } from '~/data/options.store';
+import { isValidOption, type ThemeOption, type ThemeOptions } from '~/data/options.store';
 import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
 import { arrayChunk } from '~/utils/arrayChunk';
 import { toFzfColorName } from '~/utils/colors/toFzfColorName';
 
-type ExportItemDefinition<T extends keyof ThemeOptions> = {
+type ExportItemDefinition<T extends ThemeOption> = {
   exportVariable: string;
   exportIf?: (val: string, allOptions: ThemeOptions) => boolean;
   format?: (val: ThemeOptions[T], allOptions: ThemeOptions) => string;
 };
 
 export type ExportDefinitions = {
-  [K in keyof ThemeOptions]: ExportItemDefinition<K>;
+  [K in ThemeOption]: ExportItemDefinition<K>;
 };
 
 const envExportConfiguration: ExportDefinitions = {

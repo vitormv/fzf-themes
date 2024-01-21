@@ -4,6 +4,7 @@ import { themeOptionsSchema } from '~/data/options.schema';
 import type { BorderStyle } from '~/fzf/fzfBorders';
 
 export type ThemeOptions = z.infer<typeof themeOptionsSchema>;
+export type ThemeOption = keyof ThemeOptions;
 
 export const initialOptions: ThemeOptions = {
   borderStyle: 'rounded',
@@ -25,7 +26,7 @@ const _optionsStore = writable<ThemeOptions>(initialOptions);
 
 export const optionsStore = {
   subscribe: _optionsStore.subscribe,
-  set: <TKey extends keyof ThemeOptions>(key: TKey, value: ThemeOptions[TKey]) => {
+  set: <TKey extends ThemeOption>(key: TKey, value: ThemeOptions[TKey]) => {
     _optionsStore.update((settings) => ({
       ...settings,
       [key]: value,
@@ -44,6 +45,6 @@ export const optionsStore = {
   },
 };
 
-export const isValidOption = (keyName: string): keyName is keyof ThemeOptions => {
+export const isValidOption = (keyName: string): keyName is ThemeOption => {
   return keyName in initialOptions;
 };

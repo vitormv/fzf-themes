@@ -1,5 +1,10 @@
 import { themeOptionsSchema } from '~/data/options.schema';
-import { initialOptions, isValidOption, type ThemeOptions } from '~/data/options.store';
+import {
+  initialOptions,
+  isValidOption,
+  type ThemeOption,
+  type ThemeOptions,
+} from '~/data/options.store';
 
 export const validateAndParseThemeOptions = (rawObj: Record<string, any>) => {
   if (!rawObj) return initialOptions;
@@ -12,7 +17,7 @@ export const validateAndParseThemeOptions = (rawObj: Record<string, any>) => {
     const defaultValue = initialOptions[key];
     const receivedValue = rawObj[key] ?? defaultValue;
 
-    const parsed = themeOptionsSchema.shape[key as keyof ThemeOptions].safeParse(receivedValue);
+    const parsed = themeOptionsSchema.shape[key as ThemeOption].safeParse(receivedValue);
 
     normalizedObj[key] = parsed.success ? receivedValue : defaultValue;
   }

@@ -1,5 +1,5 @@
 import { isValidColor, type ColorValues } from '~/data/colors.store';
-import { type ThemeOptions } from '~/data/options.store';
+import { type ThemeOption, type ThemeOptions } from '~/data/options.store';
 import { toFzfColorName } from '~/utils/colors/toFzfColorName';
 import { base64Encode } from '~/utils/strings/base64';
 
@@ -32,7 +32,7 @@ export const exportToUrlHash = (
 
   const optionsForEnv = Object.fromEntries(
     Object.keys(themeOptions).map((option) => {
-      return [option, themeOptions[option as keyof ThemeOptions]];
+      return [option, themeOptions[option as ThemeOption]];
     }),
   );
 

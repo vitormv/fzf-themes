@@ -1,7 +1,7 @@
 import { expect, it, describe } from 'vitest';
 import { validateAndParseThemeOptions } from '~/data/import/validateAndParseThemeOptions';
 
-import { initialOptions, type ThemeOptions } from '~/data/options.store';
+import { initialOptions, type ThemeOption, type ThemeOptions } from '~/data/options.store';
 
 const sampleThemeOptions: ThemeOptions = {
   borderStyle: 'block',
@@ -47,7 +47,7 @@ describe('validateAndParseThemeOptions()', () => {
   });
 
   it('should recover from bad obj values', () => {
-    const allBrokenObj: Record<keyof ThemeOptions, any> = {
+    const allBrokenObj: Record<ThemeOption, any> = {
       borderStyle: 'invalid-border-style',
       borderLabel: undefined,
       borderLabelPosition: new Error(),

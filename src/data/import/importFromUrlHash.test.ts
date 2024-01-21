@@ -2,24 +2,7 @@ import { expect, it, describe } from 'vitest';
 import { initialColors } from '~/data/colors.store';
 import { encodeObjForUrlHash } from '~/data/export/exportToUrlHash';
 import { importFromUrlHash } from '~/data/import/importFromUrlHash';
-
-import { initialOptions, type ThemeOptions } from '~/data/options.store';
-
-const sampleThemeOptions: ThemeOptions = {
-  borderStyle: 'block',
-  borderLabel: ' Geralt of Rivia ',
-  borderLabelPosition: 10,
-  previewBorderStyle: 'double',
-  padding: '2',
-  margin: '3',
-  prompt: 'Here: ',
-  marker: '->',
-  pointer: '*',
-  separator: 'LALA',
-  scrollbar: '++',
-  layout: 'reverse',
-  info: 'right',
-};
+import { initialOptions } from '~/data/options.store';
 
 const allWrongColors = {
   'fg': undefined,
