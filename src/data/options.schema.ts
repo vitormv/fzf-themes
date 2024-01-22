@@ -9,11 +9,11 @@ export const themeOptionsSchema = z.object({
   previewBorderStyle: z
     .enum(['rounded', 'sharp', 'bold', 'double', 'block', 'thinblock'])
     .default('rounded'),
-  margin: z
+  margin: z.coerce
     .string()
     .regex(/^[0-9]+(,[0-9]+){0,3}$/)
     .default('0'),
-  padding: z
+  padding: z.coerce
     .string()
     .regex(/^[0-9]+(,[0-9]+){0,3}$/)
     .default('0'),
@@ -23,5 +23,5 @@ export const themeOptionsSchema = z.object({
   separator: z.string().default('─'),
   scrollbar: z.string().max(1).default('│'),
   layout: z.enum(['default', 'reverse', 'reverse-list']).default('default'),
-  info: z.enum(['default', 'right']).default('default').default('default'),
+  info: z.enum(['default', 'right']).default('default'),
 });

@@ -1,69 +1,9 @@
 import { isValidColor, type ColorValues } from '~/data/colors.store';
-import { isValidOption, type ThemeOption, type ThemeOptions } from '~/data/options.store';
+import { fzfOptionsConfig, type FzfOptionDefinition } from '~/data/fzfOptions.config';
+import { isValidOption, type ThemeOptions } from '~/data/options.store';
 import { colorDefinitions } from '~/fzf/fzfColorDefinitions';
 import { arrayChunk } from '~/utils/arrayChunk';
 import { toFzfColorName } from '~/utils/colors/toFzfColorName';
-
-type ExportItemDefinition<T extends ThemeOption> = {
-  exportVariable: string;
-  exportIf?: (val: string, allOptions: ThemeOptions) => boolean;
-  format?: (val: ThemeOptions[T], allOptions: ThemeOptions) => string;
-};
-
-export type ExportDefinitions = {
-  [K in ThemeOption]: ExportItemDefinition<K>;
-};
-
-const envExportConfiguration: ExportDefinitions = {
-  margin: {
-    exportVariable: 'margin',
-    exportIf: (val) => val !== '0',
-  },
-  padding: {
-    exportVariable: 'padding',
-    exportIf: (val) => val !== '0',
-  },
-  borderStyle: {
-    exportVariable: 'border',
-    exportIf: (val) => val !== 'none',
-  },
-  borderLabel: {
-    exportVariable: 'border-label',
-    exportIf: (_, allOptions) => allOptions.borderStyle !== 'none',
-  },
-  borderLabelPosition: {
-    exportVariable: 'border-label-pos',
-    exportIf: (_, allOptions) => !!allOptions.borderLabel,
-  },
-  previewBorderStyle: {
-    exportVariable: 'preview-window',
-    exportIf: (val) => val !== 'none',
-    format: (val) => `border-${val}`,
-  },
-  separator: {
-    exportVariable: 'separator',
-  },
-  scrollbar: {
-    exportVariable: 'scrollbar',
-  },
-  prompt: {
-    exportVariable: 'prompt',
-  },
-  pointer: {
-    exportVariable: 'pointer',
-  },
-  marker: {
-    exportVariable: 'marker',
-  },
-  layout: {
-    exportVariable: 'layout',
-    exportIf: (val) => val !== 'default',
-  },
-  info: {
-    exportVariable: 'info',
-    exportIf: (val) => val !== 'default',
-  },
-};
 
 const sanitize = (str: string) => {
   return `"${str}"`;
@@ -89,19 +29,19 @@ const prepareForEnvExport = (themeOptions: ThemeOptions, colors: ColorValues) =>
   Object.keys(themeOptions).forEach((key) => {
     if (!isValidOption(key)) return;
 
-    const conf = envExportConfiguration[key] as ExportItemDefinition<typeof key>;
+    const conf = fzfOptionsConfig[key] as FzfOptionDefinition<typeof key>;
     const storeValue = themeOptions[key];
 
     if (!conf) return;
 
-    const formatted = conf.format
-      ? conf.format(String(storeValue), themeOptions)
+    const formatted = conf.transformExport
+      ? conf.transformExport(String(storeValue), themeOptions)
       : String(storeValue);
 
     // abort early if shouldn't export
     if (conf.exportIf && !conf.exportIf(formatted, themeOptions)) return;
 
-    optionsVariables.set(conf.exportVariable, formatted);
+    optionsVariables.set(conf.argName, formatted);
   });
 
   return { optionsVariables, colorVariables };

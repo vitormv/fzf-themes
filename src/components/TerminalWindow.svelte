@@ -114,8 +114,6 @@
   });
 </script>
 
-<!-- @todo: toggle show loading, header, preview -->
-
 <ExportOptions />
 
 <div bind:this={wrapperEl} class="wrapper" style={allTokenVariables}>

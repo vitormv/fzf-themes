@@ -19,7 +19,7 @@ export const validateAndParseThemeOptions = (rawObj: Record<string, any>) => {
 
     const parsed = themeOptionsSchema.shape[key as ThemeOption].safeParse(receivedValue);
 
-    normalizedObj[key] = parsed.success ? receivedValue : defaultValue;
+    normalizedObj[key] = parsed.success ? (parsed.data as any) : defaultValue;
   }
 
   return normalizedObj as ThemeOptions;

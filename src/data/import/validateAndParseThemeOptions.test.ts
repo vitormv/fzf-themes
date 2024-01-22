@@ -53,7 +53,7 @@ describe('validateAndParseThemeOptions()', () => {
       borderLabelPosition: new Error(),
       previewBorderStyle: 10,
       padding: 0,
-      margin: 2,
+      margin: ',',
       prompt: null,
       marker: undefined,
       pointer: 2,
