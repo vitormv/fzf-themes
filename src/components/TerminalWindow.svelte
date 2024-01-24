@@ -6,6 +6,9 @@
   import { renderLines } from '~/utils/tui/renderLines';
   import { addDelegateEventListener } from '~/utils/addDelegateEventListener';
   import { toFzfColorName } from '~/utils/colors/toFzfColorName';
+  import Box from '~/components/common/Box.svelte';
+  import { ArrowDownOutline, ChevronForwardOutline } from 'svelte-ionicons';
+  import ImportOptions from '~/components/ImportOptions.svelte';
   import ExportOptions from '~/components/ExportOptions.svelte';
 
   // take all known color tokens and set them as css variables
@@ -13,8 +16,11 @@
     .map((token) => `--fzf-${token}: ${getColorOrFallback(token, $colorsStore.colors).value}`)
     .join(';');
 
+  let isImportModalOpen = false;
+  let isExportModalOpen = false;
+
   let terminalWindowEl: HTMLDivElement;
-  let wrapperEl: HTMLDivElement;
+  export let wrapperEl: HTMLDivElement;
   let charWidthEl: HTMLSpanElement;
 
   let currentBg: string | undefined = 'bg';
@@ -114,29 +120,42 @@
   });
 </script>
 
-<ExportOptions />
+<Box title="Preview">
+  <svelte:fragment slot="buttons">
+    <button class="export btn btn-primary" on:click={() => (isImportModalOpen = true)}>
+      Import Options <ArrowDownOutline size="16" />
+    </button>
 
-<div bind:this={wrapperEl} class="wrapper" style={allTokenVariables}>
-  <div class="window-title" style:max-width={maxTerminalWidth}>
-    <div class="dot red"></div>
-    <div class="dot amber"></div>
-    <div class="dot green"></div>
-  </div>
+    <button class="export btn btn-primary" on:click={() => (isExportModalOpen = true)}>
+      Export <ChevronForwardOutline size="16" />
+    </button>
+  </svelte:fragment>
 
-  <div bind:this={terminalWindowEl} class="terminal-window"></div>
+  <div bind:this={wrapperEl} class="wrapper" style={allTokenVariables}>
+    <div class="window-title" style:max-width={maxTerminalWidth}>
+      <div class="dot red"></div>
+      <div class="dot amber"></div>
+      <div class="dot green"></div>
+    </div>
 
-  <div class="hint" style:max-width={maxTerminalWidth}>
-    <span class="hint-label">background:</span>
-    <strong>{toFzfColorName(currentBg || '').toUpperCase() || '---'}</strong>
-    {#if currentFg}&nbsp;&nbsp;&nbsp;<span class="hint-label">foreground:</span><strong
-        >&nbsp;{toFzfColorName(currentFg || '').toUpperCase() || '---'}</strong
-      >{/if}
-  </div>
+    <div bind:this={terminalWindowEl} class="terminal-window"></div>
 
-  <!-- This element is used to calculate the current width of chars according
+    <div class="hint" style:max-width={maxTerminalWidth}>
+      <span class="hint-label">background:</span>
+      <strong>{toFzfColorName(currentBg || '').toUpperCase() || '---'}</strong>
+      {#if currentFg}&nbsp;&nbsp;&nbsp;<span class="hint-label">foreground:</span><strong
+          >&nbsp;{toFzfColorName(currentFg || '').toUpperCase() || '---'}</strong
+        >{/if}
+    </div>
+
+    <!-- This element is used to calculate the current width of chars according
   to users browser window, resolution, zoom amount, etc. -->
-  <span bind:this={charWidthEl} class="sample-char-width">▀</span>
-</div>
+    <span bind:this={charWidthEl} class="sample-char-width">▀</span>
+  </div>
+
+  <ImportOptions bind:isModalOpen={isImportModalOpen} />
+  <ExportOptions bind:isModalOpen={isExportModalOpen} />
+</Box>
 
 <style lang="scss">
   :root {

@@ -11,6 +11,8 @@
   import { colorsStore } from '~/data/colors.store';
   import { optionsStore } from '~/data/options.store';
 
+  import { SvelteToast } from '@zerodevx/svelte-toast';
+
   let terminalContentEl: HTMLDivElement;
 
   function updateStoreFromHash() {
@@ -20,8 +22,8 @@
 
     const imported = importFromUrlHash(hash.substring(1));
 
-    colorsStore.updateAllColors(imported.colors as any);
     optionsStore.updateAll(imported.themeOptions);
+    colorsStore.updateAllColors(imported.colors as any);
   }
 
   // allow Preview Panel to be scrolled by dragging. Useful when very big
@@ -67,11 +69,22 @@
   </div>
 
   <div class="panel-terminal">
-    <Box title="Preview" bind:contentEl={terminalContentEl}>
-      <TerminalWindow />
-    </Box>
+    <TerminalWindow bind:wrapperEl={terminalContentEl} />
   </div>
 </main>
+
+<SvelteToast
+  options={{
+    reversed: true,
+    intro: { y: 192 },
+    theme: {
+      '--toastColor': 'mintcream',
+      '--toastBackground': 'rgba(72,187,120,0.9)',
+      '--toastBarBackground': '#2F855A',
+      '--toastBarHeight': 0,
+    },
+  }}
+/>
 
 <style lang="scss">
   .layout {

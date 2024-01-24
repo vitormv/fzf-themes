@@ -8,3 +8,8 @@ declare module '*.md' {
   // Modify below per your usage
   export { attributes, html };
 }
+
+declare module 'yargs-parser/browser' {
+  export * from 'yargs-parser';
+  export { default } from 'yargs-parser';
+}

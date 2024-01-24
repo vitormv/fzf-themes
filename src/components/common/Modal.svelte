@@ -5,6 +5,8 @@
   let dialog: HTMLDialogElement;
 
   $: if (dialog && showModal) dialog.showModal();
+
+  $: if (dialog && !showModal) dialog.close();
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
@@ -50,7 +52,7 @@
   }
 
   .wrapper {
-    min-width: 700px;
+    width: 700px;
     min-height: 500px;
     background-color: var(--bg-color);
     color: var(--text-color);

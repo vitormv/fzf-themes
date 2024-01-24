@@ -2,16 +2,18 @@
   import Modal from '~/components/common/Modal.svelte';
   import { colorsStore, initialColors } from '~/data/colors.store';
   import { optionsStore } from '~/data/options.store';
-  import { ChevronForwardOutline, ClipboardOutline } from 'svelte-ionicons';
+  import { ClipboardOutline } from 'svelte-ionicons';
   import { exportToEnvVariable } from '~/data/export/exportToEnvVariable';
   import { exportToUrlHash } from '~/data/export/exportToUrlHash';
   import Checkbox from '~/components/common/Checkbox.svelte';
+  import { SvelteToast, toast } from '@zerodevx/svelte-toast';
+
+  export let isModalOpen = false;
 
   let exportEnvString = '';
   let exportPermalink = '';
 
   let permalinkInputEl: HTMLInputElement;
-  let isModalOpen = false;
 
   let exportColorsOnly = false;
 
@@ -25,6 +27,9 @@
 
     permalinkInputEl.select();
     navigator.clipboard.writeText(permalinkInputEl.value);
+
+    toast.pop();
+    toast.push('Copied!', { target: 'modalToast', duration: 2000 });
   }
 
   function onToggleColorsOnly(e: Event) {
@@ -41,10 +46,6 @@
     colorsStore.updateColor('fg', isChecked ? '' : initialColors.fg);
   }
 </script>
-
-<button class="export btn btn-primary" on:click={() => (isModalOpen = true)}>
-  Export <ChevronForwardOutline size="16" />
-</button>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="wrapper" on:mousemove|stopPropagation>
@@ -76,7 +77,7 @@
             value={exportPermalink}
           />
         </div>
-        <button type="button" class="copy-url btn btn-primary" on:click={onCopyUrl}>
+        <button type="button" class="copy-url btn btn-secondary" on:click={onCopyUrl}>
           <ClipboardOutline size="16" />
         </button>
       </div>
@@ -84,17 +85,25 @@
       <h3>Variable Export</h3>
       <textarea readonly>{exportEnvString}</textarea>
     </div>
+
+    <SvelteToast
+      target="modalToast"
+      options={{
+        intro: { y: -64 },
+        theme: {
+          '--toastColor': 'mintcream',
+          '--toastBackground': 'rgba(72,187,120,0.9)',
+          '--toastBarBackground': '#2F855A',
+          '--toastBarHeight': 0,
+        },
+      }}
+    />
   </Modal>
 </div>
 
 <style lang="scss">
   h3 {
     margin: 0;
-  }
-  .export {
-    position: absolute;
-    top: 15px;
-    right: 15px;
   }
 
   .content {
