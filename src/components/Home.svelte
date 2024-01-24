@@ -10,6 +10,9 @@
   import { importFromUrlHash } from '~/data/import/importFromUrlHash';
   import { colorsStore } from '~/data/colors.store';
   import { optionsStore } from '~/data/options.store';
+  import ExportOptions from '~/components/ExportOptions.svelte';
+  import ImportOptions from '~/components/ImportOptions.svelte';
+  import { SvelteToast } from '@zerodevx/svelte-toast';
 
   let terminalContentEl: HTMLDivElement;
 
@@ -68,10 +71,28 @@
 
   <div class="panel-terminal">
     <Box title="Preview" bind:contentEl={terminalContentEl}>
+      <svelte:fragment slot="buttons">
+        <ImportOptions />
+        <ExportOptions />
+      </svelte:fragment>
+
       <TerminalWindow />
     </Box>
   </div>
 </main>
+
+<SvelteToast
+  options={{
+    reversed: true,
+    intro: { y: 192 },
+    theme: {
+      '--toastColor': 'mintcream',
+      '--toastBackground': 'rgba(72,187,120,0.9)',
+      '--toastBarBackground': '#2F855A',
+      '--toastBarHeight': 0,
+    },
+  }}
+/>
 
 <style lang="scss">
   .layout {

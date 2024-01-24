@@ -1,12 +1,26 @@
-import parser from 'yargs-parser';
+import parser from 'yargs-parser/browser';
+import type { Options } from 'yargs-parser';
+import { colorsStore } from '~/data/colors.store';
 import { fzfOptionsConfig } from '~/data/fzfOptions.config';
 import { validateAndParseColors } from '~/data/import/validateAndParseColors';
 import { validateAndParseThemeOptions } from '~/data/import/validateAndParseThemeOptions';
-import { isValidOption, type ThemeOption, type ThemeOptions } from '~/data/options.store';
+import {
+  isValidOption,
+  optionsStore,
+  type ThemeOption,
+  type ThemeOptions,
+} from '~/data/options.store';
 import { toFzfColorName } from '~/utils/colors/toFzfColorName';
 
-export const importFromEnvArgs = (argsStr: string) => {
-  const parsedObj = parser(argsStr.replace(/\n/g, ' '));
+const yargsParserOptions: Options = {
+  configuration: {
+    'parse-numbers': false,
+    'camel-case-expansion': false,
+  },
+};
+
+export const parseEnvArgs = (argsStr: string) => {
+  const parsedObj = parser(argsStr.replace(/\n/g, ' '), yargsParserOptions);
   const themeOptions: Partial<ThemeOptions> = {};
   const colors: Record<string, string> = {};
 
@@ -39,4 +53,13 @@ export const importFromEnvArgs = (argsStr: string) => {
     themeOptions: validateAndParseThemeOptions(themeOptions),
     colors: validateAndParseColors(colors),
   };
+};
+
+export const importFromEnvArgs = (argsStr: string) => {
+  const parsed = parseEnvArgs(argsStr);
+
+  optionsStore.updateAll(parsed.themeOptions);
+  colorsStore.updateAllColors(parsed.colors);
+
+  return parsed;
 };

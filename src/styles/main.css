@@ -91,3 +91,10 @@ a:hover {
     pointer-events: none;
   }
 }
+
+:root {
+  --toastContainerTop: auto;
+  --toastContainerRight: auto;
+  --toastContainerBottom: 2rem;
+  --toastContainerLeft: calc(50vw - 8rem);
+}

@@ -91,11 +91,6 @@
   h3 {
     margin: 0;
   }
-  .export {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-  }
 
   .content {
     display: flex;

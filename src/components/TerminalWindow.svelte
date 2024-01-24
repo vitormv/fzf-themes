@@ -6,7 +6,6 @@
   import { renderLines } from '~/utils/tui/renderLines';
   import { addDelegateEventListener } from '~/utils/addDelegateEventListener';
   import { toFzfColorName } from '~/utils/colors/toFzfColorName';
-  import ExportOptions from '~/components/ExportOptions.svelte';
 
   // take all known color tokens and set them as css variables
   $: allTokenVariables = orderedColorTokens
@@ -113,8 +112,6 @@
     };
   });
 </script>
-
-<ExportOptions />
 
 <div bind:this={wrapperEl} class="wrapper" style={allTokenVariables}>
   <div class="window-title" style:max-width={maxTerminalWidth}>
