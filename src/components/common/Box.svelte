@@ -45,7 +45,7 @@
 
     .buttons {
       display: flex;
-      gap: 15px;
+      gap: 20px;
     }
   }
 

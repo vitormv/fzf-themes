@@ -2,11 +2,12 @@
   import Modal from '~/components/common/Modal.svelte';
   import { toast } from '@zerodevx/svelte-toast';
 
-  import { ArrowForwardOutline, CodeDownloadOutline } from 'svelte-ionicons';
+  import { ArrowForwardOutline } from 'svelte-ionicons';
   import { importFromEnvArgs } from '~/data/import/importFromEnvArgs';
 
+  export let isModalOpen = false;
+
   let textareaEl: HTMLTextAreaElement;
-  let isModalOpen = false;
 
   let errorMessage = '';
 
@@ -35,14 +36,6 @@
   }
 </script>
 
-<button
-  class="export btn btn-primary"
-  on:click={() => (isModalOpen = true)}
-  on:change={() => (errorMessage = '')}
->
-  Import Options <CodeDownloadOutline size="16" />
-</button>
-
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="wrapper" on:mousemove|stopPropagation>
   <Modal bind:showModal={isModalOpen}>
@@ -55,6 +48,7 @@
 
       <textarea
         bind:this={textareaEl}
+        on:input={() => validateInput(textareaEl.value)}
         placeholder="Paste only the variable contents (inside the quotes)..."
       ></textarea>
 
@@ -62,7 +56,11 @@
         <div class="error" style="word-wrap: break-word; overflow-wrap: break-word;">
           {errorMessage}
         </div>
-        <button class="export btn btn-primary" on:click={onClickImport}>
+        <button
+          class="export btn btn-secondary"
+          on:click={onClickImport}
+          disabled={!textareaEl?.value.trim() || !!errorMessage}
+        >
           Import <ArrowForwardOutline size="16" />
         </button>
       </div>
@@ -87,6 +85,7 @@
   .footer {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     gap: 20px;
   }
 </style>

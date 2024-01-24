@@ -50,8 +50,8 @@ textarea {
     color: var(--text-color);
     border: 0;
 
-    &:hover,
-    &:focus {
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
       background-color: var(--color-primary-stronger);
     }
   }
@@ -61,9 +61,9 @@ textarea {
     color: var(--text-color);
     border: 0;
 
-    &:hover,
-    &:focus {
-      background-color: #6d223c;
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
+      background-color: var(--color-secondary-stronger);
     }
   }
 
@@ -72,13 +72,18 @@ textarea {
     background-color: transparent;
     border: 2px solid var(--border-color);
 
-    &:hover,
-    &:focus {
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
       border-color: var(--border-darker-color);
     }
   }
 
-  &:active {
+  &:active:not(:disabled) {
     transform: translateY(1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }

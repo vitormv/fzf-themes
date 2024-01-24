@@ -10,8 +10,7 @@
   import { importFromUrlHash } from '~/data/import/importFromUrlHash';
   import { colorsStore } from '~/data/colors.store';
   import { optionsStore } from '~/data/options.store';
-  import ExportOptions from '~/components/ExportOptions.svelte';
-  import ImportOptions from '~/components/ImportOptions.svelte';
+
   import { SvelteToast } from '@zerodevx/svelte-toast';
 
   let terminalContentEl: HTMLDivElement;
@@ -23,8 +22,8 @@
 
     const imported = importFromUrlHash(hash.substring(1));
 
-    colorsStore.updateAllColors(imported.colors as any);
     optionsStore.updateAll(imported.themeOptions);
+    colorsStore.updateAllColors(imported.colors as any);
   }
 
   // allow Preview Panel to be scrolled by dragging. Useful when very big
@@ -70,14 +69,7 @@
   </div>
 
   <div class="panel-terminal">
-    <Box title="Preview" bind:contentEl={terminalContentEl}>
-      <svelte:fragment slot="buttons">
-        <ImportOptions />
-        <ExportOptions />
-      </svelte:fragment>
-
-      <TerminalWindow />
-    </Box>
+    <TerminalWindow bind:wrapperEl={terminalContentEl} />
   </div>
 </main>
 
