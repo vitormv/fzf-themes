@@ -2,7 +2,7 @@
 
 ![Front page of fzf Theme Playground](./screenshot.png)
 
-This tool allows you to quickly preview and tweak `fzf` some of the many options available,
+This tool allows you to quickly preview and tweak some of the many of the `fzf` ([repo](https://github.com/junegunn/fzf)) options/colors,
 to make it look just the way you like it.
 
 Made with Svelte.
