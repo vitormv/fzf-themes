@@ -1,4 +1,4 @@
-# fzf Theme Playground
+# fzf Theme Generator
 
 ![Front page of fzf Theme Playground](./screenshot.png)
 
