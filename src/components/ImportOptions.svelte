@@ -7,11 +7,11 @@
 
   export let isModalOpen = false;
 
-  let textareaEl: HTMLTextAreaElement;
+  $: textareaValue = '';
 
   let errorMessage = '';
 
-  function validateInput(textareaValue: string) {
+  function validateInput() {
     if (textareaValue.startsWith('export ') || textareaValue.includes('FZF_DEFAULT_OPTS')) {
       errorMessage =
         'Invalid input. Text should not start with "export" and should not contain "FZF_DEFAULT_OPTS".';
@@ -21,16 +21,16 @@
     return true;
   }
 
+  function isDisabled(textareaValue: string) {
+    return !textareaValue?.trim() || !!errorMessage;
+  }
+
   function onClickImport() {
-    if (!textareaEl) return;
-
-    const value = textareaEl.value;
-
-    if (validateInput(value)) {
-      importFromEnvArgs(value);
+    if (validateInput()) {
+      importFromEnvArgs(textareaValue);
       isModalOpen = false;
 
-      textareaEl.value = '';
+      textareaValue = '';
       toast.push('Imported theme and colors!', {});
     }
   }
@@ -47,8 +47,8 @@
       </p>
 
       <textarea
-        bind:this={textareaEl}
-        on:input={() => validateInput(textareaEl.value)}
+        bind:value={textareaValue}
+        on:input={validateInput}
         placeholder="Paste only the variable contents (inside the quotes)..."
       ></textarea>
 
@@ -59,7 +59,7 @@
         <button
           class="export btn btn-secondary"
           on:click={onClickImport}
-          disabled={!textareaEl?.value.trim() || !!errorMessage}
+          disabled={isDisabled(textareaValue)}
         >
           Import <ArrowForwardOutline size="16" />
         </button>
