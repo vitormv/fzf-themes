@@ -5,18 +5,19 @@ import { addBorders } from '~/utils/tui/addBorders';
 import { addSpacing } from '~/utils/tui/addSpacing';
 
 export const createPreviewLines = (themeOptions: ThemeOptions) => {
+  let scrollbar = themeOptions.scrollbar.repeat(2).substr(1, 1);
   let previewLines = [
     new Line({
       className: 'preview-bg',
       tokens: [
         token('package fzf', 'preview-fg'),
         fillSpace(' ', 'preview-bg'),
-        token(themeOptions.scrollbar, 'preview-scrollbar'),
+        token(scrollbar, 'preview-scrollbar'),
       ],
     }),
     new Line({
       className: 'preview-bg',
-      tokens: [fillSpace(' ', 'preview-bg'), token(themeOptions.scrollbar, 'preview-scrollbar')],
+      tokens: [fillSpace(' ', 'preview-bg'), token(scrollbar, 'preview-scrollbar')],
     }),
     new Line({ className: 'preview-bg', tokens: [token('import (', 'preview-fg')] }),
     new Line({ className: 'preview-bg', tokens: [token('  "errors"', 'preview-fg')] }),

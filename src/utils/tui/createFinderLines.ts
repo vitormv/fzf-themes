@@ -6,7 +6,7 @@ const addScrollbarToLines = (count: number, lines: Line[], themeOptions: ThemeOp
   lines.forEach((line, i) => {
     if (i >= count) return;
 
-    line.tokens.push(fillSpace(' '), token(themeOptions.scrollbar, 'bg scrollbar'));
+    line.tokens.push(fillSpace(' '), token(themeOptions.scrollbar.substr(0, 1), 'bg scrollbar'));
   });
 
   return lines;
