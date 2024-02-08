@@ -127,7 +127,7 @@
     <FormControl label="Scrollbar">
       <input
         type="text"
-        maxlength="1"
+        maxlength="2"
         value={$optionsStore.scrollbar}
         on:input={(e) => void optionsStore.set('scrollbar', e.currentTarget.value)}
       />
